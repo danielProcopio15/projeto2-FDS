@@ -22,6 +22,6 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 Clone o repositório e instale as dependências:
 
 ```bash
-git clone https://github.com/seu-usuario/newsportal-gamificado.git
-cd newsportal-gamificado
+git clone [https://github.com/seu-usuario/newsportal-gamificado.git](https://github.com/danielProcopio15/projeto2-FDS.git)
+cd projeto2-FDS
 pip install -r requirements.txt
