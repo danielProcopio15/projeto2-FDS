@@ -1,6 +1,6 @@
 # portal reformulado
 
-portal reformulado é uma consultoria para aplicações web desenvolvida em **Django (Python)** que combina **notícias, gamificação e personalização** para engajar leitores.  
+portal reformulado é uma consultoria para aplicações web desenvolvida em **Django (Python)** que combina **notícias, gameficação e personalização** para engajar leitores.  
 O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuário para guiar o desenvolvimento.
 
 ---
