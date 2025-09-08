@@ -6,7 +6,7 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 ---
 
 ## Funcionalidades Principais
-- Gamificação com palavras cruzadas e quizzes baseados em notícias.  
+- Gameficação com palavras cruzadas e quizzes baseados em notícias.  
 - Sistema de pontos e ranking entre usuários.  
 - Perfil de usuário com personalização de interesses.  
 - Página inicial minimalista e adaptada ao comportamento do leitor.  
