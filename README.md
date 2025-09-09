@@ -87,14 +87,8 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 
 Backlog representado no estilo **Kanban (Jira)**:
 
-| **A Fazer** | **Em Progresso** | **Concluído** |
-|-------------|------------------|----------------|
-| Configuração inicial Django + banco de dados | Implementar sistema de login e cadastro | Protótipo de layout minimalista da home |
-| Criar gamificação (palavras cruzadas/quizzes) | API de personalização de interesses do usuário | Navbar funcional básica |
-| Implementar ranking de usuários | Protótipo de enquetes no fim das matérias | Integração inicial com YouTube/Podcasts |
-| Criar sistema de pontos | Integração de áudios automáticos para manchetes | - |
-| Desenvolver sistema de comentários | | - |
-| Implementar sistema de parceiros (descontos) | | - |
+<img width="1086" height="709" alt="image" src="https://github.com/user-attachments/assets/5ef76432-0bdf-4281-8c4f-15947ca9e345" />
+
 
 ---
 
