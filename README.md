@@ -87,10 +87,54 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 
 Backlog representado no estilo **Kanban (Jira)**:
 
+<img width="1611" height="854" alt="Captura de tela 2025-09-22 165653" src="https://github.com/user-attachments/assets/4a315179-8147-4725-b72e-96aca54e9f65" />
+
 <img width="1086" height="709" alt="image" src="https://github.com/user-attachments/assets/5ef76432-0bdf-4281-8c4f-15947ca9e345" />
 
 
+
 ---
+
+### Sprint
+
+Definição da primeira codificação do grupo 
+
+<img width="1340" height="492" alt="image" src="https://github.com/user-attachments/assets/37ca50f2-08f4-4b6b-8626-fc4c67c4e17b" />
+
+
+---
+### Diagrama de atividades.
+
+representação dos caminhos, decisões e interações do usuário.
+
+<img width="1915" height="1015" alt="Captura_de_tela_2025-09-22_165846" src="https://github.com/user-attachments/assets/2cfeb7e9-dc94-436c-9bf3-9dcd75cfd3bd" />
+
+
+
+
+
+
+---
+
+### Issue tracker
+
+<img width="1851" height="922" alt="image" src="https://github.com/user-attachments/assets/1746fdc8-b59e-429a-b616-ae831460acb0" />
+
+---
+
+
+###prototipação de baixa fidelidade AxB
+#### prototipação A
+<img width="1025" height="823" alt="image" src="https://github.com/user-attachments/assets/b6aba58d-4447-4bb9-9dd1-c0dcaf50e0e2" />
+
+#### prototipação B
+<img width="1029" height="849" alt="image" src="https://github.com/user-attachments/assets/d2599348-53f1-40d1-bf74-73f2332e849a" />
+
+[link para o wireframe](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=nnFXSY9vHAmyp73j-0)
+
+
+
+
 
 ## Papéis no Time
 
