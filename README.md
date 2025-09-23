@@ -76,7 +76,7 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 <img width="1827" height="553" alt="Captura de tela 2025-09-22 211431" src="https://github.com/user-attachments/assets/1d880975-bcbb-4bba-a317-c3ecdd0369e8" />
 
 
- ##Descrição das histórias
+ ## Descrição das histórias
  
 1. Priorize separar cada uma das áreas de interesse em “divs” ou “Sections” em que nessas divisões haja uma cor predominante que combine com o tema, como por exemplo: A sessão de esportes deve ter um fundo verde como cor principal. Utilize o display grid ou flex.
 2. Reestruturar listagens de matérias em cards minimalistas que estejam dentro das divs e das sections. Mudar (imagem, título, categoria). 2 formatos - 1o em grade 3x2    2o em tiras (1 noticia por lina/setor
