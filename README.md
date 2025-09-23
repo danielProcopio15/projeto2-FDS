@@ -73,6 +73,9 @@ python manage.py runserver
 
 As principais histórias do usuário que guiaram o desenvolvimento (seguindo os **3Cs**: claras, concisas e com entrega de valor):
 
+<img width="1827" height="553" alt="Captura de tela 2025-09-22 211431" src="https://github.com/user-attachments/assets/1d880975-bcbb-4bba-a317-c3ecdd0369e8" />
+
+
 1. Como **leitor interessado em esportes**, quero jogar palavras cruzadas baseadas nas notícias lidas, para fixar o conteúdo de forma divertida.  
 2. Como **usuário ativo**, quero acumular pontos por interações, para trocar por recompensas ou subir no ranking.  
 3. Como **novo usuário**, quero selecionar meus interesses no cadastro, para receber notícias personalizadas.  
