@@ -150,7 +150,8 @@ representação dos caminhos, decisões e interações do usuário.
 - **Pedro Pinzón** – Desenvolvimento Backend | Banco de Dados  
 - **Bernardo Santos** – Desenvolvimento Backend | Banco de Dados  
 - **Lucas Rocha** – Desenvolvimento Frontend & Backend | Design  
-- **Mateus José** – Desenvolvimento Backend | Banco de Dados  
+- **Mateus José** – Desenvolvimento Backend | Banco de Dados | https://www.linkedin.com/in/mateus-jos%C3%A9-48b4a6348/ <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/3cc4bd42-9fbb-4f6d-8457-de923ebbeff6" />
+
 
 ---
 
