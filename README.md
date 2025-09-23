@@ -130,9 +130,6 @@ representação dos caminhos, decisões e interações do usuário.
 #### prototipação A
 <img width="1025" height="823" alt="image" src="https://github.com/user-attachments/assets/b6aba58d-4447-4bb9-9dd1-c0dcaf50e0e2" />
 
-#### prototipação B
-<img width="1029" height="849" alt="image" src="https://github.com/user-attachments/assets/d2599348-53f1-40d1-bf74-73f2332e849a" />
-
 [link para o wireframe](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=nnFXSY9vHAmyp73j-0)
 
 
