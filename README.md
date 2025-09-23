@@ -144,13 +144,13 @@ representação dos caminhos, decisões e interações do usuário.
 
 ## Integrantes do Grupo
 
-- **Daniel Procópio** – Scrum Master | Desenvolvimento Backend (Django/Python) | Banco de Dados | Figma  
-- **Pedro Castro** – Product Owner | Desenvolvimento Frontend | Figma | UX/UI  
-- **Rafael Procópio** – Desenvolvimento Frontend & Backend | Figma  
-- **Pedro Pinzón** – Desenvolvimento Backend | Banco de Dados  
-- **Bernardo Santos** – Desenvolvimento Backend | Banco de Dados  
-- **Lucas Rocha** – Desenvolvimento Frontend & Backend | Design  
-- **Mateus José** – Desenvolvimento Backend | Banco de Dados | https://www.linkedin.com/in/mateus-jos%C3%A9-48b4a6348/ <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/3cc4bd42-9fbb-4f6d-8457-de923ebbeff6" />
+- **Daniel Procópio** – Scrum Master | Desenvolvimento Backend (Django/Python) | Banco de Dados | Figma | https://www.linkedin.com/in/daniel-cunha-347006237/
+- **Pedro Castro** – Product Owner | Desenvolvimento Frontend | Figma | UX/UI | https://www.linkedin.com/in/pedro-castro-94795a277/
+- **Rafael Procópio** – Desenvolvimento Frontend & Backend | Figma | https://www.linkedin.com/in/rafael-proc%C3%B3pio-75360a269/
+- **Pedro Pinzón** – Desenvolvimento Backend | Banco de Dados |
+- **Bernardo Santos** – Desenvolvimento Backend | Banco de Dados | https://www.linkedin.com/in/bernardo-santos-0b6761342/
+- **Lucas Rocha** – Desenvolvimento Frontend & Backend | Design | https://www.linkedin.com/in/lucas-rocha-052a37364/
+- **Mateus José** – Desenvolvimento Backend | Banco de Dados | https://www.linkedin.com/in/mateus-jos%C3%A9-48b4a6348/
 
 
 ---
