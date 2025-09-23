@@ -1,7 +1,9 @@
-# portal reformulado
-
+# Projeto NovoComm
 portal reformulado é uma consultoria para aplicações web desenvolvida em **Django (Python)** que combina **notícias, gameficação e personalização** para engajar leitores.  
 O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuário para guiar o desenvolvimento.
+
+---
+<img width="597" height="330" alt="image" src="https://github.com/user-attachments/assets/2df69ea9-c093-411e-81b1-33e0536e4cdc" />
 
 ---
 
