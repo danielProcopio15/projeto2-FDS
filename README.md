@@ -76,16 +76,18 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 <img width="1827" height="553" alt="Captura de tela 2025-09-22 211431" src="https://github.com/user-attachments/assets/1d880975-bcbb-4bba-a317-c3ecdd0369e8" />
 
 
-1. Como **leitor interessado em esportes**, quero jogar palavras cruzadas baseadas nas notícias lidas, para fixar o conteúdo de forma divertida.  
-2. Como **usuário ativo**, quero acumular pontos por interações, para trocar por recompensas ou subir no ranking.  
-3. Como **novo usuário**, quero selecionar meus interesses no cadastro, para receber notícias personalizadas.  
-4. Como **usuário recorrente**, quero editar meus interesses, para ajustar minha experiência.  
-5. Como **usuário que valoriza praticidade**, quero deslizar entre notícias no estilo TikTok, para consumir conteúdo rapidamente.  
-6. Como **usuário engajado**, quero comentar nas notícias, para compartilhar opiniões e debater.  
-7. Como **usuário que preza pela clareza**, quero uma home limpa, para encontrar notícias sem distrações.  
-8. Como **usuário assíduo**, quero trocar pontos por descontos de empresas parceiras, para ter benefícios reais.  
-9. Como **leitor curioso**, quero responder enquetes no fim das matérias, para expressar minha opinião.  
-10. Como **usuário em transporte**, quero ouvir as manchetes em áudio, para acompanhar sem precisar ler.  
+ ##Descrição das histórias
+ 
+1. Priorize separar cada uma das áreas de interesse em “divs” ou “Sections” em que nessas divisões haja uma cor predominante que combine com o tema, como por exemplo: A sessão de esportes deve ter um fundo verde como cor principal. Utilize o display grid ou flex.
+2. Reestruturar listagens de matérias em cards minimalistas que estejam dentro das divs e das sections. Mudar (imagem, título, categoria). 2 formatos - 1o em grade 3x2    2o em tiras (1 noticia por lina/setor
+3. Criem uma nav bar chamativa(com cor vermelha e fonte de letra compatível com a identidade do JC) que esteja no “header” da página, ela deve ter links diretos para cada uma das áreas de interesse como política, esportes e etc.  
+4. Façam uma outra aba dentro da página do JC em que as notícias sejam exibidas em formato scrollavel com notícias baseadas no interesse do usuário. O acesso a esta aba deve estar na nav bar com um nome com cor e fonte chamativa.
+5. Substituir os anúncios que ficam NO MEIO das notícias por uma seção limpa com pelo menos 1 ou mais artigos relacionados (titulo curto, link e Layout em cards pequenos alinhados em grid responsivo.). Os anúncios devem ficar na parte lateral da página para não atrapalhar a experiência do usuários. Layout em cards pequenos alinhados em grid responsivo. Os anúncios devem acompanhar um pedaço da página até certo ponto, dando espaço para outro anúncio, imagens ou continuidade de notícias.As notícias devem estar centralizadas, com espaço para as propagandas. as boxes estarão em formato de grid, mas ao entrar na notícia, estará escrita por extenso no meio.
+6. Criem um sistema de avaliação simples, apenas colocando a quantidade de estrelas que o usuário deseja colocar(1 até 5), no final de cada notícia, algo simples, no canto inferior direito da tela.  
+7. Criem um botão ao início da notícia, com o nome “resumo”, que ao clica-lo, abre um quadrado, uma box, com os tópicos pertinentes da matéria. A box deve conter no máximo 8 tópicos com 2 linhas cada, no máximo( a box deve se ajustar a quantidade de conteúdo).  
+8. Criem um botão com uma prévia da notícia no canto superior direito, com poucos elementos, para clicar e redirecionar para outra notícia. Esse botão deve permanecer, sempre jogando para uma notícia nova. 
+9. Criem um dado estatístico por meio de visitações do user à página(visitação do controller) e entregue na página principal notícias destinadas ao user.
+10. Façam com que dentro da navbar, apareça uma opção de jogos com base em notícias disponíveis no portal de notícias. Ao estagnar em um quizz ou minigame, o user recebe a opção no canto inferior do jogo para “receber uma dica”, que ao clicar redireciona para um anúncio que gera a resposta do joguinho.
 
 ---
 
