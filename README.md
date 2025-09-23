@@ -21,6 +21,9 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 
 <img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/7ae22ad0-5821-48fa-9bbd-90638f19fe14" />
 
+---
+
+<img width="1029" height="849" alt="image" src="https://github.com/user-attachments/assets/b70ba025-572d-4615-842f-1d17aeda6574" />
 
 ---
 
