@@ -9,6 +9,7 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 ---
 
 ## Funcionalidades Principais
+
 - Gameficação com palavras cruzadas e quizzes baseados em notícias.  
 - Sistema de pontos e ranking entre usuários.  
 - Perfil de usuário com personalização de interesses.  
@@ -17,6 +18,9 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 - Navegação sequencial estilo TikTok.  
 - Integração com parceiros para troca de pontos por descontos.  
 - Versão em áudio/vídeo das manchetes e resumos.  
+
+<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/7ae22ad0-5821-48fa-9bbd-90638f19fe14" />
+
 
 ---
 
