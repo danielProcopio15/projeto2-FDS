@@ -91,18 +91,6 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 
 ---
 
-## Backlog
-
-Backlog representado no estilo **Kanban (Jira)**:
-
-<img width="1611" height="854" alt="Captura de tela 2025-09-22 165653" src="https://github.com/user-attachments/assets/4a315179-8147-4725-b72e-96aca54e9f65" />
-
-<img width="1086" height="709" alt="image" src="https://github.com/user-attachments/assets/5ef76432-0bdf-4281-8c4f-15947ca9e345" />
-
-
-
----
-
 ### Sprint
 
 Definição da primeira codificação do grupo 
