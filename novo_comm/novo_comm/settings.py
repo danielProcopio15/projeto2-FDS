@@ -131,3 +131,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',  # <-- adicionado
 ]
+
+import os
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
