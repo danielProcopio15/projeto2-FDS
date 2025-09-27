@@ -4,12 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Página Inicial</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="static/core/css/home.css">
 </head>
 <body>
-    <h1>Bem-vindo ao novo_comm!</h1>
-    <p>Minha primeira página com CSS no Django 🚀</p>
-    <a href="cadastro.html">Ir para a página de cadastro</a>
-    <a href="login.html">Ir para a página de login</a>
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="logo-container">
+            <img src="static/core/css/images/jc-logo.png" alt="Logo" class="site-logo">
+        </div>
+        <nav class="site-nav">
+            <ul>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="#">Esportes</a></li>
+                <li><a href="#">Cultura</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <!-- CONTEÚDO PRINCIPAL -->
+
+       <section class="highlights">
+            <!-- Card destaque -->
+            <div class="card destaque">
+                <span class="tag">em alta</span>
+                <img src="" alt="Ícone 1" class="card-icon">
+                <h2>Gerais - 1</h2>
+            </div>
+
+            <!-- Linha com dois cards menores -->
+            <div class="card-row">
+                <div class="card">
+                    <span class="tag">para você</span>
+                    <img src="" alt="Ícone 2" class="card-icon">
+                    <h2>Esportes - 2</h2>
+                </div>
+                <div class="card">
+                    <img src="" alt="Ícone 3" class="card-icon">
+                    <h2>Cultura - 3</h2>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- PROPAGANDA -->
+        <section class="ads">
+            <p>PROPAGANDA</p>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>&copy; 2024 novo_comm. Todos os direitos reservados.</p>
+    </footer>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
