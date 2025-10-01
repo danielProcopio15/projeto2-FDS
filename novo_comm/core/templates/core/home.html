@@ -4,17 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Página Inicial</title>
-    <link rel="stylesheet" href="static/core/css/home.css">
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
 </head>
 <body>
     <header class="site-header">
         <div class="logo-container">
-            <img src="static/core/css/images/jc-logo.png" alt="Logo" class="site-logo">
+            <img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo">
         </div>
         <nav class="site-nav">
             <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
+                {% if user.is_authenticated %}
+                    <li>Bem-vindo, {{ user.username }}</li>
+                    <li><a href="{% url 'logout' %}">Sair</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
+                {% endif %}
                 <li><a href="#">Esportes</a></li>
                 <li><a href="#">Cultura</a></li>
             </ul>
@@ -22,8 +27,17 @@
     </header>
 
     <main class="content-wrapper">
-
-       <section class="highlights">
+        
+        {% if messages %}
+        <section class="django-messages">
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        <section class="highlights">
             <div class="card destaque">
                 <span class="tag">em alta</span>
                 <img src="" alt="Ícone 1" class="card-icon">

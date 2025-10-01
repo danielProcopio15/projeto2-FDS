@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User 
 from django.contrib import messages
 import re 
+from django.contrib.auth import authenticate, login as auth_login
 
 def home(request):
     return render(request, 'core/home.html')
@@ -78,4 +79,41 @@ def cadastro(request):
     return render(request, 'core/cadastro.html', {})
 
 def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        # Variável para armazenar o username que tentaremos autenticar
+        username_to_auth = None
+        
+        # 1. Tenta buscar o usuário pelo email
+        try:
+            user = User.objects.get(email=email)
+            username_to_auth = user.username
+        except User.DoesNotExist:
+            # Se o email não for encontrado, definimos um username que não existe.
+            # Isso é crucial para que o 'authenticate' falhe, mas o erro seja tratado
+            # de forma unificada no bloco 'else'.
+            username_to_auth = 'nonexistent_user_for_security_check'
+            
+        # 2. Tenta autenticar usando o username e a senha
+        # Se username_to_auth for o valor dummy, esta função retornará None.
+        user = authenticate(request, username=username_to_auth, password=password)
+        
+        if user is not None:
+            # Autenticação bem-sucedida
+            auth_login(request, user)
+            messages.success(request, 'Login realizado com sucesso!')
+            return redirect('home')
+        else:
+            # Falha de autenticação (email inexistente OU senha incorreta)
+            # Exibe a mensagem genérica que você solicitou.
+            messages.error(request, 'Usuário ou senha errada.') 
+            
+            # Retorna o valor do email preenchido para o template, 
+            # melhorando a experiência do usuário.
+            context = {'email_value': email}
+            return render(request, 'core/login.html', context)
+            
+    # Se a requisição for GET (primeiro acesso)
     return render(request, 'core/login.html')
