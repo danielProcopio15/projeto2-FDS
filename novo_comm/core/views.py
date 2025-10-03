@@ -67,15 +67,12 @@ def cadastro(request):
     return render(request, 'core/cadastro.html', {})
 
 def login(request):
-    # Checagem de segurança: Se o usuário já está logado,
-    # redireciona para a home para evitar loops e confusão.
-    if request.user.is_authenticated:
-        return redirect('home')
-
+    # A restrição de redirecionamento para 'home' foi removida.
+    # Isso permite que um usuário logado clique em 'Login' e acesse o formulário.
+    
     if request.method == 'POST':
         
         email = request.POST.get('email')
-        # Nome do campo correto: password
         password = request.POST.get('password')
         
         username_to_auth = None
@@ -88,12 +85,13 @@ def login(request):
             username_to_auth = 'nonexistent_user_for_security_check'
             
         # 2. Tenta autenticar
+        # Se as credenciais forem de um novo usuário, o Django SOBRESCREVE a sessão atual.
         user = authenticate(request, username=username_to_auth, password=password)
         
         if user is not None:
             # SUCESSO
             auth_login(request, user)
-            messages.success(request, 'Login realizado!')
+            messages.success(request, f'Login realizado com sucesso! Bem-vindo(a), {user.username}.')
             return redirect('home')
         else:
             # FALHA
@@ -101,9 +99,12 @@ def login(request):
             context = {'email_value': email}
             return render(request, 'core/login.html', context)
             
-    return render(request, 'core/login.html') 
+    return render(request, 'core/login.html')
 
-def user_logout(request):
-    auth_logout(request)
-    messages.info(request, "Você foi desconectado(a).")
-    return redirect('login')
+
+#def user_logout(request):
+    # Faz o logout, destruindo a sessão
+ #   auth_logout(request)
+  #  messages.info(request, "Você foi desconectado(a).")
+    # Redireciona diretamente para a página inicial (nomeada 'home')
+   # return redirect('home')

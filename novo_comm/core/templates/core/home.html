@@ -27,8 +27,14 @@
         {% if user.is_authenticated %}
         <section class="user-greeting">
             <p>
-                **Bem-vindo(a), {{ user.username }}** | 
-                <a href="{% url 'logout' %}">Sair</a>
+                Bem-vindo(a), {{ user.username }} | 
+                
+                <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; color: inherit; padding: 0; cursor: pointer;">
+                        Sair
+                    </button>
+                </form>
             </p>
         </section>
         {% endif %}
