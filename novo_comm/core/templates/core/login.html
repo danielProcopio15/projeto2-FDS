@@ -13,13 +13,16 @@
         <img src="{% static 'core/css/images/jc-logo.png' %}" alt="jcpe-logo">
     </header>
     
-    <div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        
         <form class="cadastro-form" method="POST" action="{% url 'login' %}">
             {% csrf_token %} 
 
-            <div style="text-align: center; margin-bottom: 20px;">
-                <i class="fa fa-user-circle" style="font-size: 64px;"></i>
-                <h2>Acesso à Conta</h2>
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+                
+                <i class="fa fa-user-circle" style="font-size: 64px; margin-bottom: 5px;"></i>
+                
+                <h2>Login</h2> 
             </div>
             
             {% if messages %}
@@ -48,8 +51,7 @@
             >
 
             <button type="submit">Entrar</button>
-            
-            </form>
+        </form>
         
         <p style="text-align: center; margin-top: 15px;">
             Não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a> 
