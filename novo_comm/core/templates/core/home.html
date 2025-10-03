@@ -13,13 +13,9 @@
         </div>
         <nav class="site-nav">
             <ul>
-                {% if user.is_authenticated %}
-                    <li>Bem-vindo, {{ user.username }}</li>
-                    <li><a href="{% url 'logout' %}">Sair</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
-                {% endif %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
+                
                 <li><a href="#">Esportes</a></li>
                 <li><a href="#">Cultura</a></li>
             </ul>
@@ -28,6 +24,15 @@
 
     <main class="content-wrapper">
         
+        {% if user.is_authenticated %}
+        <section class="user-greeting">
+            <p>
+                **Bem-vindo(a), {{ user.username }}** | 
+                <a href="{% url 'logout' %}">Sair</a>
+            </p>
+        </section>
+        {% endif %}
+
         {% if messages %}
         <section class="django-messages">
             <ul class="messages">
@@ -37,6 +42,7 @@
             </ul>
         </section>
         {% endif %}
+        
         <section class="highlights">
             <div class="card destaque">
                 <span class="tag">em alta</span>

@@ -1,9 +1,10 @@
 
+# core/views.py
+
 from django.shortcuts import render, redirect 
 from django.contrib.auth.models import User 
 from django.contrib import messages
 import re 
-# Importação completa para login e logout
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout 
 
 def home(request):
@@ -66,16 +67,16 @@ def cadastro(request):
     return render(request, 'core/cadastro.html', {})
 
 def login(request):
-    # O log mostra GET, mas o código espera POST. Se o navegador enviar POST, isso corrige o problema de variável.
+    # Checagem de segurança: Se o usuário já está logado,
+    # redireciona para a home para evitar loops e confusão.
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
-        email = request.POST.get('email')
         
-        # CORREÇÃO: Você deve usar o nome do campo que está no seu HTML: 'password'
-        # Se o log insiste em 'senha', o HTML está desatualizado.
-        # Vamos usar 'password' (do seu HTML) E 'senha' (do seu log) como backup temporário.
-        password_value = request.POST.get('password')
-        if not password_value:
-             password_value = request.POST.get('senha') # Tenta pegar o nome incorreto como backup
+        email = request.POST.get('email')
+        # Nome do campo correto: password
+        password = request.POST.get('password')
         
         username_to_auth = None
         
@@ -86,8 +87,8 @@ def login(request):
         except User.DoesNotExist:
             username_to_auth = 'nonexistent_user_for_security_check'
             
-        # 2. Tenta autenticar, usando a variável corrigida 'password_value'
-        user = authenticate(request, username=username_to_auth, password=password_value)
+        # 2. Tenta autenticar
+        user = authenticate(request, username=username_to_auth, password=password)
         
         if user is not None:
             # SUCESSO
@@ -100,7 +101,7 @@ def login(request):
             context = {'email_value': email}
             return render(request, 'core/login.html', context)
             
-    return render(request, 'core/login.html')
+    return render(request, 'core/login.html') 
 
 def user_logout(request):
     auth_logout(request)
