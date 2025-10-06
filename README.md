@@ -20,8 +20,20 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 - Versão em áudio/vídeo das manchetes e resumos.  
 
 ---
-
+## Protótipo
 <img width="1029" height="849" alt="image" src="https://github.com/user-attachments/assets/b70ba025-572d-4615-842f-1d17aeda6574" />
+
+---
+## Diagrama de atividades.
+
+representação dos caminhos, decisões e interações do usuário.
+
+<img width="1915" height="1015" alt="Captura_de_tela_2025-09-22_165846" src="https://github.com/user-attachments/assets/2cfeb7e9-dc94-436c-9bf3-9dcd75cfd3bd" />
+
+---
+## Screen Cast
+
+https://youtu.be/RADPIgk6zOA
 
 ---
 
@@ -101,19 +113,6 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 Definição da primeira codificação do grupo 
 
 <img width="1340" height="492" alt="image" src="https://github.com/user-attachments/assets/37ca50f2-08f4-4b6b-8626-fc4c67c4e17b" />
-
-
----
-### Diagrama de atividades.
-
-representação dos caminhos, decisões e interações do usuário.
-
-<img width="1915" height="1015" alt="Captura_de_tela_2025-09-22_165846" src="https://github.com/user-attachments/assets/2cfeb7e9-dc94-436c-9bf3-9dcd75cfd3bd" />
-
-
-
-
-
 
 ---
 
