@@ -116,16 +116,139 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 
  ## Descrição das histórias
  
-1. Priorize separar cada uma das áreas de interesse em “divs” ou “Sections” em que nessas divisões haja uma cor predominante que combine com o tema, como por exemplo: A sessão de esportes deve ter um fundo verde como cor principal. Utilize o display grid ou flex.
-2. Reestruturar listagens de matérias em cards minimalistas que estejam dentro das divs e das sections. Mudar (imagem, título, categoria). 2 formatos - 1o em grade 3x2    2o em tiras (1 noticia por lina/setor
-3. Criem uma nav bar chamativa(com cor vermelha e fonte de letra compatível com a identidade do JC) que esteja no “header” da página, ela deve ter links diretos para cada uma das áreas de interesse como política, esportes e etc.  
-4. Façam uma outra aba dentro da página do JC em que as notícias sejam exibidas em formato scrollavel com notícias baseadas no interesse do usuário. O acesso a esta aba deve estar na nav bar com um nome com cor e fonte chamativa.
-5. Substituir os anúncios que ficam NO MEIO das notícias por uma seção limpa com pelo menos 1 ou mais artigos relacionados (titulo curto, link e Layout em cards pequenos alinhados em grid responsivo.). Os anúncios devem ficar na parte lateral da página para não atrapalhar a experiência do usuários. Layout em cards pequenos alinhados em grid responsivo. Os anúncios devem acompanhar um pedaço da página até certo ponto, dando espaço para outro anúncio, imagens ou continuidade de notícias.As notícias devem estar centralizadas, com espaço para as propagandas. as boxes estarão em formato de grid, mas ao entrar na notícia, estará escrita por extenso no meio.
-6. Criem um sistema de avaliação simples, apenas colocando a quantidade de estrelas que o usuário deseja colocar(1 até 5), no final de cada notícia, algo simples, no canto inferior direito da tela.  
-7. Criem um botão ao início da notícia, com o nome “resumo”, que ao clica-lo, abre um quadrado, uma box, com os tópicos pertinentes da matéria. A box deve conter no máximo 8 tópicos com 2 linhas cada, no máximo( a box deve se ajustar a quantidade de conteúdo).  
-8. Criem um botão com uma prévia da notícia no canto superior direito, com poucos elementos, para clicar e redirecionar para outra notícia. Esse botão deve permanecer, sempre jogando para uma notícia nova. 
-9. Criem um dado estatístico por meio de visitações do user à página(visitação do controller) e entregue na página principal notícias destinadas ao user.
-10. Façam com que dentro da navbar, apareça uma opção de jogos com base em notícias disponíveis no portal de notícias. Ao estagnar em um quizz ou minigame, o user recebe a opção no canto inferior do jogo para “receber uma dica”, que ao clicar redireciona para um anúncio que gera a resposta do joguinho.
+# 🧾 Histórias de Usuário
+
+As histórias de usuário foram criadas com base nas necessidades do **Sistema Jornal do Commercio (SJCC)**, seguindo a estrutura dos **3Cs (Cartão, Conversa e Confirmação)**, de forma clara e voltada à entrega de valor.
+
+---
+
+##  História 1 — Login
+
+**Como usuário,**  
+quero poder fazer login com meu e-mail e senha,  
+**para** acessar o portal com minhas preferências de conteúdo salvas.
+
+**Principais pontos:**
+- Interface simples com campos de usuário e senha.  
+- Mensagens de erro claras (usuário não encontrado ou senha incorreta).  
+- Validação de login conectada ao banco de dados.  
+
+---
+
+##  História 2 — Cadastro
+
+**Como novo usuário,**  
+quero criar uma conta e escolher os temas que me interessam,  
+**para** receber notícias personalizadas e ocultar assuntos que não gosto.
+
+**Principais pontos:**
+- Validação de e-mail e senha fortes.  
+- Preferências e temas salvos no banco de dados.  
+- Layout com caixas de texto e botões simples e intuitivos.  
+
+---
+
+##  História 3 — Divisões de Conteúdo
+
+**Como leitor,**  
+quero visualizar as seções do site bem organizadas,  
+**para** entender facilmente em qual área de conteúdo estou.
+
+**Principais pontos:**
+- Criação de “divs” e “sections” por tema (esportes, política, cultura etc).  
+- Cores de fundo correspondentes ao tema (ex: verde para esportes).  
+- Layout flexível com display grid ou flex.  
+
+---
+
+##  História 4 — Navbar
+
+**Como usuário,**  
+quero uma barra de navegação fixa e chamativa,  
+**para** acessar rapidamente as seções do portal.
+
+**Principais pontos:**
+- Navbar vermelha no topo com identidade visual do JC.  
+- Links para todas as áreas principais.  
+- Torna-se menu sanduíche em telas menores.  
+
+---
+
+##  História 5 — Botão “Próxima Notícia”
+
+**Como leitor,**  
+quero acessar outra notícia do mesmo tema rapidamente,  
+**para** continuar lendo sem precisar voltar à página inicial.
+
+**Principais pontos:**
+- Botão no canto superior direito com prévia da próxima notícia.  
+- Sempre redireciona para uma nova matéria do mesmo tema.  
+
+---
+
+##  História 6 — Ajuste de Layout de Notícia e Anúncios
+
+**Como leitor,**  
+quero ver matérias relacionadas ao artigo que estou lendo,  
+**para** continuar navegando sem distrações e com menos anúncios no meio do texto.
+
+**Principais pontos:**
+- Seção de artigos relacionados no meio da página.  
+- Anúncios movidos para a lateral (sticky, alternando em blocos).  
+- Layout em cards pequenos e responsivos.  
+
+---
+
+##  História 7 — Página “Para Você”
+
+**Como usuário,**  
+quero ter uma página personalizada com notícias que gosto,  
+**para** encontrar meus conteúdos preferidos em um só lugar.
+
+**Principais pontos:**
+- Aba “Para Você” na navbar.  
+- Página com rolagem contínua e base em interesses do usuário.  
+- Sugestões de matérias semelhantes ao final da página.  
+
+---
+
+##  História 8 — Botão “Resumo”
+
+**Como usuário com pouco tempo,**  
+quero acessar um resumo rápido das notícias,  
+**para** entender o conteúdo sem precisar ler tudo.
+
+**Principais pontos:**
+- Botão “Resumo” no início da matéria.  
+- Exibe uma box com até 8 tópicos curtos.  
+- Efeito hover nas imagens mostrando breves descrições.  
+
+---
+
+##  História 9 — Personalização com Cache
+
+**Como usuário frequente,**  
+quero que o site me mostre notícias baseadas no que mais leio,  
+**para** encontrar rapidamente conteúdos do meu interesse.
+
+**Principais pontos:**
+- Registro das visitas e categorias acessadas pelo usuário.  
+- Homepage personalizada com base nesse histórico.  
+- Uso de cache para manter desempenho e carregamento rápido.  
+
+---
+
+##  História 10 — Gamificação da Experiência
+
+**Como usuário do portal,**  
+quero ganhar pontos e selos conforme interajo com as notícias,  
+**para** me sentir motivado a continuar navegando e lendo mais.
+
+**Principais pontos:**
+- Pontuação por ações (ler, comentar, compartilhar, visitar).  
+- Exibição de nível e selo (Bronze, Prata, Ouro).  
+- Mensagens de incentivo ao subir de nível.  
+
 
 ---
 
