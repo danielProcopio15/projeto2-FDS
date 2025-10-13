@@ -111,18 +111,15 @@ python manage.py runserver
 
 As principais histórias do usuário que guiaram o desenvolvimento (seguindo os **3Cs**: claras, concisas e com entrega de valor):
 
-<img width="1827" height="553" alt="Captura de tela 2025-09-22 211431" src="https://github.com/user-attachments/assets/1d880975-bcbb-4bba-a317-c3ecdd0369e8" />
-
-
- ## Descrição das histórias
+<img width="757" height="418" alt="Captura de tela 2025-10-13 191239" src="https://github.com/user-attachments/assets/a9711fad-cd92-4d2f-9395-9d1abf74877a" />
  
-# 🧾 Histórias de Usuário
+## Histórias de Usuário
 
 As histórias de usuário foram criadas com base nas necessidades do **Sistema Jornal do Commercio (SJCC)**, seguindo a estrutura dos **3Cs (Cartão, Conversa e Confirmação)**, de forma clara e voltada à entrega de valor.
 
 ---
 
-##  História 1 — Login
+###  História 1 — Login
 
 **Como usuário,**  
 quero poder fazer login com meu e-mail e senha,  
@@ -135,7 +132,7 @@ quero poder fazer login com meu e-mail e senha,
 
 ---
 
-##  História 2 — Cadastro
+###  História 2 — Cadastro
 
 **Como novo usuário,**  
 quero criar uma conta e escolher os temas que me interessam,  
@@ -148,7 +145,7 @@ quero criar uma conta e escolher os temas que me interessam,
 
 ---
 
-##  História 3 — Divisões de Conteúdo
+###  História 3 — Divisões de Conteúdo
 
 **Como leitor,**  
 quero visualizar as seções do site bem organizadas,  
@@ -161,7 +158,7 @@ quero visualizar as seções do site bem organizadas,
 
 ---
 
-##  História 4 — Navbar
+###  História 4 — Navbar
 
 **Como usuário,**  
 quero uma barra de navegação fixa e chamativa,  
@@ -174,7 +171,7 @@ quero uma barra de navegação fixa e chamativa,
 
 ---
 
-##  História 5 — Botão “Próxima Notícia”
+###  História 5 — Botão “Próxima Notícia”
 
 **Como leitor,**  
 quero acessar outra notícia do mesmo tema rapidamente,  
@@ -186,7 +183,7 @@ quero acessar outra notícia do mesmo tema rapidamente,
 
 ---
 
-##  História 6 — Ajuste de Layout de Notícia e Anúncios
+###  História 6 — Ajuste de Layout de Notícia e Anúncios
 
 **Como leitor,**  
 quero ver matérias relacionadas ao artigo que estou lendo,  
@@ -199,7 +196,7 @@ quero ver matérias relacionadas ao artigo que estou lendo,
 
 ---
 
-##  História 7 — Página “Para Você”
+###  História 7 — Página “Para Você”
 
 **Como usuário,**  
 quero ter uma página personalizada com notícias que gosto,  
@@ -212,7 +209,7 @@ quero ter uma página personalizada com notícias que gosto,
 
 ---
 
-##  História 8 — Botão “Resumo”
+###  História 8 — Botão “Resumo”
 
 **Como usuário com pouco tempo,**  
 quero acessar um resumo rápido das notícias,  
@@ -225,7 +222,7 @@ quero acessar um resumo rápido das notícias,
 
 ---
 
-##  História 9 — Personalização com Cache
+###  História 9 — Personalização com Cache
 
 **Como usuário frequente,**  
 quero que o site me mostre notícias baseadas no que mais leio,  
@@ -238,7 +235,7 @@ quero que o site me mostre notícias baseadas no que mais leio,
 
 ---
 
-##  História 10 — Gamificação da Experiência
+###  História 10 — Gamificação da Experiência
 
 **Como usuário do portal,**  
 quero ganhar pontos e selos conforme interajo com as notícias,  
@@ -254,9 +251,10 @@ quero ganhar pontos e selos conforme interajo com as notícias,
 
 ### Sprint
 
-Definição da primeira codificação do grupo 
+Sprint atual do grupo 
 
-<img width="1340" height="492" alt="image" src="https://github.com/user-attachments/assets/37ca50f2-08f4-4b6b-8626-fc4c67c4e17b" />
+<img width="819" height="460" alt="Sem título" src="https://github.com/user-attachments/assets/6175932a-12f1-4e47-8dd6-cb6281f6b50f" />
+
 
 ---
 
