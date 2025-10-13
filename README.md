@@ -10,35 +10,35 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 
 ## Funcionalidades Principais
 
-Sistema de login e cadastro com preferências de conteúdo.
-Usuários podem criar contas, escolher temas de interesse e ocultar assuntos que não desejam consumir.
+###Sistema de login e cadastro com preferências de conteúdo.
+####Usuários podem criar contas, escolher temas de interesse e ocultar assuntos que não desejam consumir.
 
-Personalização de homepage via cache e comportamento de navegação.
-A página inicial adapta-se às categorias mais acessadas, priorizando conteúdos de interesse do leitor.
+###Personalização de homepage via cache e comportamento de navegação.
+####A página inicial adapta-se às categorias mais acessadas, priorizando conteúdos de interesse do leitor.
 
-Divisões temáticas com identidade visual por seção.
-Cada área do portal (Esportes, Política, Cultura etc.) possui cores e estilos próprios para facilitar a identificação.
+###Divisões temáticas com identidade visual por seção.
+####Cada área do portal (Esportes, Política, Cultura etc.) possui cores e estilos próprios para facilitar a identificação.
 
-Navbar responsiva e chamativa.
-Barra de navegação fixa no topo com cores da marca JC, tornando-se menu sanduíche em telas menores.
+###Navbar responsiva e chamativa.
+####Barra de navegação fixa no topo com cores da marca JC, tornando-se menu sanduíche em telas menores.
 
-Botão “Próxima Notícia”.
-Permite avançar para outra matéria do mesmo tema sem precisar voltar à página inicial.
+###Botão “Próxima Notícia”.
+####Permite avançar para outra matéria do mesmo tema sem precisar voltar à página inicial.
 
-Layout otimizado de leitura e anúncios.
-Substitui anúncios intrusivos por cards de matérias relacionadas, mantendo propagandas laterais e experiência limpa.
+###Layout otimizado de leitura e anúncios.
+####Substitui anúncios intrusivos por cards de matérias relacionadas, mantendo propagandas laterais e experiência limpa.
 
-Página “Para Você”.
-Sessão personalizada com rolagem contínua, mostrando notícias e recomendações baseadas no histórico do usuário.
+###Página “Para Você”.
+####Sessão personalizada com rolagem contínua, mostrando notícias e recomendações baseadas no histórico do usuário.
 
-Botão “Resumo” nas matérias.
-Exibe um quadro com tópicos curtos da notícia para leitura rápida, com interação hover em imagens.
+###Botão “Resumo” nas matérias.
+####Exibe um quadro com tópicos curtos da notícia para leitura rápida, com interação hover em imagens.
 
-Gamificação da experiência.
-Usuários ganham pontos e selos (Bronze, Prata, Ouro) por ler, comentar e compartilhar notícias, com mensagens de incentivo.
+###Gamificação da experiência.
+####Usuários ganham pontos e selos (Bronze, Prata, Ouro) por ler, comentar e compartilhar notícias, com mensagens de incentivo.
 
-Sistema de estatísticas de uso.
-Registra acessos e temas mais lidos, permitindo análises e recomendações personalizadas 
+###Sistema de estatísticas de uso.
+####Registra acessos e temas mais lidos, permitindo análises e recomendações personalizadas 
 
 ---
 ## Protótipo
