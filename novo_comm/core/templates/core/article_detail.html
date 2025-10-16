@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ article.title }}</title>
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/next_article.css' %}">
+</head>
+<body>
+    {% include 'core/_nav.html' %}
+
+    <main class="content-wrapper article-page">
+        <article id="article-content">
+            {% include 'core/_article_content.html' %}
+        </article>
+    </main>
+
+    <!-- Botão sticky de próxima matéria -->
+    <div id="next-article-button" class="next-article-button" data-current-id="{{ article.pk }}" aria-hidden="false">
+        <div class="next-thumb">
+            {% if article.image_url %}
+            <img src="{{ article.image_url }}" alt="thumb">
+            {% else %}
+            <img src="{% static 'core/css/images/jc-logo.png' %}" alt="thumb">
+            {% endif %}
+        </div>
+        <div class="next-meta">
+            <div class="next-category">{{ article.category }}</div>
+            <div class="next-title">Carregando próxima...</div>
+        </div>
+    </div>
+
+    <script src="{% static 'core/js/next_article.js' %}"></script>
+</body>
+</html>

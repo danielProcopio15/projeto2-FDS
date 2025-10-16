@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Categoria: {{ category }}</title>
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <style>
+        .cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 16px; padding: 16px; }
+        .card { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
+        .card img { width:100%; height:160px; object-fit:cover; border-radius:6px; }
+        .card h3 { margin: 8px 0 0; font-size: 1.05rem; }
+        .card .meta { font-size: 0.85rem; color: #666; margin-top:6px }
+    </style>
+</head>
+<body>
+    {% include 'core/_nav.html' %}
+
+    <main class="content-wrapper">
+        <h1>Categoria: {{ category|title }}</h1>
+        <section class="cards">
+            {% for article in articles %}
+            <a class="card" href="{% url 'article_detail' article.pk %}">
+                {% if article.image_url %}
+                <img src="{{ article.image_url }}" alt="{{ article.title }}">
+                {% endif %}
+                <div class="meta">{{ article.category }} — {{ article.created_at|date:'d/m/Y H:i' }}</div>
+                <h3>{{ article.title }}</h3>
+            </a>
+            {% empty %}
+            <p>Nenhuma matéria nesta categoria ainda.</p>
+            {% endfor %}
+        </section>
+    </main>
+
+</body>
+</html>
