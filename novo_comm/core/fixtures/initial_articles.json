@@ -1,0 +1,50 @@
+[
+  {
+    "model": "core.article",
+    "pk": 1,
+    "fields": {
+      "title": "Vitória inesquecível: time local domina a final",
+      "slug": "vitoria-inesquecivel-time-local",
+      "content": "<p>Uma partida histórica terminou com uma vitória convincente do time local...</p>",
+      "category": "esportes",
+      "image_url": "https://picsum.photos/seed/esportes1/800/600",
+      "created_at": "2025-10-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "core.article",
+    "pk": 2,
+    "fields": {
+      "title": "Treino intenso prepara atletas para o campeonato",
+      "slug": "treino-intenso-atletas",
+      "content": "<p>Os atletas intensificaram os treinos para alcançar o melhor condicionamento...</p>",
+      "category": "esportes",
+      "image_url": "https://picsum.photos/seed/esportes2/800/600",
+      "created_at": "2025-10-14T09:30:00Z"
+    }
+  },
+  {
+    "model": "core.article",
+    "pk": 3,
+    "fields": {
+      "title": "Exposição local traz novas vozes da cultura",
+      "slug": "exposicao-local-vozes",
+      "content": "<p>A nova exposição do centro cultural destaca artistas emergentes...</p>",
+      "category": "cultura",
+      "image_url": "https://picsum.photos/seed/cultura1/800/600",
+      "created_at": "2025-10-13T14:20:00Z"
+    }
+  },
+  {
+    "model": "core.article",
+    "pk": 4,
+    "fields": {
+      "title": "Festival de música atrai multidão",
+      "slug": "festival-musica-atrai-multidao",
+      "content": "<p>O festival deste ano trouxe grandes nomes e público recorde...</p>",
+      "category": "cultura",
+      "image_url": "https://picsum.photos/seed/cultura2/800/600",
+      "created_at": "2025-10-12T18:05:00Z"
+    }
+  }
+]

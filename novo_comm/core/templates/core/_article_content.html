@@ -1,0 +1,13 @@
+<div id="article-content" data-article-id="{{ article.pk }}">
+    <header class="article-header">
+        <h1>{{ article.title }}</h1>
+        <div class="article-meta">Categoria: {{ article.category }} — {{ article.created_at }}</div>
+        {% if article.image_url %}
+        <div class="article-image"><img src="{{ article.image_url }}" alt="{{ article.title }}"></div>
+        {% endif %}
+    </header>
+
+    <section class="article-body">
+        {{ article.content|safe }}
+    </section>
+</div>
