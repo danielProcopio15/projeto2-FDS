@@ -1,13 +1,10 @@
-# NOVO_COMM/URLS.PY (Arquivo de URLs do Projeto)
+# novo_comm/urls.py (No diretório principal do projeto)
 
 from django.contrib import admin
-from django.urls import path, include  # <-- Certifique-se de importar 'include'
+from django.urls import path, include  # <-- IMPORTANTE: include
 
 urlpatterns = [
-    # Caminho padrão do Django Admin
     path('admin/', admin.site.urls),
-    
-    # CORREÇÃO CRÍTICA: Inclui as URLs da sua aplicação 'core'
-    # Esta linha substitui a importação incorreta 'from . import views'
+    # Inclui todas as rotas do app core
     path('', include('core.urls')), 
 ]

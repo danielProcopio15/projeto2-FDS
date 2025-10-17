@@ -12,13 +12,13 @@
             <img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo">
         </div>
         <nav class="site-nav">
-            <ul>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
-                
-                <li><a href="#">Esportes</a></li>
-                <li><a href="#">Cultura</a></li>
-            </ul>
+    <ul>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
+        
+        <li><a href="{% url 'esportes' %}">Esportes</a></li>
+        <li><a href="{% url 'cultura' %}">Cultura</a></li>
+        </ul>
         </nav>
     </header>
 
@@ -50,24 +50,31 @@
         {% endif %}
         
         <section class="highlights">
-            <div class="card destaque">
-                <span class="tag">em alta</span>
-                <img src="" alt="Ícone 1" class="card-icon">
-                <h2>Gerais - 1</h2>
-            </div>
+    
+    <div class="card destaque">
+        <span class="tag">em alta</span>
+        <a href="{% url 'gerais' %}"> 
+            <img src="" alt="Ícone 1" class="card-icon">
+            <h2>Gerais - 1</h2>
+        </a>
+    </div>
 
-            <div class="card-row">
-                <div class="card">
-                    <span class="tag">para você</span>
-                    <img src="" alt="Ícone 2" class="card-icon">
-                    <h2>Esportes - 2</h2>
-                </div>
-                <div class="card">
-                    <img src="" alt="Ícone 3" class="card-icon">
-                    <h2>Cultura - 3</h2>
-                </div>
-            </div>
-        </section>
+    <div class="card-row">
+        <div class="card">
+            <span class="tag">para você: {{ preferencia|default:"Geral" }}</span> 
+            <a href="{% url 'esportes' %}"> 
+                <img src="" alt="Ícone 2" class="card-icon">
+                <h2>Esportes - 2</h2>
+            </a>
+        </div>
+        <div class="card">
+            <a href="{% url 'cultura' %}">
+                <img src="" alt="Ícone 3" class="card-icon">
+                <h2>Cultura - 3</h2>
+            </a>
+        </div>
+    </div>
+</section>
 
 
         <section class="ads">

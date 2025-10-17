@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo-container">
+            <img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo">
+        </div>
+        <nav class="site-nav">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'gerais' %}">Gerais</a></li>
+                <li><a href="{% url 'esportes' %}">Esportes</a></li>
+                <li><a href="{% url 'cultura' %}">Cultura</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="content-wrapper">
+        
+        <h1>{{ titulo }}</h1>
+        <p>{{ conteudo }}</p>
+        
+        <p><a href="{% url 'home' %}">Voltar para a Home</a></p>
+        
+    </main>
+    
+    <footer class="site-footer">
+        <p>&copy; 2024 novo_comm. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
