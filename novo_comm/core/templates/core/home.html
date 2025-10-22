@@ -50,23 +50,80 @@
         {% endif %}
         
         <section class="highlights">
+            
+            {% with em_alta=categorias_ordenadas|first outros=categorias_ordenadas|slice:"1:" %}
+            
             <div class="card destaque">
-                <span class="tag">em alta</span>
-                <img src="" alt="Ícone 1" class="card-icon">
-                <h2>Gerais - 1</h2>
+                
+                {% if em_alta and em_alta.key %}
+                    <a href="{% url em_alta.key|lower %}"> 
+                        <div class="card-content">
+                            <img src="{% static 'caminho/para/sua/imagem.png' %}" alt="Ícone {{ em_alta.nome }}" class="card-image">
+
+                            <div class="card-overlay">
+                                {% if user.is_authenticated %}
+                                    <span class="tag">🔥 Em Alta</span>
+                                    <h2 class="short-text">{{ em_alta.nome }}</h2>
+                                    
+                                    <div class="details-text">
+                                        <h3>{{ em_alta.nome }}</h3>
+                                        <p>Clique aqui para acessar as principais manchetes e tendências de {{ em_alta.nome }}.</p>
+                                        <p class="cliques-count">Baseado em seus {{ em_alta.cliques }} cliques.</p>
+                                    </div>
+                                {% else %}
+                                    <span class="tag">Em Alta</span>
+                                    <h2 class="short-text">Faça Login para Personalizar</h2>
+                                    <div class="details-text">
+                                        <p>Explore as notícias gerais e registre seus interesses para ver o seu conteúdo personalizado!</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                
+                {% else %}
+                    <div class="card-content">
+                        <span class="tag">Erro</span>
+                        <a href="{% url 'home' %}">
+                            <h2>Erro ao carregar categorias. Tente novamente.</h2>
+                        </a>
+                    </div>
+                {% endif %}
             </div>
 
             <div class="card-row">
-                <div class="card">
-                    <span class="tag">para você</span>
-                    <img src="" alt="Ícone 2" class="card-icon">
-                    <h2>Esportes - 2</h2>
+                
+                {% for categoria in outros %}
+                
+                {% if categoria and categoria.key %}
+                <div class="card card-{{ categoria.key|lower }}">
+                    <a href="{% url categoria.key|lower %}"> 
+                        <div class="card-content">
+                            <img src="" alt="Ícone {{ categoria.nome }}" class="card-image">
+                            
+                            <div class="card-overlay">
+                                <span class="tag">Explorar</span> 
+                                <h2 class="short-text">{{ categoria.nome }}</h2>
+                                
+                                <div class="details-text">
+                                    <h3>{{ categoria.nome }}</h3>
+                                    <p>Clique para ver as últimas novidades de {{ categoria.nome }}.</p>
+                                    {% if user.is_authenticated %}
+                                        <p class="cliques-count">({{ categoria.cliques }} cliques)</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="card">
-                    <img src="" alt="Ícone 3" class="card-icon">
-                    <h2>Cultura - 3</h2>
-                </div>
+                {% endif %}
+                
+                {% endfor %}
+                
             </div>
+            
+            {% endwith %}
+
         </section>
 
 

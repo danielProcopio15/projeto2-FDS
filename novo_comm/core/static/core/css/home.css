@@ -216,3 +216,94 @@ body {
   border-top: 1px solid #ddd;
   margin-top: auto;
 }
+
+.card {
+    position: relative; 
+    height: 300px; 
+    overflow: hidden; 
+}
+
+.card a {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+.card-content {
+    position: relative;
+    height: 100%;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease-in-out; 
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s ease-in-out;
+}
+
+.card-overlay .short-text {
+    margin: 5px 0 0;
+    font-size: 1.5em;
+    z-index: 10;
+}
+
+.card-overlay .details-text {
+    opacity: 0; 
+    max-height: 0; 
+    transform: translateY(10px); 
+    transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out, transform 0.3s ease-in-out;
+    font-size: 0.9em;
+    color: #ccc;
+    text-align: left;
+}
+.card-overlay .details-text h3 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.card:hover .card-image {
+    filter: brightness(0.4); 
+}
+
+.card:hover .card-overlay {
+    background-color: rgba(0, 0, 0, 0.7); 
+    justify-content: center; 
+}
+
+.card:hover .short-text {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.card:hover .details-text {
+    opacity: 1; 
+    max-height: 200px; 
+    transform: translateY(0); 
+}
+
+.tag {
+    align-self: flex-start;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff5722;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 20;
+}
