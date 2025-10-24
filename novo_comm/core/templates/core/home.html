@@ -49,35 +49,76 @@
         </section>
         {% endif %}
         
-        <section class="highlights">
-            <div class="card destaque">
-                <span class="tag">em alta</span>
-                <img src="" alt="Ícone 1" class="card-icon">
-                <h2>Gerais - 1</h2>
+        <!-- Minimalist news boxes: toggle between grid (3x2) and strip (one per row) -->
+        <section class="news-minimal">
+            <div class="view-controls">
+                <button id="gridBtn" class="active">Grade 3x2</button>
+                <button id="stripBtn">Tiras</button>
             </div>
 
-            <div class="card-row">
-                <div class="card">
-                    <span class="tag">para você</span>
-                    <img src="" alt="Ícone 2" class="card-icon">
-                    <h2>Esportes - 2</h2>
-                </div>
-                <div class="card">
-                    <img src="" alt="Ícone 3" class="card-icon">
-                    <h2>Cultura - 3</h2>
+            <div id="newsContainer" class="news-container grid-view">
+                {# featured article (first) #}
+                {% if articles|length > 0 %}
+                {% with featured=articles.0 %}
+                <article class="news-card featured">
+                    <div class="thumb">
+                        <img src="{% static featured.image %}" alt="{{ featured.title }}">
+                    </div>
+                    <div class="meta">
+                        <span class="category">{{ featured.category }}</span>
+                        <h2 class="title">{{ featured.title }}</h2>
+                        <p class="excerpt">{{ featured.description }}</p>
+                    </div>
+                </article>
+                {% endwith %}
+                {% endif %}
+
+                {# three smaller boxes below #}
+                <div class="small-grid">
+                    {% for a in articles|slice:"1:4" %}
+                    <article class="news-card small">
+                        <div class="thumb">
+                            <img src="{% static a.image %}" alt="{{ a.title }}">
+                        </div>
+                        <div class="meta">
+                            <span class="category">{{ a.category }}</span>
+                            <h3 class="title">{{ a.title }}</h3>
+                            <p class="excerpt">{{ a.description }}</p>
+                        </div>
+                    </article>
+                    {% endfor %}
                 </div>
             </div>
-        </section>
-
-
-        <section class="ads">
-            <p>PROPAGANDA</p>
         </section>
     </main>
 
     <footer class="site-footer">
         <p>&copy; 2024 novo_comm. Todos os direitos reservados.</p>
     </footer>
+    <script>
+        (function(){
+            const gridBtn = document.getElementById('gridBtn');
+            const stripBtn = document.getElementById('stripBtn');
+            const container = document.getElementById('newsContainer');
+
+            function setView(view){
+                if(view === 'grid'){
+                    container.classList.remove('strip-view');
+                    container.classList.add('grid-view');
+                    gridBtn.classList.add('active');
+                    stripBtn.classList.remove('active');
+                } else {
+                    container.classList.remove('grid-view');
+                    container.classList.add('strip-view');
+                    stripBtn.classList.add('active');
+                    gridBtn.classList.remove('active');
+                }
+            }
+
+            gridBtn.addEventListener('click', () => setView('grid'));
+            stripBtn.addEventListener('click', () => setView('strip'));
+        })();
+    </script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

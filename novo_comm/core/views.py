@@ -8,7 +8,40 @@ import re
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout 
 
 def home(request):
-    return render(request, 'core/home.html')
+    # For now we don't have a Article model; provide a simple list of dicts
+    # that the template can iterate over to render the minimal news boxes.
+    articles = [
+        {
+            'id': 1,
+            'title': 'Sport campeão',
+            'category': 'Esportes',
+            'description': 'Sport vence flamengo e conquista o segundo título brasileiro.',
+            'image': 'core/css/images/jc-logo.png',
+        },
+        {
+            'id': 2,
+            'title': 'Arte local em evidência',
+            'category': 'Cultura',
+            'description': 'Mostra reúne artistas locais com novos olhares.',
+            'image': 'core/css/images/jc-logo.png',
+        },
+        {
+            'id': 3,
+            'title': 'Economia em foco',
+            'category': 'Economia',
+            'description': 'Mercado reage a novos índices de inflação.',
+            'image': 'core/css/images/jc-logo.png',
+        },
+        {
+            'id': 4,
+            'title': 'Ciência e futuro',
+            'category': 'Ciência',
+            'description': 'Novo estudo aponta soluções para energia limpa.',
+            'image': 'core/css/images/jc-logo.png',
+        },
+    ]
+
+    return render(request, 'core/home.html', {'articles': articles})
 
 def cadastro(request):
     context = {}
