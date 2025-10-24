@@ -15,7 +15,6 @@
             <ul>
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
-                
                 <li><a href="#">Esportes</a></li>
                 <li><a href="#">Cultura</a></li>
             </ul>
@@ -23,12 +22,11 @@
     </header>
 
     <main class="content-wrapper">
-        
+
         {% if user.is_authenticated %}
         <section class="user-greeting">
             <p>
-                Bem-vindo(a), {{ user.username }} | 
-                
+                Bem-vindo(a), {{ user.username }} |
                 <form action="{% url 'logout' %}" method="POST" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" style="background: none; border: none; color: inherit; padding: 0; cursor: pointer;">
@@ -48,36 +46,61 @@
             </ul>
         </section>
         {% endif %}
-        
-        <section class="highlights">
-            <div class="card destaque">
-                <span class="tag">em alta</span>
-                <img src="" alt="Ícone 1" class="card-icon">
-                <h2>Gerais - 1</h2>
-            </div>
 
-            <div class="card-row">
-                <div class="card">
-                    <span class="tag">para você</span>
-                    <img src="" alt="Ícone 2" class="card-icon">
-                    <h2>Esportes - 2</h2>
-                </div>
-                <div class="card">
-                    <img src="" alt="Ícone 3" class="card-icon">
-                    <h2>Cultura - 3</h2>
+        <!-- SEÇÃO DE NOTÍCIAS -->
+        <section class="news-minimal">
+            <div id="newsContainer" class="news-container grid-view">
+                {% if articles|length > 0 %}
+                {% with featured=articles.0 %}
+                <article class="news-card featured">
+                    <div class="tag destaque-tag">Em destaque</div>
+                    <a class="featured-link" href="{% url 'tema' featured.slug %}">
+                        <div class="thumb">
+                            <img src="{% static featured.image %}" alt="{{ featured.title }}">
+                        </div>
+                        <div class="meta">
+                            <span class="category">{{ featured.category }}</span>
+                            <h2 class="title">{{ featured.title }}</h2>
+                            <p class="excerpt">{{ featured.description }}</p>
+                        </div>
+                    </a>
+                </article>
+                {% endwith %}
+                {% endif %}
+
+                <div class="small-grid">
+                    {% for a in articles|slice:"1:4" %}
+                    <article class="news-card small">
+                        {% if forloop.first %}
+                        <div class="tag para-voce-tag">Para você</div>
+                        {% endif %}
+                        <a class="small-link" href="{% url 'tema' a.slug %}">
+                            <div class="thumb">
+                                <img src="{% static a.image %}" alt="{{ a.title }}">
+                            </div>
+                            <div class="meta">
+                                <span class="category">{{ a.category }}</span>
+                                <h3 class="title">{{ a.title }}</h3>
+                                <p class="excerpt">{{ a.description }}</p>
+                            </div>
+                        </a>
+                    </article>
+                    {% endfor %}
                 </div>
             </div>
         </section>
 
-
-        <section class="ads">
-            <p>PROPAGANDA</p>
+        <!-- BLOCO DE PROPAGANDA -->
+        <section class="ad-section">
+            <div class="ad-banner">
+                <p>📰 Espaço para sua propaganda — 900x200px</p>
+            </div>
         </section>
+
     </main>
 
     <footer class="site-footer">
         <p>&copy; 2024 novo_comm. Todos os direitos reservados.</p>
     </footer>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

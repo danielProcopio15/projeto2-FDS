@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9ss9t4t$0=y2y%b9nd%(!_nltcu(j*$24)x6pm@u$25j2^_juf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
 
 
 # Application definition
@@ -135,4 +135,22 @@ INSTALLED_APPS = [
 import os
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+]
+
+# novo_comm/settings.py
+
+from pathlib import Path
+
+# BASE_DIR agora aponta para a pasta-raiz do seu projeto (novo_comm)
+BASE_DIR = Path(__file__).resolve().parent.parent 
+
+# ...
+
+STATIC_URL = '/static/'
+
+# Garante que ele procure por uma pasta 'static' ao lado da sua app 'core'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    # Se a pasta 'static' estiver DENTRO da app 'core', use:
+    # BASE_DIR / 'core' / 'static',
 ]
