@@ -15,8 +15,10 @@
             <ul>
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
-                <li><a href="#">Esportes</a></li>
-                <li><a href="#">Cultura</a></li>
+                <li><a href="{% url 'tema' slug='esportes' %}">Esportes</a></li>
+                <li><a href="{% url 'tema' slug='cultura' %}">Cultura</a></li>
+                <li><a href="{% url 'tema' slug='economia' %}">Economia</a></li>
+                <li><a href="{% url 'tema' slug='ciencia' %}">Ciência</a></li>
             </ul>
         </nav>
     </header>
@@ -54,7 +56,7 @@
                 {% with featured=articles.0 %}
                 <article class="news-card featured">
                     <div class="tag destaque-tag">Em destaque</div>
-                    <a class="featured-link" href="{% url 'tema' featured.slug %}">
+                    <a class="featured-link" href="{% url 'tema' slug=featured.get_normalized_slug %}">
                         <div class="thumb">
                             <img src="{% static featured.image %}" alt="{{ featured.title }}">
                         </div>
@@ -74,7 +76,7 @@
                         {% if forloop.first %}
                         <div class="tag para-voce-tag">Para você</div>
                         {% endif %}
-                        <a class="small-link" href="{% url 'tema' a.slug %}">
+                        <a class="small-link" href="{% url 'tema' slug=a.get_normalized_slug %}">
                             <div class="thumb">
                                 <img src="{% static a.image %}" alt="{{ a.title }}">
                             </div>

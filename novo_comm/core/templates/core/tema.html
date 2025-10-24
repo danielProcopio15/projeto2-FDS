@@ -27,17 +27,23 @@
             <p>Artigos e conteúdos relacionados a {{ category }}.</p>
         </section>
 
+
+
+
+
         <section class="theme-articles">
             {% if articles and articles|length > 0 %}
                 {% for a in articles %}
-                <article class="news-card">
-                    <div class="thumb">
-                        <img src="{% static a.image %}" alt="{{ a.title }}">
-                    </div>
-                    <div class="meta">
-                        <h2 class="title">{{ a.title }}</h2>
-                        <p class="excerpt">{{ a.description }}</p>
-                    </div>
+                <article class="news-card" data-article-id="{{ a.id }}">
+                    <a href="{% url 'artigo' pk=a.id %}" style="text-decoration: none; color: inherit;">
+                        <div class="thumb">
+                            <img src="{% static a.image %}" alt="{{ a.title }}">
+                        </div>
+                        <div class="meta">
+                            <h2 class="title">{{ a.title }}</h2>
+                            <p class="excerpt">{{ a.description }}</p>
+                        </div>
+                    </a>
                 </article>
                 {% endfor %}
             {% else %}

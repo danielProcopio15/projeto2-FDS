@@ -6,62 +6,55 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 import re 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout 
-from .models import ThemeAccess
+from .models import ThemeAccess, Article
 from django.urls import reverse
 from urllib.parse import urlparse
 
 def home(request):
-    # For now we don't have a Article model; provide a simple list of dicts
-    # that the template can iterate over to render the minimal news boxes.
-    articles = [
-        {
-            'id': 1,
-            'title': 'Sport campeão',
-            'category': 'Esportes',
-            'description': 'Sport vence flamengo e conquista o segundo título brasileiro.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'esportes'
-        },
-        {
-            'id': 2,
-            'title': 'Arte local em evidência',
-            'category': 'Cultura',
-            'description': 'Mostra reúne artistas locais com novos olhares.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'cultura'
-        },
-        {
-            'id': 3,
-            'title': 'Economia em foco',
-            'category': 'Economia',
-            'description': 'Mercado reage a novos índices de inflação.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'economia'
-        },
-        {
-            'id': 4,
-            'title': 'Ciência e futuro',
-            'category': 'Ciência',
-            'description': 'Novo estudo aponta soluções para energia limpa.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'ciencia'
-        },
-    ]
+    # Get articles for each category
+    categories = ['Esportes', 'Cultura', 'Economia', 'Ciência', 'Gerais']
+    articles_by_category = {
+        cat: list(Article.objects.filter(category=cat).order_by('-created_at'))
+        for cat in categories
+    }
 
-    # If user is authenticated and has tracked accesses, move the most visited
-    # category to be the first small card (index 1) which is labeled "Para você".
+    # Build the main articles list with diverse content
+    articles = []
+    
+    # 1. Try to add a "Gerais" article as featured first
+    latest_geral = Article.objects.filter(category='Gerais').order_by('-created_at').first()
+    if latest_geral:
+        articles.append(latest_geral)
+        articles_by_category['Gerais'] = [
+            a for a in articles_by_category['Gerais'] if a.id != latest_geral.id
+        ]
+    else:
+        # If no "Gerais" article, fall back to latest from any category
+        latest = Article.objects.order_by('-created_at').first()
+        if latest:
+            articles.append(latest)
+            articles_by_category[latest.category] = [
+                a for a in articles_by_category[latest.category] if a.id != latest.id
+            ]
+
+    # 2. If user is authenticated, try to add their most visited category next
     if request.user.is_authenticated:
         top = ThemeAccess.objects.filter(user=request.user).order_by('-count').first()
         if top and top.count > 0:
-            # find article with matching category (case-insensitive)
-            idx = next((i for i, a in enumerate(articles) if a['category'].lower() == top.category.lower()), None)
-            try:
-                if idx is not None and idx != 1:
-                    article = articles.pop(idx)
-                    articles.insert(1, article)
-            except Exception:
-                # keep default order on any unexpected error
-                pass
+            # Get the latest article from user's favorite category (that's not already featured)
+            favorite_articles = articles_by_category.get(top.category, [])
+            if favorite_articles:
+                articles.append(favorite_articles[0])
+                articles_by_category[top.category] = favorite_articles[1:]
+
+    # 3. Fill remaining slots with articles from other categories
+    for category in categories:
+        if len(articles) >= 4:  # We want 4 articles total (1 featured + 3 small)
+            break
+        category_articles = articles_by_category[category]
+        if category_articles:
+            articles.append(category_articles[0])
+            articles_by_category[category] = category_articles[1:]
 
     return render(request, 'core/home.html', {'articles': articles})
 
@@ -123,61 +116,58 @@ def cadastro(request):
 
 
 def tema(request, slug):
-    """Render a theme/category page and increment per-user access count.
+    """Render a theme/category page and increment per-user access count."""
+    from unidecode import unidecode
+    from django.utils.text import slugify
 
-    Slugs supported: 'esportes', 'cultura', 'economia', 'ciencia'
-    """
+    # Map of normalized slugs to their display names
     slug_map = {
         'esportes': 'Esportes',
         'cultura': 'Cultura',
         'economia': 'Economia',
         'ciencia': 'Ciência',
+        'gerais': 'Gerais',
     }
+    
+    # Get the normalized version of all category names
+    reverse_map = {slugify(unidecode(v.lower())): v for v in slug_map.values()}
 
-    category = slug_map.get(slug, slug.capitalize())
+    # Get the display category name from the normalized slug
+    category = reverse_map.get(slug) or slug_map.get(slug, slug.capitalize())
 
-    # Reuse the sample articles from home; filter by category
-    all_articles = [
-        {
-            'id': 1,
-            'title': 'Sport campeão',
-            'category': 'Esportes',
-            'description': 'Sport vence flamengo e conquista o segundo título brasileiro.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'esportes'
-        },
-        {
-            'id': 2,
-            'title': 'Arte local em evidência',
-            'category': 'Cultura',
-            'description': 'Mostra reúne artistas locais com novos olhares.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'cultura'
-        },
-        {
-            'id': 3,
-            'title': 'Economia em foco',
-            'category': 'Economia',
-            'description': 'Mercado reage a novos índices de inflação.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'economia'
-        },
-        {
-            'id': 4,
-            'title': 'Ciência e futuro',
-            'category': 'Ciência',
-            'description': 'Novo estudo aponta soluções para energia limpa.',
-            'image': 'core/css/images/jc-logo.png',
-            'slug': 'ciencia'
-        },
-    ]
+    # Query articles persisted in DB for this category
+    articles_qs = Article.objects.filter(category__iexact=category).order_by('created_at')
+    articles_for_category = list(articles_qs)
 
-    articles = [a for a in all_articles if a['category'].lower() == category.lower()]
+    # Build enriched article list where each article carries a preview to the "next" article
+    enriched = []
+    total = len(articles_for_category)
+    for i, art in enumerate(articles_for_category):
+        next_idx = (i + 1) % total if total > 0 else None
+        next_preview = None
+        if next_idx is not None and total > 0:
+            nxt = articles_for_category[next_idx]
+            next_preview = {
+                'id': nxt.id,
+                'title': nxt.title,
+                'excerpt': nxt.description[:100],
+                'image': nxt.image,
+            }
 
-    # If no article for this category, show an empty placeholder list
+        copy = {
+            'id': art.id,
+            'title': art.title,
+            'category': art.category,
+            'description': art.description,
+            'image': art.image,
+            'slug': art.slug,
+            'next_preview': next_preview,
+        }
+        enriched.append(copy)
+
     context = {
         'category': category,
-        'articles': articles,
+        'articles': enriched,
     }
 
     # Track access for authenticated users ONLY when the request came from
@@ -204,6 +194,16 @@ def tema(request, slug):
             ta.increment()
 
     return render(request, 'core/tema.html', context)
+
+
+def artigo(request, pk):
+    """Render an article detail page with next article preview."""
+    art = get_object_or_404(Article, pk=pk)
+    next_article = art.get_next_article()
+    return render(request, 'core/artigo.html', {
+        'article': art,
+        'next_article': next_article
+    })
 
 def login(request):
     # A restrição de redirecionamento para 'home' foi removida.

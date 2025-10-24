@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }} - novo_comm</title>
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo-container">
+            <a href="{% url 'home' %}"><img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo"></a>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        {% if next_article %}
+        <div class="next-article-preview">
+            <a href="{% url 'artigo' pk=next_article.id %}" class="next-preview">
+                <div class="next-thumb">
+                    <img src="{% static next_article.image %}" alt="{{ next_article.title }}">
+                </div>
+                <div class="next-text">
+                    <strong>Próxima notícia</strong>
+                    <span>{{ next_article.title }}</span>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+        <article class="news-card featured">
+            <div class="thumb">
+                <img src="{% static article.image %}" alt="{{ article.title }}">
+            </div>
+            <div class="meta">
+                <h1 class="title">{{ article.title }}</h1>
+                <p class="excerpt">{{ article.description }}</p>
+            </div>
+        </article>
+
+        <p><a href="{% url 'tema' slug=article.get_normalized_slug %}">Voltar ao tema: {{ article.category }}</a></p>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 novo_comm.</p>
+    </footer>
+</body>
+</html>

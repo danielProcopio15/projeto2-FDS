@@ -10,6 +10,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     # Theme pages (generic)
     path('tema/<slug:slug>/', views.tema, name='tema'),
+    path('artigo/<int:pk>/', views.artigo, name='artigo'),
     path('esportes/', views.tema, {'slug': 'esportes'}, name='esportes'),
     path('cultura/', views.tema, {'slug': 'cultura'}, name='cultura'),
     path('economia/', views.tema, {'slug': 'economia'}, name='economia'),
