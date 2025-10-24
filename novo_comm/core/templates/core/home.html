@@ -15,7 +15,6 @@
             <ul>
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
-                
                 <li><a href="#">Esportes</a></li>
                 <li><a href="#">Cultura</a></li>
             </ul>
@@ -23,12 +22,11 @@
     </header>
 
     <main class="content-wrapper">
-        
+
         {% if user.is_authenticated %}
         <section class="user-greeting">
             <p>
-                Bem-vindo(a), {{ user.username }} | 
-                
+                Bem-vindo(a), {{ user.username }} |
                 <form action="{% url 'logout' %}" method="POST" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" style="background: none; border: none; color: inherit; padding: 0; cursor: pointer;">
@@ -48,19 +46,14 @@
             </ul>
         </section>
         {% endif %}
-        
-        <!-- Minimalist news boxes: toggle between grid (3x2) and strip (one per row) -->
-        <section class="news-minimal">
-            <div class="view-controls">
-                <button id="gridBtn" class="active">Grade 3x2</button>
-                <button id="stripBtn">Tiras</button>
-            </div>
 
+        <!-- SEÇÃO DE NOTÍCIAS -->
+        <section class="news-minimal">
             <div id="newsContainer" class="news-container grid-view">
-                {# featured article (first) #}
                 {% if articles|length > 0 %}
                 {% with featured=articles.0 %}
                 <article class="news-card featured">
+                    <div class="tag destaque-tag">Em destaque</div>
                     <div class="thumb">
                         <img src="{% static featured.image %}" alt="{{ featured.title }}">
                     </div>
@@ -73,10 +66,12 @@
                 {% endwith %}
                 {% endif %}
 
-                {# three smaller boxes below #}
                 <div class="small-grid">
                     {% for a in articles|slice:"1:4" %}
                     <article class="news-card small">
+                        {% if forloop.first %}
+                        <div class="tag para-voce-tag">Para você</div>
+                        {% endif %}
                         <div class="thumb">
                             <img src="{% static a.image %}" alt="{{ a.title }}">
                         </div>
@@ -90,35 +85,18 @@
                 </div>
             </div>
         </section>
+
+        <!-- BLOCO DE PROPAGANDA -->
+        <section class="ad-section">
+            <div class="ad-banner">
+                <p>📰 Espaço para sua propaganda — 900x200px</p>
+            </div>
+        </section>
+
     </main>
 
     <footer class="site-footer">
         <p>&copy; 2024 novo_comm. Todos os direitos reservados.</p>
     </footer>
-    <script>
-        (function(){
-            const gridBtn = document.getElementById('gridBtn');
-            const stripBtn = document.getElementById('stripBtn');
-            const container = document.getElementById('newsContainer');
-
-            function setView(view){
-                if(view === 'grid'){
-                    container.classList.remove('strip-view');
-                    container.classList.add('grid-view');
-                    gridBtn.classList.add('active');
-                    stripBtn.classList.remove('active');
-                } else {
-                    container.classList.remove('grid-view');
-                    container.classList.add('strip-view');
-                    stripBtn.classList.add('active');
-                    gridBtn.classList.remove('active');
-                }
-            }
-
-            gridBtn.addEventListener('click', () => setView('grid'));
-            stripBtn.addEventListener('click', () => setView('strip'));
-        })();
-    </script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
