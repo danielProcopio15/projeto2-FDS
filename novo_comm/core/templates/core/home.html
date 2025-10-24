@@ -54,14 +54,16 @@
                 {% with featured=articles.0 %}
                 <article class="news-card featured">
                     <div class="tag destaque-tag">Em destaque</div>
-                    <div class="thumb">
-                        <img src="{% static featured.image %}" alt="{{ featured.title }}">
-                    </div>
-                    <div class="meta">
-                        <span class="category">{{ featured.category }}</span>
-                        <h2 class="title">{{ featured.title }}</h2>
-                        <p class="excerpt">{{ featured.description }}</p>
-                    </div>
+                    <a class="featured-link" href="{% url 'tema' featured.slug %}">
+                        <div class="thumb">
+                            <img src="{% static featured.image %}" alt="{{ featured.title }}">
+                        </div>
+                        <div class="meta">
+                            <span class="category">{{ featured.category }}</span>
+                            <h2 class="title">{{ featured.title }}</h2>
+                            <p class="excerpt">{{ featured.description }}</p>
+                        </div>
+                    </a>
                 </article>
                 {% endwith %}
                 {% endif %}
@@ -72,14 +74,16 @@
                         {% if forloop.first %}
                         <div class="tag para-voce-tag">Para você</div>
                         {% endif %}
-                        <div class="thumb">
-                            <img src="{% static a.image %}" alt="{{ a.title }}">
-                        </div>
-                        <div class="meta">
-                            <span class="category">{{ a.category }}</span>
-                            <h3 class="title">{{ a.title }}</h3>
-                            <p class="excerpt">{{ a.description }}</p>
-                        </div>
+                        <a class="small-link" href="{% url 'tema' a.slug %}">
+                            <div class="thumb">
+                                <img src="{% static a.image %}" alt="{{ a.title }}">
+                            </div>
+                            <div class="meta">
+                                <span class="category">{{ a.category }}</span>
+                                <h3 class="title">{{ a.title }}</h3>
+                                <p class="excerpt">{{ a.description }}</p>
+                            </div>
+                        </a>
                     </article>
                     {% endfor %}
                 </div>
