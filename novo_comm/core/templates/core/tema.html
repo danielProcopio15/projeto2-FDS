@@ -5,21 +5,10 @@
     <meta charset="UTF-8">
     <title>{{ category }} - novo_comm</title>
     <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link rel="icon" href="{% static 'core/css/images/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
-    <header class="site-header">
-        <div class="logo-container">
-            <a href="{% url 'home' %}"><img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo"></a>
-        </div>
-        <nav class="site-nav">
-            <ul>
-                <li><a href="{% url 'esportes' %}">Esportes</a></li>
-                <li><a href="{% url 'cultura' %}">Cultura</a></li>
-                <li><a href="{% url 'economia' %}">Economia</a></li>
-                <li><a href="{% url 'ciencia' %}">Ciência</a></li>
-            </ul>
-        </nav>
-    </header>
+    {% include 'core/_mega_nav.html' %}
 
     <main class="content-wrapper">
         <section class="theme-hero">

@@ -1,0 +1,58 @@
+{% load static %}
+<header class="mega-header">
+  <div class="logo-container">
+    <a href="{% url 'home' %}"><img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo"></a>
+  </div>
+
+  <nav class="mega-nav" aria-label="Navegação principal">
+    <ul class="mega-categories">
+      <li class="mega-category {% if current_theme_slug == '' %}active{% endif %}">
+        <button class="mega-btn" aria-expanded="false" aria-controls="sub-noticias">👀 Notícias e Atualidades <span class="chev">▾</span></button>
+        <ul id="sub-noticias" class="mega-sub columns" role="menu">
+          <li role="none"><a role="menuitem" href="{% url 'home' %}">Últimas</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='pernambuco' %}">Pernambuco</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='seguranca' %}">Segurança</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='politica' %}">Política</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='economia' %}">Economia</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='mundo' %}">Mundo</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='interior' %}">Interior</a></li>
+        </ul>
+      </li>
+
+      <li class="mega-category {% if current_theme_slug == 'sociedade' %}active{% endif %}">
+        <button class="mega-btn" aria-expanded="false" aria-controls="sub-sociedade">💡 Sociedade e Comportamento <span class="chev">▾</span></button>
+        <ul id="sub-sociedade" class="mega-sub" role="menu">
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='saude' %}">Saúde e Bem-Estar</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='mobilidade' %}">Mobilidade</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='educacao' %}">Enem e Educação</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='cultura' %}">Cultura</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='social1' %}">Social1</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='recall' %}">Recall de Marcas</a></li>
+        </ul>
+      </li>
+
+      <li class="mega-category {% if current_theme_slug == 'esportes' %}active{% endif %}">
+        <button class="mega-btn" aria-expanded="false" aria-controls="sub-esportes">⚽ Esportes e Entretenimento <span class="chev">▾</span></button>
+        <ul id="sub-esportes" class="mega-sub" role="menu">
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='blog-do-torcedor' %}">Blog do Torcedor</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='tv-jornal' %}">TV Jornal</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='radio-jornal' %}">Rádio Jornal</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='receita-da-boa' %}">Receita da Boa</a></li>
+        </ul>
+      </li>
+
+      <li class="mega-category {% if current_theme_slug == 'opiniao' %}active{% endif %}">
+        <button class="mega-btn" aria-expanded="false" aria-controls="sub-opiniao">✍️ Opinião e Serviços <span class="chev">▾</span></button>
+        <ul id="sub-opiniao" class="mega-sub" role="menu">
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='colunas' %}">Colunas</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='opiniao' %}">Opinião</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='anuncie' %}">Anuncie aqui</a></li>
+          <li role="none"><a role="menuitem" href="{% url 'tema' slug='siga-jc' %}">Siga JC</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <link rel="stylesheet" href="{% static 'core/css/nav.css' %}">
+  <script defer src="{% static 'core/js/nav.js' %}"></script>
+</header>

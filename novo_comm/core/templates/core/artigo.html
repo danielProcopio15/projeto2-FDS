@@ -5,13 +5,10 @@
     <meta charset="UTF-8">
     <title>{{ article.title }} - novo_comm</title>
     <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link rel="icon" href="{% static 'core/css/images/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
-    <header class="site-header">
-        <div class="logo-container">
-            <a href="{% url 'home' %}"><img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo"></a>
-        </div>
-    </header>
+    {% include 'core/_mega_nav.html' %}
 
     <main class="content-wrapper">
         {% if next_article %}

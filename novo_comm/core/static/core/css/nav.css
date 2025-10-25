@@ -1,0 +1,29 @@
+.mega-header { background: #ffffff; border-bottom: 1px solid #e6e6e6; position: sticky; top: 0; z-index: 999; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
+.mega-header .logo-container { display: inline-block; padding: 10px 16px; vertical-align: middle; }
+.mega-header .site-logo { height: 40px; }
+.mega-nav { display: inline-block; vertical-align: middle; }
+.mega-categories { display: flex; gap: 18px; list-style: none; margin: 0; padding: 8px 12px; align-items: center; }
+.mega-category { position: relative; }
+.mega-btn { background: none; border: none; font-size: 15px; padding: 8px 10px; cursor: pointer; display:flex; align-items:center; gap:8px; color:#111; }
+.mega-btn .chev { transition: transform 180ms ease; font-size: 12px; color:#666; }
+.mega-sub { display: block; position: absolute; left: 0; top: calc(100% + 8px); background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 12px; border-radius: 8px; list-style: none; min-width: 220px; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; }
+.mega-sub li { margin: 6px 0; }
+.mega-sub li a { color: #111; text-decoration: none; font-size: 14px; display:block; padding:6px 8px; border-radius:6px; }
+.mega-sub li a:hover, .mega-sub li a:focus { background:#f5f5f7; }
+.mega-category.open .mega-sub { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.mega-category.open .mega-btn .chev { transform: rotate(180deg); color:#222; }
+
+/* multi-column support for longer lists */
+.mega-sub.columns { column-count: 2; column-gap: 16px; }
+
+.mega-btn:focus { outline: 2px solid #cce3ff; outline-offset: 2px; }
+
+/* Active category visual state */
+.mega-category.active > .mega-btn { background: linear-gradient(180deg, #f0f8ff, #ffffff); border-radius: 6px; color: #0b57a4; font-weight: 600; }
+.mega-category.active > .mega-btn .chev { color: #0b57a4; }
+
+@media (max-width: 900px) {
+  .mega-categories { flex-direction: column; gap: 6px; padding: 8px; }
+  .mega-sub { position: static; box-shadow: none; padding-left: 12px; transform:none; opacity:1; pointer-events:auto; border-radius:0; }
+  .mega-sub.columns { column-count:1; }
+}

@@ -56,7 +56,8 @@ def home(request):
             articles.append(category_articles[0])
             articles_by_category[category] = category_articles[1:]
 
-    return render(request, 'core/home.html', {'articles': articles})
+    # No specific theme is active on the home page
+    return render(request, 'core/home.html', {'articles': articles, 'current_theme_slug': ''})
 
 def cadastro(request):
     context = {}
@@ -168,6 +169,8 @@ def tema(request, slug):
     context = {
         'category': category,
         'articles': enriched,
+        # expose the normalized slug so the nav can highlight the active topic
+        'current_theme_slug': slug,
     }
 
     # Track access for authenticated users ONLY when the request came from
@@ -200,9 +203,16 @@ def artigo(request, pk):
     """Render an article detail page with next article preview."""
     art = get_object_or_404(Article, pk=pk)
     next_article = art.get_next_article()
+    # normalize the article category into a slug so the nav can highlight the section
+    from unidecode import unidecode
+    from django.utils.text import slugify
+
+    normalized = slugify(unidecode((art.category or '').lower()))
+
     return render(request, 'core/artigo.html', {
         'article': art,
-        'next_article': next_article
+        'next_article': next_article,
+        'current_theme_slug': normalized,
     })
 
 def login(request):
