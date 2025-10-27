@@ -10,35 +10,18 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 
 ## Funcionalidades Principais
 
-### Sistema de login e cadastro com preferências de conteúdo.
-Usuários podem criar contas, escolher temas de interesse e ocultar assuntos que não desejam consumir.
+- Login e cadastro com preferências de conteúdo, permitindo escolher temas de interesse e ocultar assuntos indesejados;
 
-### Personalização de homepage via cache e comportamento de navegação.
-A página inicial adapta-se às categorias mais acessadas, priorizando conteúdos de interesse do leitor.
+- Homepage personalizada, que se adapta automaticamente aos temas mais acessados;
 
-### Divisões temáticas com identidade visual por seção.
-Cada área do portal (Esportes, Política, Cultura etc.) possui cores e estilos próprios para facilitar a identificação.
+- Navbar responsiva, fixa no topo e adaptável para diferentes dispositivos;
 
-### Navbar responsiva e chamativa.
-Barra de navegação fixa no topo com cores da marca JC, tornando-se menu sanduíche em telas menores.
+- Botão “Próxima Notícia”, que direciona para outras matérias do mesmo tema;
 
-### Botão “Próxima Notícia”.
-Permite avançar para outra matéria do mesmo tema sem precisar voltar à página inicial.
+- Página “Para Você”, exibindo recomendações personalizadas com rolagem contínua;
 
-### Layout otimizado de leitura e anúncios.
-Substitui anúncios intrusivos por cards de matérias relacionadas, mantendo propagandas laterais e experiência limpa.
-
-### Página “Para Você”.
-Sessão personalizada com rolagem contínua, mostrando notícias e recomendações baseadas no histórico do usuário.
-
-### Botão “Resumo” nas matérias.
-Exibe um quadro com tópicos curtos da notícia para leitura rápida, com interação hover em imagens.
-
-### Gamificação da experiência.
-Usuários ganham pontos e selos (Bronze, Prata, Ouro) por ler, comentar e compartilhar notícias, com mensagens de incentivo.
-
-### Sistema de estatísticas de uso.
-Registra acessos e temas mais lidos, permitindo análises e recomendações personalizadas 
+- Botão “Resumo”, que apresenta tópicos curtos para leitura rápida e interação por hover.
+ 
 
 ---
 ## Protótipo
@@ -113,139 +96,6 @@ As principais histórias do usuário que guiaram o desenvolvimento (seguindo os 
 
 <img width="757" height="418" alt="Captura de tela 2025-10-13 191239" src="https://github.com/user-attachments/assets/a9711fad-cd92-4d2f-9395-9d1abf74877a" />
  
-## Histórias de Usuário
-
-As histórias de usuário foram criadas com base nas necessidades do **Sistema Jornal do Commercio (SJCC)**, seguindo a estrutura dos **3Cs (Cartão, Conversa e Confirmação)**, de forma clara e voltada à entrega de valor.
-
----
-
-###  História 1 — Login
-
-**Como usuário,**  
-quero poder fazer login com meu e-mail e senha,  
-**para** acessar o portal com minhas preferências de conteúdo salvas.
-
-**Principais pontos:**
-- Interface simples com campos de usuário e senha.  
-- Mensagens de erro claras (usuário não encontrado ou senha incorreta).  
-- Validação de login conectada ao banco de dados.  
-
----
-
-###  História 2 — Cadastro
-
-**Como novo usuário,**  
-quero criar uma conta e escolher os temas que me interessam,  
-**para** receber notícias personalizadas e ocultar assuntos que não gosto.
-
-**Principais pontos:**
-- Validação de e-mail e senha fortes.  
-- Preferências e temas salvos no banco de dados.  
-- Layout com caixas de texto e botões simples e intuitivos.  
-
----
-
-###  História 3 — Divisões de Conteúdo
-
-**Como leitor,**  
-quero visualizar as seções do site bem organizadas,  
-**para** entender facilmente em qual área de conteúdo estou.
-
-**Principais pontos:**
-- Criação de “divs” e “sections” por tema (esportes, política, cultura etc).  
-- Cores de fundo correspondentes ao tema (ex: verde para esportes).  
-- Layout flexível com display grid ou flex.  
-
----
-
-###  História 4 — Navbar
-
-**Como usuário,**  
-quero uma barra de navegação fixa e chamativa,  
-**para** acessar rapidamente as seções do portal.
-
-**Principais pontos:**
-- Navbar vermelha no topo com identidade visual do JC.  
-- Links para todas as áreas principais.  
-- Torna-se menu sanduíche em telas menores.  
-
----
-
-###  História 5 — Botão “Próxima Notícia”
-
-**Como leitor,**  
-quero acessar outra notícia do mesmo tema rapidamente,  
-**para** continuar lendo sem precisar voltar à página inicial.
-
-**Principais pontos:**
-- Botão no canto superior direito com prévia da próxima notícia.  
-- Sempre redireciona para uma nova matéria do mesmo tema.  
-
----
-
-###  História 6 — Ajuste de Layout de Notícia e Anúncios
-
-**Como leitor,**  
-quero ver matérias relacionadas ao artigo que estou lendo,  
-**para** continuar navegando sem distrações e com menos anúncios no meio do texto.
-
-**Principais pontos:**
-- Seção de artigos relacionados no meio da página.  
-- Anúncios movidos para a lateral (sticky, alternando em blocos).  
-- Layout em cards pequenos e responsivos.  
-
----
-
-###  História 7 — Página “Para Você”
-
-**Como usuário,**  
-quero ter uma página personalizada com notícias que gosto,  
-**para** encontrar meus conteúdos preferidos em um só lugar.
-
-**Principais pontos:**
-- Aba “Para Você” na navbar.  
-- Página com rolagem contínua e base em interesses do usuário.  
-- Sugestões de matérias semelhantes ao final da página.  
-
----
-
-###  História 8 — Botão “Resumo”
-
-**Como usuário com pouco tempo,**  
-quero acessar um resumo rápido das notícias,  
-**para** entender o conteúdo sem precisar ler tudo.
-
-**Principais pontos:**
-- Botão “Resumo” no início da matéria.  
-- Exibe uma box com até 8 tópicos curtos.  
-- Efeito hover nas imagens mostrando breves descrições.  
-
----
-
-###  História 9 — Personalização com Cache
-
-**Como usuário frequente,**  
-quero que o site me mostre notícias baseadas no que mais leio,  
-**para** encontrar rapidamente conteúdos do meu interesse.
-
-**Principais pontos:**
-- Registro das visitas e categorias acessadas pelo usuário.  
-- Homepage personalizada com base nesse histórico.  
-- Uso de cache para manter desempenho e carregamento rápido.  
-
----
-
-###  História 10 — Gamificação da Experiência
-
-**Como usuário do portal,**  
-quero ganhar pontos e selos conforme interajo com as notícias,  
-**para** me sentir motivado a continuar navegando e lendo mais.
-
-**Principais pontos:**
-- Pontuação por ações (ler, comentar, compartilhar, visitar).  
-- Exibição de nível e selo (Bronze, Prata, Ouro).  
-- Mensagens de incentivo ao subir de nível.  
-
 
 ---
 
