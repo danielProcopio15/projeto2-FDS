@@ -7,7 +7,9 @@ portal reformulado é uma consultoria para aplicações web desenvolvida em **Dj
 O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuário para guiar o desenvolvimento.
 
 ---
-##Ferramentas tecnológicas
+
+## Ferramentas tecnológicas
+
 - [Clickup](https://app.clickup.com/90132559199/v/l/6-901320778399-1): Utilizado para a gestão do nosso projeto
 - HTML, CSS, Python, Django: Utilizados para o desenvolvimento Web
 - [Figma](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=OUVp60PCG4ATGZiN-0): Utilizado para fazer o protótipo
@@ -28,6 +30,7 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 - Botão “Resumo”, que apresenta tópicos curtos para leitura rápida e interação por hover.
 
 ---
+
 ## Demonstração do projeto
 
 [Prototipagem](https://youtu.be/RADPIgk6zOA)
@@ -38,22 +41,29 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 
 
 ---
-##Tela inicial
+
+## Tela inicial
+
 
 <img width="1902" height="944" alt="Captura de tela 2025-10-27 181518" src="https://github.com/user-attachments/assets/e77e30b6-a8a1-403e-8d2a-31190c25b411" />
 
 ---
-##Tela da principal funcionalidade
+
+## Tela da principal funcionalidade
+
 
 <img width="957" height="909" alt="Captura de tela 2025-10-27 181845" src="https://github.com/user-attachments/assets/36f501f1-319d-4759-bb5e-6b3585303963" />
 
 ---
 
-##Clickup
+## Clickup
+
 
 <img width="873" height="441" alt="Captura de tela 2025-10-27 185233" src="https://github.com/user-attachments/assets/659def33-2264-4219-b59a-42283288d738" />
 
+
 [Clickup](https://app.clickup.com/90132559199/v/l/6-901320778399-1)
+
 
 ---
 ## Protótipo
@@ -66,13 +76,14 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 <img width="1759" height="944" alt="Captura de tela 2025-10-27 182107" src="https://github.com/user-attachments/assets/27c2639d-997c-4777-80ad-4afdede8efe0" />
 
 [Miro](https://miro.com/app/board/uXjVJzod_qU=/)
+
 ---
 ## Issue tracker
 
 [Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
 ---
-##Programação em pares
+## Programação em pares
 
 Durante o desenvolvimento do projeto, estão sendo realizadas sessões de programação em par com o objetivo de revisar e aprimorar o código da aplicação. Essa prática colaborativa permite analisar diferentes partes do sistema de forma conjunta, identificar oportunidades de melhoria e corrigir erros de maneira mais eficiente. Como resultado, o código está se tornando mais consistente e o desenvolvimento, mais ágil e organizado.
 
