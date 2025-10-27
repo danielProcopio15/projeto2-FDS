@@ -72,7 +72,7 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 [Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
 ---
-##Programação em pares]
+##Programação em pares
 
 Durante o desenvolvimento do projeto, estão sendo realizadas sessões de programação em par com o objetivo de revisar e aprimorar o código da aplicação. Essa prática colaborativa permite analisar diferentes partes do sistema de forma conjunta, identificar oportunidades de melhoria e corrigir erros de maneira mais eficiente. Como resultado, o código está se tornando mais consistente e o desenvolvimento, mais ágil e organizado.
 
