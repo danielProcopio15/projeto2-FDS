@@ -41,6 +41,39 @@ https://youtu.be/RADPIgk6zOA
 
 ---
 
+
+## Histórias do Usuário
+
+As principais histórias do usuário que guiaram o desenvolvimento (seguindo os **3Cs**: claras, concisas e com entrega de valor):
+
+<img width="757" height="418" alt="Captura de tela 2025-10-13 191239" src="https://github.com/user-attachments/assets/a9711fad-cd92-4d2f-9395-9d1abf74877a" />
+ 
+
+---
+
+### Sprint
+
+Sprint atual do grupo 
+
+<img width="819" height="460" alt="Sem título" src="https://github.com/user-attachments/assets/6175932a-12f1-4e47-8dd6-cb6281f6b50f" />
+
+
+---
+
+### Issue tracker
+
+<img width="1851" height="922" alt="image" src="https://github.com/user-attachments/assets/1746fdc8-b59e-429a-b616-ae831460acb0" />
+
+---
+
+
+###prototipação de baixa fidelidade AxB
+#### prototipação A
+<img width="1025" height="823" alt="image" src="https://github.com/user-attachments/assets/b6aba58d-4447-4bb9-9dd1-c0dcaf50e0e2" />
+
+[link para o wireframe](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=nnFXSY9vHAmyp73j-0)
+
+
 ## Instalação
 
 Clone o repositório e instale as dependências:
@@ -89,39 +122,6 @@ python manage.py runserver
 ```
 
 ---
-
-## Histórias do Usuário
-
-As principais histórias do usuário que guiaram o desenvolvimento (seguindo os **3Cs**: claras, concisas e com entrega de valor):
-
-<img width="757" height="418" alt="Captura de tela 2025-10-13 191239" src="https://github.com/user-attachments/assets/a9711fad-cd92-4d2f-9395-9d1abf74877a" />
- 
-
----
-
-### Sprint
-
-Sprint atual do grupo 
-
-<img width="819" height="460" alt="Sem título" src="https://github.com/user-attachments/assets/6175932a-12f1-4e47-8dd6-cb6281f6b50f" />
-
-
----
-
-### Issue tracker
-
-<img width="1851" height="922" alt="image" src="https://github.com/user-attachments/assets/1746fdc8-b59e-429a-b616-ae831460acb0" />
-
----
-
-
-###prototipação de baixa fidelidade AxB
-#### prototipação A
-<img width="1025" height="823" alt="image" src="https://github.com/user-attachments/assets/b6aba58d-4447-4bb9-9dd1-c0dcaf50e0e2" />
-
-[link para o wireframe](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=nnFXSY9vHAmyp73j-0)
-
-
 
 
 
