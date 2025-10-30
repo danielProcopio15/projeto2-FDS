@@ -3,39 +3,48 @@
 
 # Projeto NovoComm
 
-portal reformulado é uma consultoria para aplicações web desenvolvida em **Django (Python)** que combina **notícias, gameficação e personalização** para engajar leitores.  
-O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuário para guiar o desenvolvimento.
+O NovoComm é um portal de notícias reformulado desenvolvido em Django (Python). Ele atua como uma consultoria para aplicações web, combinando notícias, gamificação e personalização para aumentar o engajamento dos leitores.
 
+O projeto foi construído sob a inspiração de metodologias ágeis, com o desenvolvimento guiado ativamente por histórias do usuário.
 ---
 
 ## Ferramentas tecnológicas
 
-- [Clickup](https://app.clickup.com/90132559199/v/l/6-901320778399-1): Utilizado para a gestão do nosso projeto
-- HTML, CSS, Python, Django: Utilizados para o desenvolvimento Web
-- [Figma](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=OUVp60PCG4ATGZiN-0): Utilizado para fazer o protótipo
+Para o desenvolvimento deste projeto, utilizamos as seguintes ferramentas:
+
+- HTML, CSS, Python, Django: Utilizados para o desenvolvimento Web e backend.
+
+- [ClickUp](https://app.clickup.com/90132559199/v/l/6-901320778399-1): Utilizado para a gestão ágil do nosso projeto.
+
+- [Figma](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=OUVp60PCG4ATGZiN-0): Utilizado para a criação do protótipo e design.
 
 ---
 ## Funcionalidades Principais
 
-- Login e cadastro com preferências de conteúdo, permitindo escolher temas de interesse e ocultar assuntos indesejados;
+O sistema oferece diversas funcionalidades focadas na personalização e engajamento do leitor:
 
-- Homepage personalizada, que se adapta automaticamente aos temas mais acessados;
+- Login e Cadastro Personalizado: Permite ao usuário escolher temas de interesse e ocultar assuntos indesejados.
 
-- Navbar responsiva, fixa no topo e adaptável para diferentes dispositivos;
+- Homepage Adaptativa: A página inicial se adapta automaticamente, exibindo os temas mais acessados pelo usuário.
 
-- Botão “Próxima Notícia”, que direciona para outras matérias do mesmo tema;
+- Navbar Responsiva: Uma barra de navegação responsiva que se mantém fixa no topo da página.
 
-- Página “Para Você”, exibindo recomendações personalizadas com rolagem contínua;
+- Botão “Próxima Notícia”: Direciona o leitor para outras matérias do mesmo tema, incentivando a navegação.
 
-- Botão “Resumo”, que apresenta tópicos curtos para leitura rápida e interação por hover.
+- Página “Para Você”: Exibe recomendações personalizadas em um formato de rolagem contínua.
+
+- Botão “Resumo”: Apresenta tópicos curtos para leitura rápida e uma interação por hover.
 
 ---
 
 ## Demonstração do projeto
 
 [Prototipagem](https://youtu.be/RADPIgk6zOA)
+
 [Funcionalidades](https://youtu.be/i32FYrB3Jho)
+
 [Teste estatísticas](https://www.youtube.com/watch?v=iVr5x6JALXE)
+
 [Teste Login/Registro](https://youtu.be/dO_FzFLGr6w)
 
 
@@ -86,7 +95,7 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 [Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
 ---
-## Programação em pares
+## 👥 Programação em pares
 
 Durante o desenvolvimento do projeto, utilizamos a técnica de programação em pares, o que se provou essencial para a superação de desafios. Inicialmente, enfrentamos problemas de integração do CSS do layout original, sendo a Navbar o principal elemento em foco. No entanto, nossa colaboração também foi crucial para implementar as funcionalidades de Login e Cadastro. Ao trabalharmos juntos na lógica de autenticação e na interface de entrada de dados, conseguimos identificar e corrigir diversos erros estruturais e de segurança, resultando em um código mais limpo, robusto e com uma melhor experiência para o usuário.
 
@@ -94,7 +103,7 @@ Durante o desenvolvimento do projeto, utilizamos a técnica de programação em 
 
 
 ---
-## Instalação
+## 💾 Instalação e uso
 
 Clone o repositório e instale as dependências:
 
@@ -124,10 +133,6 @@ python manage.py runserver
 
 Acesse em: [http://localhost:8000](http://localhost:8000)
 
----
-
-## Uso
-
 Exemplo de como rodar a aplicação localmente e explorar funcionalidades:
 
 ```python
@@ -142,15 +147,15 @@ python manage.py runserver
 ```
 
 ---
-## Equipe
+## 👨‍💻 Equipe
 
-- **Daniel Procópio** – Scrum Master | Desenvolvimento Backend (Django/Python) | Banco de Dados | Figma | https://www.linkedin.com/in/daniel-cunha-347006237/
-- **Pedro Castro** – Product Owner | Desenvolvimento Frontend | Figma | UX/UI | https://www.linkedin.com/in/pedro-castro-94795a277/
-- **Rafael Procópio** – Desenvolvimento Frontend & Backend | Banco de dados | Figma | https://www.linkedin.com/in/rafael-proc%C3%B3pio-75360a269/
+- [Daniel Procópio](https://www.linkedin.com/in/daniel-cunha-347006237/) – Scrum Master | Desenvolvimento Backend (Django/Python) | Banco de Dados | Figma |
+- [Pedro Castro](https://www.linkedin.com/in/pedro-castro-94795a277/) – Product Owner | Desenvolvimento Frontend | Figma | UX/UI | https://www.linkedin.com/in/pedro-castro-94795a277/
+- [Rafael Procópio](https://www.linkedin.com/in/rafael-proc%C3%B3pio-75360a269/) – Desenvolvimento Frontend & Backend | Banco de dados | Figma |
 - **Pedro Pinzón** – Desenvolvimento Backend | Banco de Dados |
-- **Bernardo Santos** – Desenvolvimento Backend | Banco de Dados | https://www.linkedin.com/in/bernardo-santos-0b6761342/
-- **Lucas Rocha** – Desenvolvimento Frontend & Backend | Design | https://www.linkedin.com/in/lucas-rocha-052a37364/
-- **Mateus José** – Desenvolvimento Backend | Banco de Dados | https://www.linkedin.com/in/mateus-jos%C3%A9-48b4a6348/
+- [Bernardo Santos](https://www.linkedin.com/in/bernardo-santos-0b6761342/) – Desenvolvimento Backend | Banco de Dados |
+- [Lucas Rocha](https://www.linkedin.com/in/lucas-rocha-052a37364/)– Desenvolvimento Frontend & Backend | Design |
+- [Mateus José](https://www.linkedin.com/in/mateus-jos%C3%A9-48b4a6348/) – Desenvolvimento Backend | Banco de Dados |
 - **Thiago Gabriel Tahim** - Desenvolvimento Frontend & Backend | Banco de dados |
 
 ---
@@ -161,8 +166,3 @@ Pull requests são bem-vindos. Para mudanças maiores, abra primeiro uma *issue*
 
 Certifique-se de atualizar os testes antes de enviar PR.  
 
----
-
-## Licença
-
-[MIT](https://choosealicense.com/licenses/mit/)
