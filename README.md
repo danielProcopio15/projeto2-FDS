@@ -80,12 +80,15 @@ O projeto foi inspirado em metodologias ágeis e no uso de histórias do usuári
 ---
 ## Issue tracker
 
+- Separação de divs e sections da página inicial
+- Mudança de layout dos anuncios
+- Botão de "notícia resumida"
 [Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
 ---
 ## Programação em pares
 
-Durante o desenvolvimento do projeto, estão sendo realizadas sessões de programação em par com o objetivo de revisar e aprimorar o código da aplicação. Essa prática colaborativa permite analisar diferentes partes do sistema de forma conjunta, identificar oportunidades de melhoria e corrigir erros de maneira mais eficiente. Como resultado, o código está se tornando mais consistente e o desenvolvimento, mais ágil e organizado.
+Durante o desenvolvimento do projeto, utilizamos a técnica de programação em pares, o que se provou essencial para a superação de desafios. Inicialmente, enfrentamos problemas de integração do CSS do layout original, sendo a Navbar o principal elemento em foco. No entanto, nossa colaboração também foi crucial para implementar as funcionalidades de Login e Cadastro. Ao trabalharmos juntos na lógica de autenticação e na interface de entrada de dados, conseguimos identificar e corrigir diversos erros estruturais e de segurança, resultando em um código mais limpo, robusto e com uma melhor experiência para o usuário.
 
 <img width="1916" height="1028" alt="Captura de tela 2025-10-27 183255" src="https://github.com/user-attachments/assets/8ba74155-d87f-4ea5-a137-50de5785b0a5" /> 
 
