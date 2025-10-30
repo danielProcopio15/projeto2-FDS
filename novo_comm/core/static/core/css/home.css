@@ -115,6 +115,87 @@ body {
   z-index: 1000;
 }
 
+/* User Menu Styles */
+.user-menu {
+  margin-right: 20px;
+  position: relative;
+}
+
+.user-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.user-icon:hover {
+  background: var(--gray-300);
+  color: var(--primary-color);
+}
+
+.user-icon i {
+  font-size: 1.2rem;
+}
+
+.user-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  padding: 8px 0;
+  min-width: 150px;
+  z-index: 1001;
+}
+
+.user-actions:hover .user-dropdown {
+  display: block;
+}
+
+.user-dropdown a {
+  display: block;
+  padding: 8px 16px;
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.user-dropdown a:hover {
+  background: var(--gray-100);
+  color: var(--primary-color);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.username {
+  font-size: 0.9rem;
+  color: var(--gray-700);
+}
+
+.logout-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.logout-link:hover {
+  text-decoration: underline;
+}
+
 .header-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr;

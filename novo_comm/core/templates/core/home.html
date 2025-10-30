@@ -195,6 +195,27 @@
             <div class="container">
                 <div class="header-grid">
                     <div class="header-left">
+                        <div class="user-menu">
+                            {% if user.is_authenticated %}
+                                <div class="user-info">
+                                    <a href="#" class="user-icon">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                    <span class="username">{{ user.username }}</span>
+                                    <a href="{% url 'logout' %}" class="logout-link">Sair</a>
+                                </div>
+                            {% else %}
+                                <div class="user-actions">
+                                    <a href="#" class="user-icon">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                    <div class="user-dropdown">
+                                        <a href="{% url 'login' %}" class="login-link">Login</a>
+                                        <a href="{% url 'cadastro' %}" class="register-link">Cadastro</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
                         <a href="https://impresso.jc.uol.com.br/index.php?id=/banca.php&amp;utm_source=site_jc&amp;utm_medium=imagem_capa&amp;utm_campaign=chama_flip" class="edition">
                             <img width="106" height="91" src="/img/edicao.png" alt="Leia aqui a edição de hoje">
                             <h5>Edição do dia</h5>
