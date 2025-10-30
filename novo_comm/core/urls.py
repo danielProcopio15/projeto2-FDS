@@ -16,7 +16,7 @@ urlpatterns = [
     path('economia/', views.tema, {'slug': 'economia'}, name='economia'),
     path('ciencia/', views.tema, {'slug': 'ciencia'}, name='ciencia'),
     
-    # SOLUÇÃO: Usar LogoutView e redirecionar para 'login' (que é mais estável que 'home')
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'), 
+    # Logout personalizado que limpa a sessão e redireciona para home
+    path('logout/', views.user_logout, name='logout'),
     
 ]

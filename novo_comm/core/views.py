@@ -241,9 +241,15 @@ def login(request):
     return render(request, 'core/login.html')
 
 
-#def user_logout(request):
-    # Faz o logout, destruindo a sessão
- #   auth_logout(request)
-  #  messages.info(request, "Você foi desconectado(a).")
-    # Redireciona diretamente para a página inicial (nomeada 'home')
-   # return redirect('home')
+def user_logout(request):
+    # Limpa todas as sessões do usuário
+    auth_logout(request)
+    
+    # Força a limpeza da sessão atual
+    request.session.flush()
+    
+    # Adiciona mensagem de feedback
+    messages.info(request, "Você foi desconectado(a) com sucesso.")
+    
+    # Redireciona para a página inicial
+    return redirect('home')
