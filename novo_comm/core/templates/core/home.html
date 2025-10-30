@@ -436,21 +436,22 @@
     <div class="wrap-hardnews">        
                     <section class="hard-box" id="hardnews1">
     <div class="container">
-        <div class="row mb-4">
+                <div class="row mb-4">
             <div class="col-xs-12 col-lg-12">
                 <div class="box">
                     <div class="row">
                                                                                 <div class="col-xs-12 col-md-12 col-lg-8">
                                 
-                                <a href="https://jc.uol.com.br/brasil/2025/10/30/onu-pede-reforma-dos-metodos-de-policiamento-no-brasil-apos-operacao-violenta-no-rio.html">
+                                <a href="{% url 'artigo' articles.0.id %}">
                                     <figure class="wide">
-                                        <span class="news-category">Segurança</span>
-                                        <img width="852" height="479" src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2025/10/30/852x479/1_d6a0296-35949821.jpg?20251030111858" alt="Protesto contra a operação policial que deixou mais de 120 pessoas mortas no Rio de Janeiro" data-midia-publi="120359" data-midia-id="35949821" data-default-height="1440" data-default-width="1920" data-midia="35949821;1920;1440;1920;1440;35949821">
+                                        {% if user.is_authenticated %}
+                                            <span class="news-category para-voce">Para Você</span>
+                                        {% endif %}
+                                        <span class="news-category">{{ articles.0.category }}</span>
+                                        <img width="852" height="479" src="{% static articles.0.image %}" alt="{{ articles.0.title }}">
                                     </figure>
                                 </a>
-                            </div>
-                              
-                                                <div class="col-xs-12 col-md-12 col-lg-4">
+                            </div>                                                <div class="col-xs-12 col-md-12 col-lg-4">
                                                                                                 <div class="box">
                                         <a href="https://jc.uol.com.br/brasil/2025/10/30/onu-pede-reforma-dos-metodos-de-policiamento-no-brasil-apos-operacao-violenta-no-rio.html">
                                             <div class="content-text">

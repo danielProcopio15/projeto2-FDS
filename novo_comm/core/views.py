@@ -20,23 +20,42 @@ def home(request):
 
     # Build the main articles list with diverse content
     articles = []
+    recommended_article = None
     
-    # 1. Try to add a "Gerais" article as featured first
-    latest_geral = Article.objects.filter(category='Gerais').order_by('-created_at').first()
-    if latest_geral:
-        articles.append(latest_geral)
-        articles_by_category['Gerais'] = [
-            a for a in articles_by_category['Gerais'] if a.id != latest_geral.id
-        ]
+    # Escolhe o primeiro artigo baseado no status de autenticação
+    if request.user.is_authenticated:
+        # Se logado, pega a categoria mais acessada
+        top_category = ThemeAccess.objects.filter(user=request.user).order_by('-count').first()
+        if top_category:
+            recommended_article = Article.objects.filter(
+                category=top_category.category
+            ).order_by('-created_at').first()
+            if recommended_article:
+                articles.append(recommended_article)
+                # Remove o artigo recomendado da sua categoria para evitar duplicação
+                articles_by_category[recommended_article.category] = [
+                    a for a in articles_by_category[recommended_article.category] 
+                    if a.id != recommended_article.id
+                ]
+        else:
+            # Se logado mas sem histórico, usa artigo de Economia
+            eco_article = Article.objects.filter(category='Economia').order_by('-created_at').first()
+            if eco_article:
+                articles.append(eco_article)
+                articles_by_category['Economia'] = [
+                    a for a in articles_by_category['Economia'] 
+                    if a.id != eco_article.id
+                ]
     else:
-        # If no "Gerais" article, fall back to latest from any category
-        latest = Article.objects.order_by('-created_at').first()
-        if latest:
-            articles.append(latest)
-            articles_by_category[latest.category] = [
-                a for a in articles_by_category[latest.category] if a.id != latest.id
+        # Se não estiver logado, usa artigo Geral
+        latest_geral = Article.objects.filter(category='Gerais').order_by('-created_at').first()
+        if latest_geral:
+            articles.append(latest_geral)
+            articles_by_category['Gerais'] = [
+                a for a in articles_by_category['Gerais'] 
+                if a.id != latest_geral.id
             ]
-
+            
     # 2. If user is authenticated, try to add their most visited category next
     if request.user.is_authenticated:
         top = ThemeAccess.objects.filter(user=request.user).order_by('-count').first()

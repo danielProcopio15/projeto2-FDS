@@ -327,6 +327,16 @@ body {
   letter-spacing: 0.025em;
 }
 
+.news-category.para-voce {
+  background-color: rgba(40, 167, 69, 0.85);  /* Tom verde */
+  left: 95px;  /* Posiciona à direita da primeira tag */
+}
+
+/* Ajusta a posição da tag original quando tem "Para Você" */
+.news-category + .news-category {
+  left: 12px;
+}
+
 .news-title {
   font-size: 1.25rem;
   font-weight: 600;
