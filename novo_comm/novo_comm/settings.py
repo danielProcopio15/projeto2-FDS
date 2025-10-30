@@ -132,25 +132,10 @@ INSTALLED_APPS = [
     'core',  # <-- adicionado
 ]
 
-import os
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-
-# novo_comm/settings.py
-
-from pathlib import Path
-
-# BASE_DIR agora aponta para a pasta-raiz do seu projeto (novo_comm)
-BASE_DIR = Path(__file__).resolve().parent.parent 
-
-# ...
-
+# Static files configuration
 STATIC_URL = '/static/'
 
-# Garante que ele procure por uma pasta 'static' ao lado da sua app 'core'
+# Since the static files are inside the core app
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    # Se a pasta 'static' estiver DENTRO da app 'core', use:
-    # BASE_DIR / 'core' / 'static',
+    BASE_DIR / 'core' / 'static',
 ]

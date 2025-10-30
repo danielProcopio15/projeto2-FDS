@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}JCPE - Jornal do Commercio{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="site-header">
+        <div class="top-header">
+            <div class="container">
+                <div class="header-wrapper">
+                    <a href="{% url 'home' %}" class="logo">
+                        <img src="{% static 'core/css/images/jc-logo.png' %}" alt="JCPE" class="site-logo">
+                    </a>
+                    <div class="user-nav">
+                        {% if user.is_authenticated %}
+                            <span>Olá, {{ user.username }}</span>
+                            <a href="{% url 'logout' %}" class="nav-link">Sair</a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav-link">Login</a>
+                            <a href="{% url 'cadastro' %}" class="nav-link">Cadastre-se</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="site-nav">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'esportes' %}">Esportes</a></li>
+                <li><a href="{% url 'cultura' %}">Cultura</a></li>
+                <li><a href="{% url 'economia' %}">Economia</a></li>
+                <li><a href="{% url 'ciencia' %}">Ciência</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Sobre o JCPE</h3>
+                    <p>Jornalismo de qualidade desde 1919</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Facebook</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">Instagram</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Email: contato@jcpe.com.br</p>
+                    <p>Telefone: (81) 3425-5000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} JCPE - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
