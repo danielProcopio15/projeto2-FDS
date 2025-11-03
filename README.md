@@ -8,18 +8,18 @@ O NovoComm é um portal de notícias reformulado desenvolvido em Django (Python)
 O projeto foi construído sob a inspiração de metodologias ágeis, com o desenvolvimento guiado ativamente por histórias do usuário.
 ---
 
-## Ferramentas tecnológicas
+## 🛠️ Ferramentas tecnológicas
 
 Para o desenvolvimento deste projeto, utilizamos as seguintes ferramentas:
 
-- HTML, CSS, Python, Django: Utilizados para o desenvolvimento Web e backend.
+- HTML, CSS, Python, Django, SqLite: Utilizados para o desenvolvimento Web, backend e dados.
 
 - [ClickUp](https://app.clickup.com/90132559199/v/l/6-901320778399-1): Utilizado para a gestão ágil do nosso projeto.
 
 - [Figma](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=OUVp60PCG4ATGZiN-0): Utilizado para a criação do protótipo e design.
 
 ---
-## Funcionalidades Principais
+## 🎯 Funcionalidades Principais
 
 O sistema oferece diversas funcionalidades focadas na personalização e engajamento do leitor:
 
@@ -37,7 +37,7 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 ---
 
-## Demonstração do projeto
+## 🏞️ Demonstração do projeto
 
 [Prototipagem](https://youtu.be/RADPIgk6zOA)
 
@@ -51,21 +51,21 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 ---
 
-## Tela inicial
+## 🧭 Tela inicial
 
 
 <img width="1902" height="944" alt="Captura de tela 2025-10-27 181518" src="https://github.com/user-attachments/assets/e77e30b6-a8a1-403e-8d2a-31190c25b411" />
 
 ---
 
-## Tela da principal funcionalidade
+## 🎇 Tela da principal funcionalidade
 
 
 <img width="957" height="909" alt="Captura de tela 2025-10-27 181845" src="https://github.com/user-attachments/assets/36f501f1-319d-4759-bb5e-6b3585303963" />
 
 ---
 
-## Clickup
+## 🕗 Clickup
 
 
 <img width="873" height="441" alt="Captura de tela 2025-10-27 185233" src="https://github.com/user-attachments/assets/659def33-2264-4219-b59a-42283288d738" />
@@ -75,29 +75,34 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 
 ---
-## Protótipo
+## 🤖 Protótipo
 <img width="1029" height="849" alt="image" src="https://github.com/user-attachments/assets/b70ba025-572d-4615-842f-1d17aeda6574" />
 [Figma](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=OUVp60PCG4ATGZiN-0)
 
 ---
-## Diagrama de atividades.
+## 🗺️ Diagrama de atividades.
 
 <img width="1759" height="944" alt="Captura de tela 2025-10-27 182107" src="https://github.com/user-attachments/assets/27c2639d-997c-4777-80ad-4afdede8efe0" />
 
 [Miro](https://miro.com/app/board/uXjVJzod_qU=/)
 
 ---
-## Issue tracker
+## 🔎 Issue tracker
+### Migrations
+Ao longo do projeto nós passamos a utilziar o django framework como ferramente de trabalho. Entretanto, por falta de experiência, passamos a perceber um problema de consistência no consumo de dados e interações de Usuário, impossibilitando dessa forma o nosso sistema de recomendações. Além disto, percebemos que ao invés de criarmos lógicas complexas com regras de negócios extensas, descobrimos que poderíamos usar blibliotecas para facilitar o nosso uso e tratamento de dados que nos interessávamos. Incrementamos o Pandas, Numpy e matplotlib(antes utilizávamos apenas o Flask). 
 
-- Separação de divs e sections da página inicial
-- Mudança de layout dos anuncios
-- Botão de "notícia resumida"
+Fazendo a inclusão destas bibliotecas, tivemos que baixar as migrations, e então percebemos que o problema da persistência dos dados anteriormente estava diretamente relacionado à não atualização destas migrations, para que nosso servidor local comportasse e computasse todas as alterações feitas no site.
+  
 [Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
 ---
 ## 👥 Programação em pares
 
 Durante o desenvolvimento do projeto, utilizamos a técnica de programação em pares, o que se provou essencial para a superação de desafios. Inicialmente, enfrentamos problemas de integração do CSS do layout original, sendo a Navbar o principal elemento em foco. No entanto, nossa colaboração também foi crucial para implementar as funcionalidades de Login e Cadastro. Ao trabalharmos juntos na lógica de autenticação e na interface de entrada de dados, conseguimos identificar e corrigir diversos erros estruturais e de segurança, resultando em um código mais limpo, robusto e com uma melhor experiência para o usuário.
+
+O projeto inteiro está fundamentado em programação em par, tendo em vista que em todas as sprints são designadas um par de contribuintes para executar tarefas que conpõem uma funcionalidade. 
+Além do exemplo acima, tivemos programação em pares para todas as entregas, desde um sistema de login simples, até algo mais complexo da relação e utilização de dados do usuário para confirmação de tokens, interações e estatísticas relativas ao mesmo.
+
 
 <img width="1916" height="1028" alt="Captura de tela 2025-10-27 183255" src="https://github.com/user-attachments/assets/8ba74155-d87f-4ea5-a137-50de5785b0a5" /> 
 
