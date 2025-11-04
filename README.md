@@ -89,9 +89,6 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 ---
 ## 🔎 Issue tracker
 ### Migrations
-Ao longo do projeto nós passamos a utilziar o django framework como ferramente de trabalho. Entretanto, por falta de experiência, passamos a perceber um problema de consistência no consumo de dados e interações de Usuário, impossibilitando dessa forma o nosso sistema de recomendações. Além disto, percebemos que ao invés de criarmos lógicas complexas com regras de negócios extensas, descobrimos que poderíamos usar blibliotecas para facilitar o nosso uso e tratamento de dados que nos interessávamos. Incrementamos o Pandas, Numpy e matplotlib(antes utilizávamos apenas o Flask). 
-
-Fazendo a inclusão destas bibliotecas, tivemos que baixar as migrations, e então percebemos que o problema da persistência dos dados anteriormente estava diretamente relacionado à não atualização destas migrations, para que nosso servidor local comportasse e computasse todas as alterações feitas no site.
   
 [Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
