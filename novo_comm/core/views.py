@@ -18,57 +18,33 @@ def home(request):
         for cat in categories
     }
 
-    # Build the main articles list with diverse content
+    # Algoritmo de recomendação avançado
+    from .recommendation import get_user_recommendation
     articles = []
-    recommended_article = None
-    
-    # Escolhe o primeiro artigo baseado no status de autenticação
+
     if request.user.is_authenticated:
-        # Se logado, pega a categoria mais acessada
-        top_category = ThemeAccess.objects.filter(user=request.user).order_by('-count').first()
-        if top_category:
-            recommended_article = Article.objects.filter(
-                category=top_category.category
-            ).order_by('-created_at').first()
-            if recommended_article:
-                articles.append(recommended_article)
-                # Remove o artigo recomendado da sua categoria para evitar duplicação
-                articles_by_category[recommended_article.category] = [
-                    a for a in articles_by_category[recommended_article.category] 
-                    if a.id != recommended_article.id
-                ]
-        else:
-            # Se logado mas sem histórico, usa artigo de Economia
-            eco_article = Article.objects.filter(category='Economia').order_by('-created_at').first()
-            if eco_article:
-                articles.append(eco_article)
-                articles_by_category['Economia'] = [
-                    a for a in articles_by_category['Economia'] 
-                    if a.id != eco_article.id
-                ]
+        # Usa algoritmo para recomendar a categoria principal
+        recommended_category = get_user_recommendation(request.user)
+        destaque = Article.objects.filter(category=recommended_category).order_by('-created_at').first()
+        if destaque:
+            articles.append(destaque)
+            articles_by_category[recommended_category] = [
+                a for a in articles_by_category[recommended_category]
+                if a.id != destaque.id
+            ]
     else:
         # Se não estiver logado, usa artigo Geral
         latest_geral = Article.objects.filter(category='Gerais').order_by('-created_at').first()
         if latest_geral:
             articles.append(latest_geral)
             articles_by_category['Gerais'] = [
-                a for a in articles_by_category['Gerais'] 
+                a for a in articles_by_category['Gerais']
                 if a.id != latest_geral.id
             ]
-            
-    # 2. If user is authenticated, try to add their most visited category next
-    if request.user.is_authenticated:
-        top = ThemeAccess.objects.filter(user=request.user).order_by('-count').first()
-        if top and top.count > 0:
-            # Get the latest article from user's favorite category (that's not already featured)
-            favorite_articles = articles_by_category.get(top.category, [])
-            if favorite_articles:
-                articles.append(favorite_articles[0])
-                articles_by_category[top.category] = favorite_articles[1:]
 
-    # 3. Fill remaining slots with articles from other categories
+    # Preenche os slots restantes com artigos das outras categorias
     for category in categories:
-        if len(articles) >= 4:  # We want 4 articles total (1 featured + 3 small)
+        if len(articles) >= 4:
             break
         category_articles = articles_by_category[category]
         if category_articles:
@@ -189,36 +165,25 @@ def tema(request, slug):
         'articles': enriched,
     }
 
-    # Track access for authenticated users ONLY when the request came from
-    # the home page (i.e. user clicked a card on `/`). This ensures counts
-    # reflect clicks from the home page as requested.
+    # Rastreia acesso à página de categoria para sistema de recomendação
     if request.user.is_authenticated:
-        referer = request.META.get('HTTP_REFERER', '')
-        home_path = reverse('home')  # typically '/'
-        should_count = False
-
-        if referer:
-            try:
-                parsed = urlparse(referer)
-                # Compare path component to the home path. If the referer path
-                # is exactly the home path or ends with it, we consider it a click
-                # from the home page.
-                if parsed.path == home_path or parsed.path.rstrip('/') == home_path.rstrip('/'):
-                    should_count = True
-            except Exception:
-                should_count = False
-
-        if should_count:
-            ta, _ = ThemeAccess.objects.get_or_create(user=request.user, category=category)
-            ta.increment()
+        ta, _ = ThemeAccess.objects.get_or_create(user=request.user, category=category)
+        ta.increment()
 
     return render(request, 'core/tema.html', context)
 
 
 def artigo(request, pk):
     """Render an article detail page with next article preview."""
+    from .recommendation import track_article_view
+    
     art = get_object_or_404(Article, pk=pk)
     next_article = art.get_next_article()
+    
+    # Rastreia visualização do artigo para sistema de recomendação
+    if request.user.is_authenticated:
+        track_article_view(request.user, art)
+    
     return render(request, 'core/artigo.html', {
         'article': art,
         'next_article': next_article

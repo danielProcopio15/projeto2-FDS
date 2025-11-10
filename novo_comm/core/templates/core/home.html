@@ -440,174 +440,60 @@
             <div class="col-xs-12 col-lg-12">
                 <div class="box">
                     <div class="row">
-                                                                                <div class="col-xs-12 col-md-12 col-lg-8">
-                                
+                        <!-- NOTÍCIA PRINCIPAL: PARA VOCÊ -->
+                        {% if articles and articles.0 %}
+                        <div class="col-xs-12 col-md-12 col-lg-8">
+                            <a href="{% url 'artigo' articles.0.id %}">
+                                <figure class="wide">
+                                    {% if user.is_authenticated %}
+                                        <span class="news-category para-voce">Para Você</span>
+                                    {% endif %}
+                                    <span class="news-category">{{ articles.0.category }}</span>
+                                    <img width="852" height="479" src="{% static articles.0.image %}" alt="{{ articles.0.title }}">
+                                </figure>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-md-12 col-lg-4 d-flex flex-column justify-content-center">
+                            <div class="box">
                                 <a href="{% url 'artigo' articles.0.id %}">
-                                    <figure class="wide">
-                                        {% if user.is_authenticated %}
-                                            <span class="news-category para-voce">Para Você</span>
-                                        {% endif %}
-                                        <span class="news-category">{{ articles.0.category }}</span>
-                                        <img width="852" height="479" src="{% static articles.0.image %}" alt="{{ articles.0.title }}">
-                                    </figure>
+                                    <div class="content-text">
+                                        <h1 class="title">{{ articles.0.title }}</h1>
+                                        <h2 class="summary summary-subtitle">{{ articles.0.description|truncatechars:180 }}</h2>
+                                    </div>
                                 </a>
-                            </div>                                                <div class="col-xs-12 col-md-12 col-lg-4">
-                                                                                                <div class="box">
-                                        <a href="https://jc.uol.com.br/brasil/2025/10/30/onu-pede-reforma-dos-metodos-de-policiamento-no-brasil-apos-operacao-violenta-no-rio.html">
-                                            <div class="content-text">
-                                                <small class="d-block hat mt-4-xs mt-0-md">OPERAÇÃO NO RIO</small>
-                                                <h1 class="title">ONU pede reforma dos métodos de policiamento no Brasil após operação violenta no Rio de Janeiro</h1>
-                                                <h2 class="summary summary-subtitle">A ONU defende, ainda, o combate ao racismo sistêmico no País, apontando que 5 mil pessoas negras são mortas por agentes de segurança a cada ano</h2>
-                                                                                            </div>
-                                        </a>
-                                    </div>        
-                                                                                                                        <div class="inside-box-link mt-4">
-                                    
-                                    <h3 class="inside-box-title">
-                                        <a href="https://jc.uol.com.br/brasil/2025/10/30/faccoes-se-mantem-pela-exploracao-do-territorio-alerta-ex-capitao-do-bope-apos-operacao-policial-no-rio.html">
-                                            "Facções se mantêm pela exploração do território", alerta ex-capitão do BOPE após operação no Rio
-                                        </a>
-                                    </h3>
-                                </div>
-                                                    </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
                         
-                                            <div class="col-xs-6 col-md-6 col-lg-3 mt-4">
-                    <div class="box">
-                        
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <a href="https://jc.uol.com.br/economia/2025/10/29/voos-para-o-rio-latam-gol-e-azul-flexibilizam-remarcacao-apos-operacao-policial-veja-as-regras.html">
-                                    <figure class="wide">
-                                        <span class="news-category">Economia</span>
-                                        <img width="305" height="171" src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2025/01/17/305x171/1_gol_e_azul_numa_so_companhia_-33556018.jpg?20251030093352" alt="Companhias aéreas flexibilizam remarcação de voos para o Rio de Janeiro" data-midia-publi="117812" data-midia-id="33556018" data-default-height="1371" data-default-width="1920" data-midia="33556018;1920;1371;1920;1371;33556018">
-                                    </figure>
-                                </a>
-                            </div>
-                          <div class="col-xs-12 col-md-12 mt-3">
-                            <a href="https://jc.uol.com.br/economia/2025/10/29/voos-para-o-rio-latam-gol-e-azul-flexibilizam-remarcacao-apos-operacao-policial-veja-as-regras.html">
-                                <div class="content-text">
-                                    <small class="d-block hat">
-                                        VIAGENS AÉREAS
-                                    </small>
-
-                                    <h4 class="title">
-                                        Voos para o Rio: Latam, Gol e Azul flexibilizam remarcação após operação policial; veja as regras
-                                    </h4>
-
-                                    
-                                                                    </div>
-                            </a>
-                        </div>
-
-                        </div>
-                    </div>
-                </div>
-                                            <div class="col-xs-6 col-md-6 col-lg-3 mt-4">
-                    <div class="box">
-                        
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <a href="https://jc.uol.com.br/colunas/blog-dellas/2025/10/30/justica-suspende-resultado-da-convencao-do-mdb-que-escolheu-o-deputado-federal-raul-henry-como-presidente.html">
-                                    <figure class="wide">
-                                        <span class="news-category">Política</span>
-                                        <img width="305" height="171" src="https://imagens.ne10.uol.com.br/legado/156/imagemjc/imagem/galeria/2019/10/04/9594_avulsa/normal/2fd0328a22c544e37f07ce712dc44282.jpg" alt="Raul Henry" data-midia-publi="115609" data-midia-id="7150174" data-default-height="data-default-width=" data-midia="7150174;;;;;7150174">
-                                    </figure>
-                                </a>
-                            </div>
-                          <div class="col-xs-12 col-md-12 mt-3">
-                            <a href="https://jc.uol.com.br/colunas/blog-dellas/2025/10/30/justica-suspende-resultado-da-convencao-do-mdb-que-escolheu-o-deputado-federal-raul-henry-como-presidente.html">
-                                <div class="content-text">
-                                    <small class="d-block hat">
-                                        ELEIÇÃO PARTIDÁRIA
-                                    </small>
-
-                                    <h4 class="title">
-                                        Justiça suspende convenção do MDB que escolheu Raul Henry como presidente
-                                    </h4>
-
-                                    
-                                                                    </div>
-                            </a>
-                        </div>
-
-                        </div>
-                    </div>
-                </div>
-                                            <div class="col-xs-6 col-md-6 col-lg-3 mt-4">
-                    <div class="box">
-                        
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <a href="https://jc.uol.com.br/colunas/enem-e-educacao/2025/10/30/apos-sancao-de-lei-de-cotas-pernambuco-reabre-inscricoes-do-concurso-publico-unificado.html">
-                                    <figure class="wide">
-                                        <span class="news-category">Educação</span>
-                                        <img width="305" height="171" src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2025/04/11/305x171/1_credito___mirva_filho__foto___secretaria_de_administracao-34291725.jpeg?20251030103924" alt="Secretaria de Administração de Pernambuco" data-midia-publi="115608" data-midia-id="34291725" data-default-height="1280" data-default-width="1920" data-midia="34291725;1920;1280;1920;1280;34291725">
-                                    </figure>
-                                </a>
-                            </div>
-                          <div class="col-xs-12 col-md-12 mt-3">
-                            <a href="https://jc.uol.com.br/colunas/enem-e-educacao/2025/10/30/apos-sancao-de-lei-de-cotas-pernambuco-reabre-inscricoes-do-concurso-publico-unificado.html">
-                                <div class="content-text">
-                                    <small class="d-block hat">
-                                        INSCRIÇÕES
-                                    </small>
-
-                                    <h4 class="title">
-                                        Após sanção de lei de cotas, Pernambuco reabre o Concurso Público Unificado
-                                    </h4>
-
-                                    
-                                                                    </div>
-                            </a>
-                        </div>
-
-                        </div>
-                    </div>
-                </div>
-                                            <div class="col-xs-6 col-md-6 col-lg-3 mt-4">
-                    <div class="box">
-                        
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12">
-                                <a href="https://jc.uol.com.br/colunas/mobilidade/2025/10/29/nova-avenida-guararapes-projeto-de-reurbanizacao-da-guararapes-estimula-mobilidade-ativa-reorganiza-o-transporte-publico-e-preve-5-km-de-novas-ciclofaixas.html">
-                                    <figure class="wide">
-                                        <img width="305" height="171" src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2025/10/29/305x171/1_img_20251029_wa0099-35944393.jpg?20251029132712" alt="Projeto Distrito Guararapes est&amp;aacute; sob consulta p&amp;uacute;blica at&amp;eacute; o dia 4 de novembro. Prefeitura n&amp;atilde;o divulgou a audi&amp;ecirc;ncia, mas popula&amp;ccedil;&amp;atilde;o ainda pode conhecer e contribuir com a proposta
-
 " data-midia-publi="115604" data-midia-id="35944393" data-default-height="1747" data-default-width="1920" data-midia="35944393;1920;1747;1920;1747;35944393">
-                                    </figure>
-                                </a>
-                            </div>
-                          <div class="col-xs-12 col-md-12 mt-3">
-                            <a href="https://jc.uol.com.br/colunas/mobilidade/2025/10/29/nova-avenida-guararapes-projeto-de-reurbanizacao-da-guararapes-estimula-mobilidade-ativa-reorganiza-o-transporte-publico-e-preve-5-km-de-novas-ciclofaixas.html">
-                                </a><div class="content-text"><a href="https://jc.uol.com.br/colunas/mobilidade/2025/10/29/nova-avenida-guararapes-projeto-de-reurbanizacao-da-guararapes-estimula-mobilidade-ativa-reorganiza-o-transporte-publico-e-preve-5-km-de-novas-ciclofaixas.html">
-                                    <small class="d-block hat">
-                                        INFRAESTRUTURA
-                                    </small>
-
-                                    <h4 class="title">
-                                        Projeto de reurbanização da Guararapes estimula mobilidade ativa, reorganiza o transporte público e prevê 5 km de novas ciclofaixas
-                                    </h4>
-
-                                    
-                                                                            </a><ul class="related-list mt-2"><a href="https://jc.uol.com.br/colunas/mobilidade/2025/10/29/nova-avenida-guararapes-projeto-de-reurbanizacao-da-guararapes-estimula-mobilidade-ativa-reorganiza-o-transporte-publico-e-preve-5-km-de-novas-ciclofaixas.html">
-                                            </a><div class="inside-box-link mt-4"><a href="https://jc.uol.com.br/colunas/mobilidade/2025/10/29/nova-avenida-guararapes-projeto-de-reurbanizacao-da-guararapes-estimula-mobilidade-ativa-reorganiza-o-transporte-publico-e-preve-5-km-de-novas-ciclofaixas.html">
-                                                </a><h3 class="inside-box-title"><a href="https://jc.uol.com.br/colunas/mobilidade/2025/10/29/nova-avenida-guararapes-projeto-de-reurbanizacao-da-guararapes-estimula-mobilidade-ativa-reorganiza-o-transporte-publico-e-preve-5-km-de-novas-ciclofaixas.html">
-                                                    </a><a href="/pernambuco/2025/10/29/bairro-no-centro-do-recife-pode-ser-concedido-a-iniciativa-privada-por-30-anos-com-investimento-de-rs-300-milhoes-veja-projeto.html">
-                                                                                                                    Bairro no Centro do Recife pode ser concedido à iniciativa privada por 30 anos com investimento de R$ 300 mi
-                                                                                                            </a>
-                                                </h3>
+                        <!-- GRID DE NOTÍCIAS SECUNDÁRIAS -->
+                        {% for article in articles|slice:'1:4' %}
+                        <div class="col-xs-6 col-md-6 col-lg-3 mt-4">
+                            <div class="box">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12">
+                                        <a href="{% url 'artigo' article.id %}">
+                                            <figure class="wide">
+                                                <span class="news-category">{{ article.category }}</span>
+                                                <img width="305" height="171" src="{% static article.image %}" alt="{{ article.title }}">
+                                            </figure>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12 col-md-12 mt-3">
+                                        <a href="{% url 'artigo' article.id %}">
+                                            <div class="content-text">
+                                                <h4 class="title">{{ article.title }}</h4>
+                                                <p class="news-excerpt">{{ article.description|truncatechars:120 }}</p>
                                             </div>
-                                        </ul>
-                                                                    </div>
-                            
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        </div>
-                    </div>
-                </div>
+                        {% endfor %}
                     </div>
     </div>
 </section> 
