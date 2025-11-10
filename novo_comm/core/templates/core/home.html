@@ -445,9 +445,8 @@
                         <div class="col-xs-12 col-md-12 col-lg-8">
                             <a href="{% url 'artigo' articles.0.id %}">
                                 <figure class="wide">
-                                    {% if user.is_authenticated %}
-                                        <span class="news-category para-voce">Para Você</span>
-                                    {% endif %}
+                                    <!-- Tag "Para Você" aparece sempre (logado ou não) -->
+                                    <span class="news-category para-voce">Para Você</span>
                                     <span class="news-category">{{ articles.0.category }}</span>
                                     <img width="852" height="479" src="{% static articles.0.image %}" alt="{{ articles.0.title }}">
                                 </figure>

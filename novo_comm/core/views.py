@@ -18,22 +18,27 @@ def home(request):
         for cat in categories
     }
 
-    # Algoritmo de recomendação avançado
+    # Sistema de recomendação para usuários logados E não logados
     from .recommendation import get_user_recommendation
     articles = []
 
     if request.user.is_authenticated:
-        # Usa algoritmo para recomendar a categoria principal
-        recommended_category = get_user_recommendation(request.user)
-        destaque = Article.objects.filter(category=recommended_category).order_by('-created_at').first()
-        if destaque:
-            articles.append(destaque)
-            articles_by_category[recommended_category] = [
-                a for a in articles_by_category[recommended_category]
-                if a.id != destaque.id
-            ]
+        # Usuário logado - usar dados do banco
+        recommended_category = get_user_recommendation(request.user, is_authenticated=True)
     else:
-        # Se não estiver logado, usa artigo Geral
+        # Usuário não logado - usar dados da sessão
+        recommended_category = get_user_recommendation(request.session, is_authenticated=False)
+    
+    # Busca artigo da categoria recomendada
+    destaque = Article.objects.filter(category=recommended_category).order_by('-created_at').first()
+    if destaque:
+        articles.append(destaque)
+        articles_by_category[recommended_category] = [
+            a for a in articles_by_category[recommended_category]
+            if a.id != destaque.id
+        ]
+    else:
+        # Fallback para Geral se não encontrar artigo da categoria recomendada
         latest_geral = Article.objects.filter(category='Gerais').order_by('-created_at').first()
         if latest_geral:
             articles.append(latest_geral)
@@ -166,9 +171,12 @@ def tema(request, slug):
     }
 
     # Rastreia acesso à página de categoria para sistema de recomendação
-    if request.user.is_authenticated:
-        ta, _ = ThemeAccess.objects.get_or_create(user=request.user, category=category)
-        ta.increment()
+    from .recommendation import track_category_view
+    track_category_view(
+        request.user if request.user.is_authenticated else request.session, 
+        category, 
+        is_authenticated=request.user.is_authenticated
+    )
 
     return render(request, 'core/tema.html', context)
 
@@ -181,8 +189,11 @@ def artigo(request, pk):
     next_article = art.get_next_article()
     
     # Rastreia visualização do artigo para sistema de recomendação
-    if request.user.is_authenticated:
-        track_article_view(request.user, art)
+    track_article_view(
+        request.user if request.user.is_authenticated else request.session,
+        art,
+        is_authenticated=request.user.is_authenticated
+    )
     
     return render(request, 'core/artigo.html', {
         'article': art,
