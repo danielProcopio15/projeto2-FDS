@@ -11,8 +11,14 @@ from django.urls import reverse
 from urllib.parse import urlparse
 
 def home(request):
+    # Busca todas as categorias disponíveis dinamicamente
+    categories = list(Article.objects.values_list('category', flat=True).distinct())
+    
+    # Se não houver categorias, usa uma lista padrão
+    if not categories:
+        categories = ['Esportes', 'Cultura', 'Economia', 'Ciência', 'Gerais']
+    
     # Get articles for each category
-    categories = ['Esportes', 'Cultura', 'Economia', 'Ciência', 'Gerais']
     articles_by_category = {
         cat: list(Article.objects.filter(category=cat).order_by('-created_at'))
         for cat in categories
@@ -31,21 +37,23 @@ def home(request):
     
     # Busca artigo da categoria recomendada
     destaque = Article.objects.filter(category=recommended_category).order_by('-created_at').first()
-    if destaque:
+    if destaque and recommended_category in articles_by_category:
         articles.append(destaque)
         articles_by_category[recommended_category] = [
             a for a in articles_by_category[recommended_category]
             if a.id != destaque.id
         ]
     else:
-        # Fallback para Geral se não encontrar artigo da categoria recomendada
-        latest_geral = Article.objects.filter(category='Gerais').order_by('-created_at').first()
-        if latest_geral:
-            articles.append(latest_geral)
-            articles_by_category['Gerais'] = [
-                a for a in articles_by_category['Gerais']
-                if a.id != latest_geral.id
-            ]
+        # Fallback para primeira categoria disponível se não encontrar artigo da categoria recomendada
+        fallback_category = categories[0] if categories else 'Economia'
+        latest_fallback = Article.objects.filter(category=fallback_category).order_by('-created_at').first()
+        if latest_fallback:
+            articles.append(latest_fallback)
+            if fallback_category in articles_by_category:
+                articles_by_category[fallback_category] = [
+                    a for a in articles_by_category[fallback_category]
+                    if a.id != latest_fallback.id
+                ]
 
     # Preenche os slots restantes com artigos das outras categorias
     for category in categories:
@@ -248,3 +256,25 @@ def user_logout(request):
     
     # Redireciona para a página inicial
     return redirect('home')
+
+
+def jc360(request):
+    """
+    Página do JC360 com artigos locais
+    """
+    # Busca artigos da categoria JC360 ou relacionadas
+    jc360_articles = Article.objects.filter(
+        category__in=['JC360', 'Educação', 'Economia', 'Cultura']
+    ).order_by('-created_at')[:12]
+    
+    context = {
+        'articles': jc360_articles
+    }
+    return render(request, 'core/jc360.html', context)
+
+
+def pre_lancamento(request):
+    """
+    Página de pré-lançamento com HTML específico
+    """
+    return render(request, 'core/pre_lancamento.html')

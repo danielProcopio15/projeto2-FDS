@@ -19,4 +19,10 @@ urlpatterns = [
     # Logout personalizado que limpa a sessão e redireciona para home
     path('logout/', views.user_logout, name='logout'),
     
+    # Página JC360
+    path('jc360/', views.jc360, name='jc360'),
+    
+    # Página de pré-lançamento
+    path('pre-lancamento/', views.pre_lancamento, name='pre_lancamento'),
+    
 ]

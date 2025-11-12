@@ -3,58 +3,404 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>{{ category }} - novo_comm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://jc.uol.com.br/{{ category|lower }}">
+
+    <!-- FACEBOOK -->
+    <meta property="og:site_name" content="JC">
+    <meta rel="title-matia" property="og:title" content="{{ category }} - Jornal do Commercio">
+    <meta property="og:description" content="Artigos e notícias sobre {{ category }} - Acompanhe as últimas informações">
+    <meta property="og:url" content="{% url 'tema' slug=category|slugify %}">
+    <meta property="og:image" content="{% static 'core/css/images/jc-logo.png' %}">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:type" content="website">
+
+    <!-- META TAGS -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="description" content="Artigos e notícias sobre {{ category }} - Acompanhe as últimas informações do Jornal do Commercio">
+    <meta name="author" content="Jornal do Commercio">
+    <meta name="robots" content="max-image-preview:large">
+    <meta name="referrer" content="always">
+
+    <title>{{ category }} - Jornal do Commercio</title>
+
+    <!-- CSS do template JC -->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "{{ category }} - Jornal do Commercio",
+        "description": "Artigos e notícias sobre {{ category }}",
+        "url": "{% url 'tema' slug=category|slugify %}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Jornal do Commercio",
+            "url": "{% url 'home' %}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{% static 'core/css/images/jc-logo.png' %}"
+            }
+        }
+    }
+    </script>
+
+    <style>
+        .tema-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .tema-hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .tema-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tema-subtitle {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .article-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #ddd;
+        }
+        
+        .article-content {
+            padding: 25px;
+        }
+        
+        .article-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+        
+        .article-excerpt {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        .article-category {
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .article-read-more {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .no-articles {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+        
+        .no-articles-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .breadcrumb {
+            background: #ecf0f1;
+            padding: 15px 25px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            color: #7f8c8d;
+            margin: 0 10px;
+        }
+        
+        .stats-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .stats-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #3498db;
+            display: block;
+        }
+        
+        .stats-label {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .tema-title {
+                font-size: 2.5em;
+            }
+            
+            .tema-container {
+                padding: 10px;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .tema-hero {
+                padding: 40px 15px;
+            }
+        }
+    </style>
 </head>
-<body>
-    <header class="site-header">
-        <div class="logo-container">
-            <a href="{% url 'home' %}"><img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo"></a>
+
+<body id="jc-new">
+    <!-- Header similar ao template JC -->
+    <header id="header" class="header-jc">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <a href="#" class="edition">
+                        <img src="{% static 'core/css/images/edicao.png' %}" alt="Edição do dia" onerror="this.style.display='none'">
+                        <h5>Edição do dia</h5>
+                    </a>
+                </div>
+                
+                <div class="col-xs-4 col-md-4">
+                    <a href="{% url 'home' %}" class="logo">
+                        <figure>
+                            <img src="{% static 'core/css/images/jc-logo.png' %}" alt="Página inicial do Jornal do Commercio">
+                        </figure>
+                    </a>    
+                </div>
+                
+                <div class="col-xs-4 col-md-4">
+                    <div class="options">
+                        <a href="#" class="toggle-menu">
+                            <img src="{% static 'core/css/images/menu.svg' %}" alt="menu" onerror="this.style.display='none'">
+                        </a>
+                        <a href="#" class="toggle-search">
+                            <img src="{% static 'core/css/images/busca.svg' %}" alt="busca" onerror="this.style.display='none'">
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <nav class="site-nav">
-            <ul>
-                <li><a href="{% url 'esportes' %}">Esportes</a></li>
-                <li><a href="{% url 'cultura' %}">Cultura</a></li>
-                <li><a href="{% url 'economia' %}">Economia</a></li>
-                <li><a href="{% url 'ciencia' %}">Ciência</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <main class="content-wrapper">
-        <section class="theme-hero">
-            <h1>{{ category }}</h1>
-            <p>Artigos e conteúdos relacionados a {{ category }}.</p>
-        </section>
+    <!-- Navegação das categorias -->
+    <nav style="background: #34495e; padding: 15px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <ul style="display: flex; justify-content: center; flex-wrap: wrap; list-style: none; margin: 0; padding: 0;">
+                <li style="margin: 0 15px;"><a href="{% url 'esportes' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Esportes</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'cultura' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Cultura</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'economia' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Economia</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'ciencia' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Ciência</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'jc360' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">JC360</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
+    <main>
+        <section id="content">
+            <div class="tema-container">
+                
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}">Início</a>
+                    <span>›</span>
+                    <strong>{{ category }}</strong>
+                </div>
 
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <span class="stats-number">{{ articles|length }}</span>
+                    <div class="stats-label">
+                        {% if articles|length == 1 %}
+                            artigo encontrado em {{ category }}
+                        {% else %}
+                            artigos encontrados em {{ category }}
+                        {% endif %}
+                    </div>
+                </div>
 
+                <!-- Hero Section -->
+                <div class="tema-hero">
+                    <h1 class="tema-title">{{ category }}</h1>
+                    <p class="tema-subtitle">Acompanhe as últimas notícias e artigos sobre {{ category }}</p>
+                </div>
 
-
-        <section class="theme-articles">
-            {% if articles and articles|length > 0 %}
-                {% for a in articles %}
-                <article class="news-card" data-article-id="{{ a.id }}">
-                    <a href="{% url 'artigo' pk=a.id %}" style="text-decoration: none; color: inherit;">
-                        <div class="thumb">
-                            <img src="{% static a.image %}" alt="{{ a.title }}">
+                <!-- Articles Grid -->
+                {% if articles and articles|length > 0 %}
+                    <section class="articles-grid">
+                        {% for a in articles %}
+                            <a href="{% url 'artigo' pk=a.id %}" class="article-card">
+                                <img src="{% static a.image %}" alt="{{ a.title }}" class="article-image" onerror="this.src='{% static 'core/css/images/placeholder.jpg' %}'">
+                                <div class="article-content">
+                                    <h2 class="article-title">{{ a.title }}</h2>
+                                    <p class="article-excerpt">{{ a.description|truncatewords:20 }}</p>
+                                    <div class="article-meta">
+                                        <span class="article-category">{{ a.category }}</span>
+                                        <span class="article-read-more">Ler mais →</span>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </section>
+                {% else %}
+                    <div class="no-articles">
+                        <div class="no-articles-icon">📰</div>
+                        <h3>Nenhum artigo encontrado</h3>
+                        <p>Não há conteúdo específico para {{ category }} ainda.</p>
+                        <p>Volte mais tarde ou explore outras categorias:</p>
+                        <div style="margin-top: 30px;">
+                            <a href="{% url 'esportes' %}" style="margin: 0 10px; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px;">Esportes</a>
+                            <a href="{% url 'cultura' %}" style="margin: 0 10px; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px;">Cultura</a>
+                            <a href="{% url 'economia' %}" style="margin: 0 10px; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px;">Economia</a>
+                            <a href="{% url 'ciencia' %}" style="margin: 0 10px; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px;">Ciência</a>
                         </div>
-                        <div class="meta">
-                            <h2 class="title">{{ a.title }}</h2>
-                            <p class="excerpt">{{ a.description }}</p>
-                        </div>
-                    </a>
-                </article>
-                {% endfor %}
-            {% else %}
-                <p>Não há conteúdo específico para esta categoria ainda. Volte mais tarde.</p>
-            {% endif %}
-        </section>
+                    </div>
+                {% endif %}
 
+            </div>
+        </section>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; 2025 novo_comm.</p>
+    <!-- Footer -->
+    <footer style="background: #2c3e50; color: white; text-align: center; padding: 40px 20px; margin-top: 40px;">
+        <div class="container">
+            <p>&copy; 2025 Jornal do Commercio - Todos os direitos reservados</p>
+            <p style="margin-top: 10px;">
+                <a href="{% url 'home' %}" style="color: #3498db; text-decoration: none; margin: 0 15px;">Início</a>
+                <a href="{% url 'jc360' %}" style="color: #3498db; text-decoration: none; margin: 0 15px;">JC360</a>
+                <a href="{% url 'pre_lancamento' %}" style="color: #3498db; text-decoration: none; margin: 0 15px;">Pré-lançamento</a>
+            </p>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Animação dos cards ao fazer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animação aos cards
+        document.querySelectorAll('.article-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Hover effect para navegação
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.background = '#2c3e50';
+            });
+            link.addEventListener('mouseleave', function() {
+                this.style.background = 'transparent';
+            });
+        });
+
+        // Highlight da categoria atual
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.style.background = '#e74c3c';
+            }
+        });
+    </script>
+
 </body>
 </html>

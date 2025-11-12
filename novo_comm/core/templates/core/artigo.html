@@ -3,46 +3,731 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>{{ article.title }} - novo_comm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://jc.uol.com.br/artigo/{{ article.id }}">
+
+    <!-- FACEBOOK -->
+    <meta property="og:site_name" content="JC">
+    <meta rel="title-matia" property="og:title" content="{{ article.title }}">
+    <meta property="og:description" content="{{ article.description|truncatewords:30 }}">
+    <meta property="og:url" content="{% url 'artigo' pk=article.id %}">
+    <meta property="og:image" content="{% static article.image %}">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:type" content="article">
+    <meta property="article:author" content="Jornal do Commercio">
+    <meta property="article:section" content="{{ article.category }}">
+
+    <!-- META TAGS -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="description" content="{{ article.description|truncatewords:30 }}">
+    <meta name="author" content="Jornal do Commercio">
+    <meta name="robots" content="max-image-preview:large">
+    <meta name="referrer" content="always">
+
+    <title>{{ article.title }} - Jornal do Commercio</title>
+
+    <!-- CSS do template JC -->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "{{ article.title }}",
+        "description": "{{ article.description|truncatewords:30 }}",
+        "author": {
+            "@type": "Organization",
+            "name": "Jornal do Commercio"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Jornal do Commercio",
+            "url": "{% url 'home' %}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{% static 'core/css/images/jc-logo.png' %}"
+            }
+        },
+        "datePublished": "{{ article.created_at|date:'c' }}",
+        "url": "{% url 'artigo' pk=article.id %}",
+        "image": "{% static article.image %}",
+        "articleSection": "{{ article.category }}"
+    }
+    </script>
+
+    <style>
+        .artigo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .artigo-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+        }
+        
+        .artigo-category {
+            background: #3498db;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .artigo-title {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+        
+        .artigo-subtitle {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .artigo-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: #95a5a6;
+            font-size: 0.95em;
+        }
+        
+        .artigo-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+        
+        .artigo-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin: 30px 0;
+        }
+        
+        .artigo-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .next-article-section {
+            background: #ecf0f1;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .next-article-title {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .next-article-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s ease;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .next-article-card:hover {
+            transform: translateY(-5px);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .next-article-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .next-article-label {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .next-article-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            line-height: 1.3;
+        }
+        
+        .breadcrumb {
+            background: #ecf0f1;
+            padding: 15px 25px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            color: #7f8c8d;
+            margin: 0 10px;
+        }
+        
+        .share-section {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .share-button {
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .share-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+        
+        .share-facebook {
+            background: #3b5998;
+            color: white;
+        }
+        
+        .share-twitter {
+            background: #1da1f2;
+            color: white;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+        
+        /* Botão Flutuante de Próxima Notícia */
+        .floating-next-button {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 280px;
+            animation: pulse 3s infinite;
+            border: 3px solid white;
+        }
+        
+        .floating-next-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.6);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .floating-next-button .button-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            flex-shrink: 0;
+        }
+        
+        .floating-next-button .button-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .floating-next-button .button-label {
+            font-size: 0.8em;
+            opacity: 0.9;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .floating-next-button .button-title {
+            font-size: 0.95em;
+            line-height: 1.2;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .floating-next-button .arrow-icon {
+            font-size: 1.5em;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .floating-next-button:hover .arrow-icon {
+            transform: translateX(5px);
+        }
+        
+        @keyframes pulse {
+            0% { 
+                box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 4px 25px rgba(231, 76, 60, 0.7);
+                transform: scale(1.02);
+            }
+            100% { 
+                box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+                transform: scale(1);
+            }
+        }
+        
+        /* Navegação entre artigos */
+        .article-navigation {
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .nav-button {
+            background: #3498db;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .artigo-title {
+                font-size: 2.2em;
+            }
+            
+            .artigo-container {
+                padding: 10px;
+            }
+            
+            .artigo-content {
+                padding: 25px;
+            }
+            
+            .artigo-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .floating-next-button {
+                top: 80px;
+                right: 15px;
+                padding: 12px 15px;
+                max-width: 220px;
+                font-size: 0.85em;
+            }
+            
+            .floating-next-button .button-image {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .floating-next-button .button-title {
+                font-size: 0.9em;
+            }
+            
+            .article-navigation {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-<body>
-    <header class="site-header">
-        <div class="logo-container">
-            <a href="{% url 'home' %}"><img src="{% static 'core/css/images/jc-logo.png' %}" alt="Logo" class="site-logo"></a>
+
+<body id="jc-new">
+    <!-- Header similar ao template JC -->
+    <header id="header" class="header-jc">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <a href="#" class="edition">
+                        <img src="{% static 'core/css/images/edicao.png' %}" alt="Edição do dia" onerror="this.style.display='none'">
+                        <h5>Edição do dia</h5>
+                    </a>
+                </div>
+                
+                <div class="col-xs-4 col-md-4">
+                    <a href="{% url 'home' %}" class="logo">
+                        <figure>
+                            <img src="{% static 'core/css/images/jc-logo.png' %}" alt="Página inicial do Jornal do Commercio">
+                        </figure>
+                    </a>    
+                </div>
+                
+                <div class="col-xs-4 col-md-4">
+                    <div class="options">
+                        <a href="#" class="toggle-menu">
+                            <img src="{% static 'core/css/images/menu.svg' %}" alt="menu" onerror="this.style.display='none'">
+                        </a>
+                        <a href="#" class="toggle-search">
+                            <img src="{% static 'core/css/images/busca.svg' %}" alt="busca" onerror="this.style.display='none'">
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="content-wrapper">
-        {% if next_article %}
-        <div class="next-article-preview">
-            <a href="{% url 'artigo' pk=next_article.id %}" class="next-preview">
-                <div class="next-thumb">
-                    <img src="{% static next_article.image %}" alt="{{ next_article.title }}">
-                </div>
-                <div class="next-text">
-                    <strong>Próxima notícia</strong>
-                    <span>{{ next_article.title }}</span>
-                </div>
-            </a>
+    <!-- Navegação das categorias -->
+    <nav style="background: #34495e; padding: 15px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <ul style="display: flex; justify-content: center; flex-wrap: wrap; list-style: none; margin: 0; padding: 0;">
+                <li style="margin: 0 15px;"><a href="{% url 'esportes' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Esportes</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'cultura' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Cultura</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'economia' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Economia</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'ciencia' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Ciência</a></li>
+                <li style="margin: 0 15px;"><a href="{% url 'jc360' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">JC360</a></li>
+            </ul>
         </div>
-        {% endif %}
+    </nav>
 
-        <article class="news-card featured">
-            <div class="thumb">
-                <img src="{% static article.image %}" alt="{{ article.title }}">
-            </div>
-            <div class="meta">
-                <h1 class="title">{{ article.title }}</h1>
-                <p class="excerpt">{{ article.description }}</p>
-            </div>
-        </article>
+    <!-- Main Content -->
+    <main>
+        <section id="content">
+            <div class="artigo-container">
+                
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}">Início</a>
+                    <span>›</span>
+                    <a href="{% url 'tema' slug=article.get_normalized_slug %}">{{ article.category }}</a>
+                    <span>›</span>
+                    <strong>{{ article.title|truncatewords:5 }}</strong>
+                </div>
 
-        <p><a href="{% url 'tema' slug=article.get_normalized_slug %}">Voltar ao tema: {{ article.category }}</a></p>
+                <!-- Article Header -->
+                <div class="artigo-header">
+                    <div class="artigo-category">{{ article.category }}</div>
+                    <h1 class="artigo-title">{{ article.title }}</h1>
+                    <p class="artigo-subtitle">{{ article.description }}</p>
+                    <div class="artigo-meta">
+                        <span>📅 {{ article.created_at|date:"d/m/Y" }}</span>
+                        <span>⏱️ {{ article.created_at|date:"H:i" }}</span>
+                        <span>📂 {{ article.category }}</span>
+                    </div>
+                </div>
+
+                <!-- Article Image -->
+                <img src="{% static article.image %}" alt="{{ article.title }}" class="artigo-image" onerror="this.style.display='none'">
+
+                <!-- Article Content -->
+                <div class="artigo-content">
+                    <div class="artigo-text">
+                        {{ article.description }}
+                        <br><br>
+                        <p>Este é um artigo completo sobre {{ article.title|lower }}. Aqui você encontra informações detalhadas e atualizadas sobre o tema, trazendo as últimas novidades e análises relevantes para nossos leitores.</p>
+                        
+                        <p>O Jornal do Commercio continua comprometido em trazer conteúdo de qualidade e informações precisas para manter você sempre bem informado sobre os assuntos mais importantes da categoria {{ article.category }}.</p>
+                    </div>
+
+                    <!-- Navegação Interna do Artigo -->
+                    {% if next_article %}
+                    <div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 20px; border-radius: 10px; margin: 30px 0; text-align: center;">
+                        <h4 style="margin: 0 0 15px 0; font-size: 1.1em;">Leia também</h4>
+                        <a href="{% url 'artigo' pk=next_article.id %}" style="background: white; color: #3498db; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                            📖 Próxima Notícia: {{ next_article.title|truncatewords:6 }}
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Navegação entre Artigos -->
+                <div class="article-navigation">
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0 0 10px 0; opacity: 0.8;">Navegação</h4>
+                        <p style="margin: 0; opacity: 0.7;">Explore mais conteúdo de {{ article.category }}</p>
+                    </div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        {% if next_article %}
+                            <a href="{% url 'artigo' pk=next_article.id %}" class="nav-button">
+                                <span class="icon">→</span>
+                                <span>Próxima</span>
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'tema' slug=article.get_normalized_slug %}" class="nav-button">
+                            <span class="icon">📑</span>
+                            <span>Ver Todas</span>
+                        </a>
+                        <a href="{% url 'home' %}" class="nav-button">
+                            <span class="icon">🏠</span>
+                            <span>Início</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <h3>Compartilhe esta notícia</h3>
+                    <div class="share-buttons">
+                        <a href="https://api.whatsapp.com/send?text={{ article.title|urlencode }} - {% url 'artigo' pk=article.id %}" class="share-button share-whatsapp" target="_blank">📱 WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={% url 'artigo' pk=article.id %}" class="share-button share-facebook" target="_blank">📘 Facebook</a>
+                        <a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={% url 'artigo' pk=article.id %}" class="share-button share-twitter" target="_blank">🐦 Twitter</a>
+                    </div>
+                </div>
+
+                <!-- Next Article -->
+                {% if next_article %}
+                    <div class="next-article-section">
+                        <h3 class="next-article-title">Continue lendo - Próximo artigo</h3>
+                        <a href="{% url 'artigo' pk=next_article.id %}" class="next-article-card">
+                            <img src="{% static next_article.image %}" alt="{{ next_article.title }}" class="next-article-image" onerror="this.style.display='none'">
+                            <div class="next-article-label">🚀 Próximo artigo em {{ next_article.category }}</div>
+                            <div class="next-article-name">{{ next_article.title }}</div>
+                            <div style="margin-top: 15px; background: #3498db; color: white; padding: 10px 20px; border-radius: 25px; display: inline-block; font-size: 0.9em; font-weight: bold;">
+                                Continuar Lendo →
+                            </div>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="next-article-section">
+                        <h3 class="next-article-title">Explore mais conteúdo</h3>
+                        <div style="text-align: center; padding: 30px;">
+                            <p style="color: #7f8c8d; margin-bottom: 20px;">Você chegou ao fim desta categoria! Que tal explorar outros temas?</p>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                                <a href="{% url 'esportes' %}" style="background: #e74c3c; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">🏈 Esportes</a>
+                                <a href="{% url 'cultura' %}" style="background: #9b59b6; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">🎭 Cultura</a>
+                                <a href="{% url 'economia' %}" style="background: #f39c12; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">💰 Economia</a>
+                                <a href="{% url 'ciencia' %}" style="background: #1abc9c; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">🔬 Ciência</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!-- Back to Category -->
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="{% url 'tema' slug=article.get_normalized_slug %}" style="background: #3498db; color: white; padding: 15px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; transition: all 0.3s ease;">
+                        ← Voltar para {{ article.category }}
+                    </a>
+                </div>
+
+            </div>
+        </section>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; 2025 novo_comm.</p>
+    <!-- Botão Flutuante de Próxima Notícia -->
+    {% if next_article %}
+    <a href="{% url 'artigo' pk=next_article.id %}" class="floating-next-button" title="{{ next_article.title }}">
+        <img src="{% if next_article.image %}{% static 'core/css/images/' %}{{ next_article.image }}{% else %}{% static 'core/css/images/placeholder.svg' %}{% endif %}" alt="{{ next_article.title }}" class="button-image" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}';" />">
+        <div class="button-content">
+            <div class="button-label">Próxima notícia</div>
+            <div class="button-title">{{ next_article.title|truncatewords:5 }}</div>
+        </div>
+        <span class="arrow-icon">→</span>
+    </a>
+    {% endif %}
+
+    <!-- Footer -->
+    <footer style="background: #2c3e50; color: white; text-align: center; padding: 40px 20px; margin-top: 40px;">
+        <div class="container">
+            <p>&copy; 2025 Jornal do Commercio - Todos os direitos reservados</p>
+            <p style="margin-top: 10px;">
+                <a href="{% url 'home' %}" style="color: #3498db; text-decoration: none; margin: 0 15px;">Início</a>
+                <a href="{% url 'jc360' %}" style="color: #3498db; text-decoration: none; margin: 0 15px;">JC360</a>
+                <a href="{% url 'pre_lancamento' %}" style="color: #3498db; text-decoration: none; margin: 0 15px;">Pré-lançamento</a>
+            </p>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Hover effect para navegação
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.background = '#2c3e50';
+            });
+            link.addEventListener('mouseleave', function() {
+                this.style.background = 'transparent';
+            });
+        });
+
+        // Hover effect para botão de voltar
+        document.querySelectorAll('a[href*="tema"]').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.background = '#2980b9';
+                this.style.transform = 'translateY(-2px)';
+            });
+            button.addEventListener('mouseleave', function() {
+                this.style.background = '#3498db';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Controle do botão flutuante - aparecer/desaparecer baseado no scroll
+        const floatingButton = document.querySelector('.floating-next-button');
+        if (floatingButton) {
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Mostrar o botão após rolar 300px
+                if (currentScroll > 300) {
+                    floatingButton.style.opacity = '1';
+                    floatingButton.style.transform = 'translateY(0)';
+                } else {
+                    floatingButton.style.opacity = '0.7';
+                    floatingButton.style.transform = 'translateY(10px)';
+                }
+                
+                // Esconder quando scrollando para cima rapidamente
+                if (currentScroll > lastScrollTop && currentScroll > 500) {
+                    // Scrolling down
+                    floatingButton.style.opacity = '1';
+                } else if (currentScroll < lastScrollTop - 5) {
+                    // Scrolling up
+                    floatingButton.style.opacity = '0.8';
+                }
+                
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            });
+
+            // Inicializar o botão como oculto
+            floatingButton.style.opacity = '0.7';
+            floatingButton.style.transform = 'translateY(10px)';
+            floatingButton.style.transition = 'all 0.3s ease';
+        }
+
+        // Função para copiar link do artigo
+        function copyArticleLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(function() {
+                // Criar feedback visual
+                const feedback = document.createElement('div');
+                feedback.textContent = 'Link copiado!';
+                feedback.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #2ecc71;
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    z-index: 9999;
+                    animation: slideInRight 0.3s ease;
+                `;
+                document.body.appendChild(feedback);
+                
+                setTimeout(() => {
+                    feedback.remove();
+                }, 2000);
+            });
+        }
+
+        // Adicionar estilo para animação
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
 </body>
 </html>

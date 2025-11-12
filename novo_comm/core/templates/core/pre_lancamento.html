@@ -1,0 +1,510 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://jc.uol.com.br/pre-lancamento">
+
+    <!-- FACEBOOK -->
+    <meta property="og:site_name" content="JC">
+    <meta rel="title-matia" property="og:title" content="Splendore Boa Viagem - Pré-Lançamento Exclusivo">
+    <meta property="og:description" content="Apartamentos de 2, 3 e 4 quartos no coração de Boa Viagem, com lazer completo e localização privilegiada">
+    <meta property="og:url" content="{% url 'pre_lancamento' %}">
+    <meta property="og:image" content="https://imagens.ne10.uol.com.br/legado/156/imagemjc/imagem/noticia/2017/05/06/normal/981dde5e50571c4335279d179b4570d8.jpg">
+    <meta property="og:image:width" content="">
+    <meta property="og:image:height" content="">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:type" content="article">
+    <meta property="fb:app_id" content="649835981702614">
+    <meta property="fb:pages" content="196984146984424">
+    <meta property="fb:admins" content="jornaldocommercioPE">
+
+    <!-- GENERALL -->
+    <meta name="description" content="Apartamentos de 2, 3 e 4 quartos no coração de Boa Viagem, com lazer completo e localização privilegiada">
+    <meta name="author" content="JC Pré-Lançamento">
+    <meta name="robots" content="max-image-preview:large">
+    <meta name="referrer" content="always">
+
+    <title>Splendore Boa Viagem - Pré-Lançamento Exclusivo | Jornal do Commercio</title>
+
+    <!-- CSS do template JC -->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "articleSection": "Pré-Lançamento#Imóveis",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{% url 'pre_lancamento' %}"
+        },
+        "headline": "Splendore Boa Viagem - Pré-Lançamento Exclusivo",
+        "description": "Apartamentos de 2, 3 e 4 quartos no coração de Boa Viagem, com lazer completo e localização privilegiada",
+        "keywords": ["Splendore", "Boa Viagem", "Pré-lançamento", "Apartamentos", "Recife", "Imóveis"],
+        "datePublished": "2025-11-12T10:26:30Z",
+        "publishingPrinciples": "{% url 'pre_lancamento' %}",
+        "url": "{% url 'pre_lancamento' %}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Jornal do Commercio",
+            "url": "{% url 'home' %}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://imagens.ne10.uol.com.br/template-unificado/images/jc-new/favicon/android-icon-192x192.png",
+                "width": "192",
+                "height": "192"
+            }
+        },
+        "author": {
+            "@type": "Person",
+            "name": "JC Pré-Lançamento"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "JC",
+        "item": "{% url 'home' %}"
+        },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Pré-Lançamento",
+        "item": "{% url 'pre_lancamento' %}"
+        },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Splendore Boa Viagem - Pré-Lançamento Exclusivo",
+        "item": "{% url 'pre_lancamento' %}"
+        }]
+    }
+    </script>
+
+    <style>
+        .pre-lancamento-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+        
+        .feature-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .location-section {
+            background: #ecf0f1;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .apartments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .apartment-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .apartment-type {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .apartment-details {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .contact-section {
+            background: #2c3e50;
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .contact-item {
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5em;
+            }
+            
+            .pre-lancamento-container {
+                padding: 10px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body id="jc-new">
+    <!-- Header similar ao template JC -->
+    <header id="header" class="header-jc">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <a href="#" class="edition">
+                        <img src="{% static 'core/css/images/edicao.png' %}" alt="Edição do dia" onerror="this.style.display='none'">
+                        <h5>Edição do dia</h5>
+                    </a>
+                </div>
+                
+                <div class="col-xs-4 col-md-4">
+                    <a href="{% url 'home' %}" class="logo">
+                        <figure>
+                            <img src="{% static 'core/css/images/logo.svg' %}" alt="Página inicial do Jornal do Commercio" onerror="this.src='{% static 'core/css/images/logo.png' %}'">
+                        </figure>
+                    </a>    
+                </div>
+                
+                <div class="col-xs-4 col-md-4">
+                    <div class="options">
+                        <a href="#" class="toggle-menu">
+                            <img src="{% static 'core/css/images/menu.svg' %}" alt="menu" onerror="this.style.display='none'">
+                        </a>
+                        <a href="#" class="toggle-search">
+                            <img src="{% static 'core/css/images/busca.svg' %}" alt="busca" onerror="this.style.display='none'">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section id="content">
+            <div class="container">
+                <!-- Article header similar ao template JC -->
+                <div class="article-header-jc-new">
+                    <div class="hat">
+                        <a href="{% url 'jc360' %}" class="author">
+                            <strong class="author">JC360</strong>
+                        </a>
+                        <span>|</span>
+                        <span>Pré-Lançamento</span>
+                    </div>
+                    <h1 class="article-title">Splendore Boa Viagem - Pré-Lançamento Exclusivo</h1>
+                    <p class="article-subtitle">Apartamentos de 2, 3 e 4 quartos no coração de Boa Viagem, com lazer completo e localização privilegiada</p>
+                    
+                    <div class="author-signature">
+                        <div class="author-info">
+                            <strong>Por</strong>
+                            <strong>JC Pré-Lançamento</strong>
+                            <small class="publishinfo">
+                                Publicado em 12/11/2025 às 10:26
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo do Pré-Lançamento -->
+                <div class="pre-lancamento-container">
+                    
+                    <!-- Hero Section -->
+                    <div class="hero-section">
+                        <h1 class="hero-title">Splendore Boa Viagem</h1>
+                        <p class="hero-subtitle">O novo padrão de elegância e sofisticação chegou a Boa Viagem</p>
+                        <a href="#contato" class="cta-button">QUERO MAIS INFORMAÇÕES</a>
+                    </div>
+
+                    <!-- Apartamentos -->
+                    <section>
+                        <h2 class="section-title">Apartamentos Disponíveis</h2>
+                        <div class="apartments-grid">
+                            <div class="apartment-card">
+                                <div class="apartment-type">2 Quartos</div>
+                                <div class="apartment-details">A partir de 68m²<br>2 quartos • 1 suíte • 2 banheiros</div>
+                            </div>
+                            <div class="apartment-card">
+                                <div class="apartment-type">3 Quartos</div>
+                                <div class="apartment-details">A partir de 85m²<br>3 quartos • 1 suíte • 2 banheiros</div>
+                            </div>
+                            <div class="apartment-card">
+                                <div class="apartment-type">4 Quartos</div>
+                                <div class="apartment-details">A partir de 120m²<br>4 quartos • 2 suítes • 3 banheiros</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Features -->
+                    <section>
+                        <h2 class="section-title">Diferenciais do Empreendimento</h2>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🏊</div>
+                                <div class="feature-title">Piscina Adulto e Infantil</div>
+                                <p>Área aquática completa para toda família, com deck molhado e área gourmet</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🏋️</div>
+                                <div class="feature-title">Academia Completa</div>
+                                <p>Espaço fitness equipado com aparelhos modernos e vista panorâmica</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🌳</div>
+                                <div class="feature-title">Jardim Zen</div>
+                                <p>Área verde para relaxamento e meditação com paisagismo exclusivo</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🚗</div>
+                                <div class="feature-title">Vagas Cobertas</div>
+                                <p>Garagem coberta com sistema de segurança 24h e portão eletrônico</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🛡️</div>
+                                <div class="feature-title">Segurança Total</div>
+                                <p>Portaria 24h, circuito interno de TV e controle de acesso</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🎯</div>
+                                <div class="feature-title">Localização Premium</div>
+                                <p>A 200m da praia de Boa Viagem, próximo a shoppings e restaurantes</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Localização -->
+                    <section class="location-section">
+                        <h2 class="section-title">Localização Privilegiada</h2>
+                        <p style="text-align: center; font-size: 1.1em; color: #2c3e50;">
+                            Localizado no coração de Boa Viagem, o Splendore oferece fácil acesso aos principais 
+                            pontos da cidade. A apenas 200 metros da praia, próximo ao Shopping Recife, 
+                            restaurantes renomados e com excelente infraestrutura urbana.
+                        </p>
+                        
+                        <div class="features-grid" style="margin-top: 30px;">
+                            <div class="feature-card">
+                                <div class="feature-icon">🏖️</div>
+                                <div class="feature-title">200m da Praia</div>
+                                <p>Acesso rápido à Praia de Boa Viagem</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🛍️</div>
+                                <div class="feature-title">Shopping Recife</div>
+                                <p>5 minutos de caminhada</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🍴</div>
+                                <div class="feature-title">Gastronomia</div>
+                                <p>Restaurantes e cafés na região</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contato -->
+                    <section id="contato" class="contact-section">
+                        <h2 class="section-title" style="color: white;">Entre em Contato</h2>
+                        <p style="font-size: 1.2em; margin-bottom: 30px;">
+                            Não perca essa oportunidade única! Entre em contato conosco e garante já o seu apartamento no Splendore Boa Viagem.
+                        </p>
+                        
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="contact-icon">📱</div>
+                                <h4>WhatsApp</h4>
+                                <p>(81) 99999-9999</p>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">📧</div>
+                                <h4>E-mail</h4>
+                                <p>vendas@splendore.com.br</p>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">📍</div>
+                                <h4>Estande de Vendas</h4>
+                                <p>Av. Boa Viagem, 1234<br>Boa Viagem - Recife/PE</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <a href="https://api.whatsapp.com/send?phone=5581999999999&text=Olá! Tenho interesse no Splendore Boa Viagem" 
+                               class="cta-button" target="_blank">
+                                FALAR NO WHATSAPP
+                            </a>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer básico -->
+    <footer style="background: #2c3e50; color: white; text-align: center; padding: 40px 20px; margin-top: 40px;">
+        <div class="container">
+            <p>&copy; 2025 Jornal do Commercio - Todos os direitos reservados</p>
+            <p>
+                <a href="{% url 'home' %}" style="color: #3498db; text-decoration: none;">Voltar ao JC</a> | 
+                <a href="{% url 'jc360' %}" style="color: #3498db; text-decoration: none;">JC360</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts básicos -->
+    <script>
+        // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animação dos cards ao fazer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animação aos cards
+        document.querySelectorAll('.feature-card, .apartment-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+</html>
