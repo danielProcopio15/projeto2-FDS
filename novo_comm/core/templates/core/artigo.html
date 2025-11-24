@@ -98,6 +98,107 @@
             line-height: 1.2;
         }
         
+        /* Estilos do botão de resumir notícia */
+        .resumir-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .resumir-button {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .resumir-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        }
+        
+        .resumir-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .resumir-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .resumir-icon {
+            font-size: 1.2em;
+        }
+        
+        .resumir-text {
+            font-weight: bold;
+        }
+        
+        .resumir-loading {
+            display: none;
+        }
+        
+        /* Área do resumo gerado */
+        .resumo-area {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #e74c3c;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .resumo-titulo {
+            color: #e74c3c;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .resumo-conteudo {
+            color: #2c3e50;
+            line-height: 1.6;
+            font-size: 1.05em;
+        }
+        
+        .resumo-pontos {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .resumo-pontos li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .resumo-pontos li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
         .artigo-subtitle {
             font-size: 1.3em;
             color: #7f8c8d;
@@ -400,6 +501,16 @@
                 align-items: center;
             }
             
+            .resumir-button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
+            
+            .resumo-area {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
             .floating-next-button {
                 top: 80px;
                 right: 15px;
@@ -490,6 +601,16 @@
                 <div class="artigo-header">
                     <div class="artigo-category">{{ article.category }}</div>
                     <h1 class="artigo-title">{{ article.title }}</h1>
+                    
+                    <!-- Botão de Resumir Notícia -->
+                    <div class="resumir-container">
+                        <button id="resumir-btn" class="resumir-button">
+                            <span class="resumir-icon">📋</span>
+                            <span class="resumir-text">Resumir Notícia</span>
+                            <span class="resumir-loading" style="display: none;">⏳ Gerando resumo...</span>
+                        </button>
+                    </div>
+                    
                     <p class="artigo-subtitle">{{ article.description }}</p>
                     <div class="artigo-meta">
                         <span>📅 {{ article.created_at|date:"d/m/Y" }}</span>
@@ -500,6 +621,17 @@
 
                 <!-- Article Image -->
                 <img src="{% static article.image %}" alt="{{ article.title }}" class="artigo-image" onerror="this.style.display='none'">
+
+                <!-- Área do Resumo (inicialmente oculta) -->
+                <div id="resumo-area" class="resumo-area">
+                    <div class="resumo-titulo">
+                        <span>📋</span>
+                        <span>Resumo da Notícia</span>
+                    </div>
+                    <div id="resumo-conteudo" class="resumo-conteudo">
+                        <!-- O resumo será inserido aqui pelo JavaScript -->
+                    </div>
+                </div>
 
                 <!-- Article Content -->
                 <div class="artigo-content">
@@ -621,6 +753,108 @@
 
     <!-- Scripts -->
     <script>
+        // Função para resumir notícia
+        function resumirNoticia() {
+            const button = document.getElementById('resumir-btn');
+            const resumoArea = document.getElementById('resumo-area');
+            const resumoConteudo = document.getElementById('resumo-conteudo');
+            const resumirText = button.querySelector('.resumir-text');
+            const resumirLoading = button.querySelector('.resumir-loading');
+            
+            // Verificar se o resumo já está sendo exibido
+            if (resumoArea.style.display === 'block') {
+                // Esconder o resumo com animação suave
+                resumoArea.style.opacity = '0';
+                resumoArea.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    resumoArea.style.display = 'none';
+                    resumoArea.style.opacity = '1';
+                    resumoArea.style.transform = 'translateY(0)';
+                }, 300);
+                resumirText.textContent = 'Resumir Notícia';
+                return;
+            }
+            
+            // Mostrar estado de carregamento
+            button.disabled = true;
+            resumirText.style.display = 'none';
+            resumirLoading.style.display = 'inline';
+            
+            // Simular geração de resumo
+            setTimeout(() => {
+                const artigo = {
+                    titulo: "{{ article.title|escapejs }}",
+                    categoria: "{{ article.category|escapejs }}",
+                    descricao: "{{ article.description|escapejs }}"
+                };
+                
+                // Gerar resumo baseado no conteúdo do artigo
+                const resumo = gerarResumo(artigo);
+                
+                // Exibir o resumo com animação
+                resumoConteudo.innerHTML = resumo;
+                resumoArea.style.display = 'block';
+                resumoArea.style.opacity = '0';
+                resumoArea.style.transform = 'translateY(20px)';
+                
+                // Animar entrada
+                setTimeout(() => {
+                    resumoArea.style.opacity = '1';
+                    resumoArea.style.transform = 'translateY(0)';
+                    resumoArea.style.transition = 'all 0.3s ease';
+                }, 50);
+                
+                // Rolar suavemente até o resumo
+                setTimeout(() => {
+                    resumoArea.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, 400);
+                
+                // Restaurar botão
+                button.disabled = false;
+                resumirText.style.display = 'inline';
+                resumirLoading.style.display = 'none';
+                resumirText.textContent = 'Ocultar Resumo';
+                
+            }, 2500); // Simula 2.5 segundos de processamento
+        }
+        
+        // Função que gera o resumo
+        function gerarResumo(artigo) {
+            const pontosChave = [
+                `Artigo sobre <strong>${artigo.titulo.toLowerCase()}</strong> na editoria de ${artigo.categoria}.`,
+                `Informações atualizadas e relevantes sobre o tema em questão.`,
+                `Análise detalhada dos principais aspectos relacionados ao assunto.`,
+                `Conteúdo completo disponível para leitores do Jornal do Commercio.`
+            ];
+            
+            let resumoHtml = '<div style="background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">';
+            resumoHtml += '<h4 style="color: #e74c3c; margin-bottom: 15px; font-size: 16px;">📋 Principais pontos:</h4>';
+            resumoHtml += '<ul class="resumo-pontos">';
+            
+            pontosChave.forEach(ponto => {
+                resumoHtml += `<li>${ponto}</li>`;
+            });
+            
+            resumoHtml += '</ul>';
+            resumoHtml += `<div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-left: 4px solid #e74c3c; border-radius: 0 8px 8px 0;">`;
+            resumoHtml += `<strong style="color: #e74c3c;">Resumo:</strong> `;
+            resumoHtml += `${artigo.descricao.length > 150 ? artigo.descricao.substring(0, 150) + '...' : artigo.descricao}`;
+            resumoHtml += `</div></div>`;
+            
+            return resumoHtml;
+        }
+        
+        // Adicionar evento ao botão quando o DOM carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            const resumirBtn = document.getElementById('resumir-btn');
+            if (resumirBtn) {
+                resumirBtn.addEventListener('click', resumirNoticia);
+            }
+        });
+        
         // Smooth scrolling para links internos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
