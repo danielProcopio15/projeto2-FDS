@@ -78,7 +78,7 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 ---
 ## 🔎 Issue e bugs tracker
   
-[Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
+[Issues/Bug tracker]([https://github.com/danielProcopio15/projeto2-FDS/issues](https://github.com/danielProcopio15/projeto2-FDS/issues?q=is%3Aissue%20state%3Aclosed%20no%3Alabel))
 
 ---
 ## 👥 Programação em pares
