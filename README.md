@@ -39,13 +39,7 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 ## 🏞️ Demonstração do projeto
 
-[Prototipagem](https://youtu.be/RADPIgk6zOA)
-
-[Funcionalidades](https://youtu.be/i32FYrB3Jho)
-
-[Teste estatísticas](https://www.youtube.com/watch?v=iVr5x6JALXE)
-
-[Teste Login/Registro](https://youtu.be/dO_FzFLGr6w)
+[Demonstração geral do projeto](https://youtu.be/hqstKe638x0)
 
 
 
