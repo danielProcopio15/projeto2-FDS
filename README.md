@@ -69,16 +69,14 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 
 ---
-## 🗺️ Diagrama de atividades.
-
-<img width="1759" height="944" alt="Captura de tela 2025-10-27 182107" src="https://github.com/user-attachments/assets/27c2639d-997c-4777-80ad-4afdede8efe0" />
+## 🗺️ Diagrama de atividades
 
 [Diagrama de atividades](https://miro.com/app/board/uXjVJzod_qU=/)
 
 ---
 ## 🔎 Issue e bugs tracker
   
-[Issues/Bug tracker]([https://github.com/danielProcopio15/projeto2-FDS/issues](https://github.com/danielProcopio15/projeto2-FDS/issues?q=is%3Aissue%20state%3Aclosed%20no%3Alabel))
+[Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
 ---
 ## 👥 Programação em pares
