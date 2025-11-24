@@ -51,7 +51,7 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 ---
 
-## 🧭 Tela inicial
+## 🔹 Tela inicial
 
 
 <img width="1919" height="1079" alt="Captura de tela 2025-11-24 172556" src="https://github.com/user-attachments/assets/89f668e0-d059-4085-a2af-1f75bd1cc7a5" />
@@ -59,7 +59,7 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 ---
 
-## 🕗 Clickup
+## 🔹 Clickup
 
 
 <img width="873" height="441" alt="Captura de tela 2025-10-27 185233" src="https://github.com/user-attachments/assets/659def33-2264-4219-b59a-42283288d738" />
@@ -85,7 +85,7 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 Durante o desenvolvimento do projeto, utilizamos a técnica de programação em pares, o que se provou essencial para a superação de desafios. Inicialmente, enfrentamos problemas de integração do CSS do layout original, sendo a Navbar o principal elemento em foco. No entanto, nossa colaboração também foi crucial para implementar as funcionalidades de Login e Cadastro. Ao trabalharmos juntos na lógica de autenticação e na interface de entrada de dados, conseguimos identificar e corrigir diversos erros estruturais e de segurança, resultando em um código mais limpo, robusto e com uma melhor experiência para o usuário.
 
-(COLOCAR LINK PARA REGISTRO)
+[Registro](https://github.com/danielProcopio15/projeto2-FDS/tree/main/novo_comm/core/static/core/css/images)
 
 ---
 
