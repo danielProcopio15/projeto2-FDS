@@ -47,6 +47,8 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 [Teste Login/Registro](https://youtu.be/dO_FzFLGr6w)
 
+[Teste geral do projeto](https://youtu.be/hqstKe638x0)
+
 
 
 ---
