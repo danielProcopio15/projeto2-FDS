@@ -64,7 +64,8 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 ## 🔹 Clickup
 
 
-<img width="873" height="441" alt="Captura de tela 2025-10-27 185233" src="https://github.com/user-attachments/assets/659def33-2264-4219-b59a-42283288d738" />
+<img width="1914" height="941" alt="Captura de tela 2025-11-24 191917" src="https://github.com/user-attachments/assets/43ed6e05-0ec8-4f2d-b17b-6bbb4559a956" />
+
 
 
 [Clickup](https://app.clickup.com/90132559199/v/l/6-901320778399-1)
