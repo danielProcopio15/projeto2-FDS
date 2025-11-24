@@ -54,14 +54,8 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 ## 🧭 Tela inicial
 
 
-<img width="1902" height="944" alt="Captura de tela 2025-10-27 181518" src="https://github.com/user-attachments/assets/e77e30b6-a8a1-403e-8d2a-31190c25b411" />
+<img width="1919" height="1079" alt="Captura de tela 2025-11-24 172556" src="https://github.com/user-attachments/assets/89f668e0-d059-4085-a2af-1f75bd1cc7a5" />
 
----
-
-## 🎇 Tela da principal funcionalidade
-
-
-<img width="957" height="909" alt="Captura de tela 2025-10-27 181845" src="https://github.com/user-attachments/assets/36f501f1-319d-4759-bb5e-6b3585303963" />
 
 ---
 
@@ -75,20 +69,14 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 
 ---
-## 🤖 Protótipo
-<img width="1029" height="849" alt="image" src="https://github.com/user-attachments/assets/b70ba025-572d-4615-842f-1d17aeda6574" />
-[Figma](https://www.figma.com/design/CxJtSRKwt8lbcdUXEXBcZ7/Untitled?node-id=0-1&p=f&t=OUVp60PCG4ATGZiN-0)
-
----
 ## 🗺️ Diagrama de atividades.
 
 <img width="1759" height="944" alt="Captura de tela 2025-10-27 182107" src="https://github.com/user-attachments/assets/27c2639d-997c-4777-80ad-4afdede8efe0" />
 
-[Miro](https://miro.com/app/board/uXjVJzod_qU=/)
+[Diagrama de atividades](https://miro.com/app/board/uXjVJzod_qU=/)
 
 ---
-## 🔎 Issue tracker
-### Migrations
+## 🔎 Issue e bugs tracker
   
 [Issues/Bug tracker](https://github.com/danielProcopio15/projeto2-FDS/issues)
 
@@ -97,11 +85,20 @@ O sistema oferece diversas funcionalidades focadas na personalização e engajam
 
 Durante o desenvolvimento do projeto, utilizamos a técnica de programação em pares, o que se provou essencial para a superação de desafios. Inicialmente, enfrentamos problemas de integração do CSS do layout original, sendo a Navbar o principal elemento em foco. No entanto, nossa colaboração também foi crucial para implementar as funcionalidades de Login e Cadastro. Ao trabalharmos juntos na lógica de autenticação e na interface de entrada de dados, conseguimos identificar e corrigir diversos erros estruturais e de segurança, resultando em um código mais limpo, robusto e com uma melhor experiência para o usuário.
 
-O projeto inteiro está fundamentado em programação em par, tendo em vista que em todas as sprints são designadas um par de contribuintes para executar tarefas que conpõem uma funcionalidade. 
-Além do exemplo acima, tivemos programação em pares para todas as entregas, desde um sistema de login simples, até algo mais complexo da relação e utilização de dados do usuário para confirmação de tokens, interações e estatísticas relativas ao mesmo.
+(COLOCAR LINK PARA REGISTRO)
 
+---
 
-<img width="1916" height="1028" alt="Captura de tela 2025-10-27 183255" src="https://github.com/user-attachments/assets/8ba74155-d87f-4ea5-a137-50de5785b0a5" /> 
+## 👨‍💻 Equipe
+
+- [Daniel Procópio](https://www.linkedin.com/in/daniel-cunha-347006237/) – Scrum Master | Desenvolvimento Backend (Django/Python) | Banco de Dados | Figma |
+- [Pedro Castro](https://www.linkedin.com/in/pedro-castro-94795a277/) – Product Owner | Desenvolvimento Frontend | Figma | UX/UI | https://www.linkedin.com/in/pedro-castro-94795a277/
+- [Rafael Procópio](https://www.linkedin.com/in/rafael-proc%C3%B3pio-75360a269/) – Desenvolvimento Frontend & Backend | Banco de dados | Figma |
+- **Pedro Pinzón** – Desenvolvimento Backend | Banco de Dados |
+- [Bernardo Santos](https://www.linkedin.com/in/bernardo-santos-0b6761342/) – Desenvolvimento Backend | Banco de Dados |
+- [Lucas Rocha](https://www.linkedin.com/in/lucas-rocha-052a37364/)– Desenvolvimento Frontend & Backend | Design |
+- [Mateus José](https://www.linkedin.com/in/mateus-jos%C3%A9-48b4a6348/) – Desenvolvimento Backend | Banco de Dados |
+- **Thiago Gabriel Tahim** - Desenvolvimento Frontend & Backend | Banco de dados |
 
 
 ---
@@ -149,22 +146,5 @@ python manage.py runserver
 ```
 
 ---
-## 👨‍💻 Equipe
 
-- [Daniel Procópio](https://www.linkedin.com/in/daniel-cunha-347006237/) – Scrum Master | Desenvolvimento Backend (Django/Python) | Banco de Dados | Figma |
-- [Pedro Castro](https://www.linkedin.com/in/pedro-castro-94795a277/) – Product Owner | Desenvolvimento Frontend | Figma | UX/UI | https://www.linkedin.com/in/pedro-castro-94795a277/
-- [Rafael Procópio](https://www.linkedin.com/in/rafael-proc%C3%B3pio-75360a269/) – Desenvolvimento Frontend & Backend | Banco de dados | Figma |
-- **Pedro Pinzón** – Desenvolvimento Backend | Banco de Dados |
-- [Bernardo Santos](https://www.linkedin.com/in/bernardo-santos-0b6761342/) – Desenvolvimento Backend | Banco de Dados |
-- [Lucas Rocha](https://www.linkedin.com/in/lucas-rocha-052a37364/)– Desenvolvimento Frontend & Backend | Design |
-- [Mateus José](https://www.linkedin.com/in/mateus-jos%C3%A9-48b4a6348/) – Desenvolvimento Backend | Banco de Dados |
-- **Thiago Gabriel Tahim** - Desenvolvimento Frontend & Backend | Banco de dados |
-
----
-
-## Contribuição
-
-Pull requests são bem-vindos. Para mudanças maiores, abra primeiro uma *issue* para discussão.  
-
-Certifique-se de atualizar os testes antes de enviar PR.  
 
