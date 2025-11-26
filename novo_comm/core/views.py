@@ -24,18 +24,20 @@ def home(request):
         for cat in categories
     }
 
-    # Sistema de recomendação para usuários logados E não logados
-    from .recommendation import get_user_recommendation
+    # Sistema de recomendação avançado para todas as posições
+    from .recommendation import get_user_recommendation, get_recommended_articles
     articles = []
 
     if request.user.is_authenticated:
         # Usuário logado - usar dados do banco
         recommended_category = get_user_recommendation(request.user, is_authenticated=True)
+        recommended_articles = get_recommended_articles(request.user, is_authenticated=True, limit=4)
     else:
         # Usuário não logado - usar dados da sessão
         recommended_category = get_user_recommendation(request.session, is_authenticated=False)
+        recommended_articles = get_recommended_articles(request.session, is_authenticated=False, limit=4)
     
-    # Busca artigo da categoria recomendada
+    # 1ª posição: Artigo "Para Você" (maior recomendação)
     destaque = Article.objects.filter(category=recommended_category).order_by('-created_at').first()
     if destaque and recommended_category in articles_by_category:
         articles.append(destaque)
@@ -55,14 +57,36 @@ def home(request):
                     if a.id != latest_fallback.id
                 ]
 
-    # Preenche os slots restantes com artigos das outras categorias
-    for category in categories:
+    # 2ª-4ª posições: Sistema de recomendação decrescente
+    used_article_ids = {articles[0].id} if articles else set()
+    
+    for recommended_article in recommended_articles:
         if len(articles) >= 4:
             break
-        category_articles = articles_by_category[category]
-        if category_articles:
-            articles.append(category_articles[0])
-            articles_by_category[category] = category_articles[1:]
+        
+        # Evita duplicatas
+        if recommended_article.id not in used_article_ids:
+            articles.append(recommended_article)
+            used_article_ids.add(recommended_article.id)
+            
+            # Remove o artigo da lista da categoria para evitar duplicação
+            if recommended_article.category in articles_by_category:
+                articles_by_category[recommended_article.category] = [
+                    a for a in articles_by_category[recommended_article.category]
+                    if a.id != recommended_article.id
+                ]
+
+    # Fallback: preenche com artigos recentes se não tiver recomendações suficientes
+    if len(articles) < 4:
+        for category in categories:
+            if len(articles) >= 4:
+                break
+            category_articles = articles_by_category[category]
+            for article in category_articles:
+                if article.id not in used_article_ids:
+                    articles.append(article)
+                    used_article_ids.add(article.id)
+                    break
 
     return render(request, 'core/home.html', {'articles': articles})
 

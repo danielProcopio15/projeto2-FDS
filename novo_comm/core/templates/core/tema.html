@@ -315,7 +315,7 @@
                     <section class="articles-grid">
                         {% for a in articles %}
                             <a href="{% url 'artigo' pk=a.id %}" class="article-card">
-                                <img src="{% static a.image %}" alt="{{ a.title }}" class="article-image" onerror="this.src='{% static 'core/css/images/placeholder.jpg' %}'">
+                                <img src="{% static a.get_smart_image %}" alt="{{ a.get_image_alt_text }}" class="article-image" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}'">
                                 <div class="article-content">
                                     <h2 class="article-title">{{ a.title }}</h2>
                                     <p class="article-excerpt">{{ a.description|truncatewords:20 }}</p>

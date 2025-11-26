@@ -65,3 +65,64 @@ class Article(models.Model):
 			).exclude(id=self.id).order_by('created_at').first()
 			
 		return next_articles
+	
+	def get_smart_image(self):
+		"""
+		Retorna uma imagem inteligentemente selecionada baseada no conteúdo
+		"""
+		from .image_selector import ImageSelector
+		
+		if not self.image:
+			return ImageSelector.select_image(self.title, self.category, self.description)
+		return self.image
+	
+	def get_image_url(self):
+		"""
+		Retorna a URL completa da imagem (internet ou static)
+		"""
+		image_path = self.get_smart_image()
+		# Se começa com http, é uma URL da internet
+		if image_path.startswith('http'):
+			return image_path
+		# Se não, é um caminho estático
+		from django.templatetags.static import static
+		return static(image_path)
+	
+	def get_secondary_image_url(self):
+		"""
+		Retorna URL da imagem padronizada para notícias secundárias (305x171)
+		"""
+		from .image_selector import ImageSelector
+		image_url = self.get_image_url()
+		return ImageSelector.get_standardized_image_url(image_url, 305, 171)
+	
+	def get_category_icon(self):
+		"""
+		Retorna emoji/ícone da categoria
+		"""
+		from .image_selector import ImageSelector
+		return ImageSelector.get_category_icon(self.category)
+	
+	def get_trending_emoji(self):
+		"""
+		Retorna emoji trending baseado no título
+		"""
+		from .image_selector import ImageSelector
+		return ImageSelector.get_trending_emoji(self.title)
+	
+	def get_image_alt_text(self):
+		"""
+		Gera texto alternativo inteligente para a imagem
+		"""
+		from .image_selector import ImageSelector
+		return ImageSelector.generate_alt_text(self.title, self.category)
+	
+	def save(self, *args, **kwargs):
+		"""
+		Override save para auto-selecionar imagem se não especificada
+		"""
+		if not self.image:
+			from .image_selector import ImageSelector
+			self.image = ImageSelector.select_image(self.title, self.category, self.description)
+		
+		super().save(*args, **kwargs)

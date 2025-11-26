@@ -15,7 +15,7 @@
     <meta rel="title-matia" property="og:title" content="{{ article.title }}">
     <meta property="og:description" content="{{ article.description|truncatewords:30 }}">
     <meta property="og:url" content="{% url 'artigo' pk=article.id %}">
-    <meta property="og:image" content="{% static article.image %}">
+    <meta property="og:image" content="{% static article.get_smart_image %}">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:type" content="article">
     <meta property="article:author" content="Jornal do Commercio">
@@ -56,7 +56,7 @@
         },
         "datePublished": "{{ article.created_at|date:'c' }}",
         "url": "{% url 'artigo' pk=article.id %}",
-        "image": "{% static article.image %}",
+        "image": "{% static article.get_smart_image %}",
         "articleSection": "{{ article.category }}"
     }
     </script>
@@ -599,8 +599,10 @@
 
                 <!-- Article Header -->
                 <div class="artigo-header">
-                    <div class="artigo-category">{{ article.category }}</div>
-                    <h1 class="artigo-title">{{ article.title }}</h1>
+                    <div class="artigo-category">{{ article.get_category_icon }} {{ article.category }}</div>
+                    <h1 class="artigo-title">
+                        {{ article.get_trending_emoji }} {{ article.title }}
+                    </h1>
                     
                     <!-- Botão de Resumir Notícia -->
                     <div class="resumir-container">
@@ -620,7 +622,10 @@
                 </div>
 
                 <!-- Article Image -->
-                <img src="{% static article.image %}" alt="{{ article.title }}" class="artigo-image" onerror="this.style.display='none'">
+                <img src="{% static article.get_smart_image %}" 
+                     alt="{{ article.get_image_alt_text }}" 
+                     class="artigo-image" 
+                     onerror="this.src='{% static 'core/css/images/jc-logo.png' %}'; this.alt='Logo Jornal do Commercio';">
 
                 <!-- Área do Resumo (inicialmente oculta) -->
                 <div id="resumo-area" class="resumo-area">
@@ -647,9 +652,14 @@
                     {% if next_article %}
                     <div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 20px; border-radius: 10px; margin: 30px 0; text-align: center;">
                         <h4 style="margin: 0 0 15px 0; font-size: 1.1em;">Leia também</h4>
-                        <a href="{% url 'artigo' pk=next_article.id %}" style="background: white; color: #3498db; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-                            📖 Próxima Notícia: {{ next_article.title|truncatewords:6 }}
-                        </a>
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            <div style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 3px solid white; flex-shrink: 0;">
+                                <img src="{{ next_article.get_image_url }}" alt="{{ next_article.get_image_alt_text }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}';">
+                            </div>
+                            <a href="{% url 'artigo' pk=next_article.id %}" style="background: white; color: #3498db; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                                {{ next_article.get_category_icon }} {{ next_article.title|truncatewords:6 }}
+                            </a>
+                        </div>
                     </div>
                     {% endif %}
                 </div>
@@ -662,13 +672,13 @@
                     </div>
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                         {% if next_article %}
-                            <a href="{% url 'artigo' pk=next_article.id %}" class="nav-button">
-                                <span class="icon">→</span>
+                            <a href="{% url 'artigo' pk=next_article.id %}" class="nav-button" title="{{ next_article.title }}">
+                                <span class="icon">{{ next_article.get_category_icon }}</span>
                                 <span>Próxima</span>
                             </a>
                         {% endif %}
                         <a href="{% url 'tema' slug=article.get_normalized_slug %}" class="nav-button">
-                            <span class="icon">📑</span>
+                            <span class="icon">{{ article.get_category_icon }}</span>
                             <span>Ver Todas</span>
                         </a>
                         <a href="{% url 'home' %}" class="nav-button">
@@ -693,8 +703,8 @@
                     <div class="next-article-section">
                         <h3 class="next-article-title">Continue lendo - Próximo artigo</h3>
                         <a href="{% url 'artigo' pk=next_article.id %}" class="next-article-card">
-                            <img src="{% static next_article.image %}" alt="{{ next_article.title }}" class="next-article-image" onerror="this.style.display='none'">
-                            <div class="next-article-label">🚀 Próximo artigo em {{ next_article.category }}</div>
+                            <img src="{{ next_article.get_image_url }}" alt="{{ next_article.get_image_alt_text }}" class="next-article-image" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}';">
+                            <div class="next-article-label">🚀 Próximo artigo em {{ next_article.get_category_icon }} {{ next_article.category }}</div>
                             <div class="next-article-name">{{ next_article.title }}</div>
                             <div style="margin-top: 15px; background: #3498db; color: white; padding: 10px 20px; border-radius: 25px; display: inline-block; font-size: 0.9em; font-weight: bold;">
                                 Continuar Lendo →
@@ -730,7 +740,7 @@
     <!-- Botão Flutuante de Próxima Notícia -->
     {% if next_article %}
     <a href="{% url 'artigo' pk=next_article.id %}" class="floating-next-button" title="{{ next_article.title }}">
-        <img src="{% if next_article.image %}{% static 'core/css/images/' %}{{ next_article.image }}{% else %}{% static 'core/css/images/placeholder.svg' %}{% endif %}" alt="{{ next_article.title }}" class="button-image" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}';" />">
+        <img src="{{ next_article.get_image_url }}" alt="{{ next_article.get_image_alt_text }}" class="button-image" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}';"/>
         <div class="button-content">
             <div class="button-label">Próxima notícia</div>
             <div class="button-title">{{ next_article.title|truncatewords:5 }}</div>
