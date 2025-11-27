@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 import re 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout 
-from .models import ThemeAccess, Article
+from .models import ThemeAccess, Article, ArticleFeedback
 from django.urls import reverse
 from urllib.parse import urlparse
 
@@ -227,9 +227,31 @@ def artigo(request, pk):
         is_authenticated=request.user.is_authenticated
     )
     
+    # Obter estatísticas de feedback
+    feedback_stats = art.get_feedback_stats()
+    
+    # Verificar se usuário já deu feedback
+    user_feedback = None
+    if request.user.is_authenticated:
+        user_feedback = ArticleFeedback.objects.filter(
+            article=art, 
+            user=request.user
+        ).first()
+    else:
+        session_id = request.session.session_key
+        if session_id:
+            user_feedback = ArticleFeedback.objects.filter(
+                article=art, 
+                session_id=session_id
+            ).first()
+    
     return render(request, 'core/artigo.html', {
         'article': art,
-        'next_article': next_article
+        'next_article': next_article,
+        'feedback_stats': feedback_stats,
+        'user_feedback': user_feedback,
+        'likes_count': feedback_stats['likes'],
+        'dislikes_count': feedback_stats['dislikes']
     })
 
 def login(request):
@@ -302,3 +324,151 @@ def pre_lancamento(request):
     Página de pré-lançamento com HTML específico
     """
     return render(request, 'core/pre_lancamento.html')
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+import json
+from .models import ArticleFeedback
+
+@csrf_exempt
+@require_POST
+def article_feedback(request):
+    """
+    API endpoint para receber feedback (like/dislike) dos artigos
+    Usado pelo sistema de recomendação
+    """
+    try:
+        data = json.loads(request.body)
+        article_id = data.get('article_id')
+        feedback_type = data.get('feedback_type')
+        
+        # Validações
+        if not article_id or feedback_type not in ['like', 'dislike']:
+            return JsonResponse({'error': 'Dados inválidos'}, status=400)
+        
+        # Buscar o artigo
+        article = get_object_or_404(Article, id=article_id)
+        
+        # Determinar user ou session
+        user = request.user if request.user.is_authenticated else None
+        session_id = request.session.session_key if not user else None
+        
+        # Se não há session_key, criar uma
+        if not session_id and not user:
+            request.session.create()
+            session_id = request.session.session_key
+        
+        # Verificar se já existe feedback
+        feedback_filter = {'article': article}
+        if user:
+            feedback_filter['user'] = user
+        else:
+            feedback_filter['session_id'] = session_id
+            
+        existing_feedback = ArticleFeedback.objects.filter(**feedback_filter).first()
+        
+        if existing_feedback:
+            # Se o feedback já existe, permitir alternância
+            if existing_feedback.feedback_type != feedback_type:
+                # Atualizar feedback existente
+                existing_feedback.feedback_type = feedback_type
+                existing_feedback.save()
+                
+                # Atualizar dados de recomendação na sessão (para usuários não logados)
+                if not user:
+                    update_session_preferences(request.session, article, feedback_type)
+                
+                # Obter estatísticas atualizadas
+                stats = article.get_feedback_stats()
+                
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Feedback atualizado com sucesso',
+                    'feedback_id': existing_feedback.id,
+                    'stats': stats,
+                    'previous_feedback': existing_feedback.feedback_type,
+                    'updated': True,
+                    'recommendation_score': article.get_recommendation_score(user)
+                })
+            else:
+                # Se for o mesmo tipo, remover o feedback (toggle off)
+                existing_feedback.delete()
+                
+                # Obter estatísticas atualizadas
+                stats = article.get_feedback_stats()
+                
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Feedback removido com sucesso',
+                    'stats': stats,
+                    'removed': True,
+                    'recommendation_score': article.get_recommendation_score(user)
+                })
+        
+        # Criar novo feedback
+        feedback = ArticleFeedback.objects.create(
+            article=article,
+            user=user,
+            session_id=session_id,
+            feedback_type=feedback_type,
+            ip_address=get_client_ip(request),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')[:500]
+        )
+        
+        # Atualizar dados de recomendação na sessão (para usuários não logados)
+        if not user:
+            update_session_preferences(request.session, article, feedback_type)
+        
+        # Obter estatísticas atualizadas
+        stats = article.get_feedback_stats()
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Feedback registrado com sucesso',
+            'feedback_id': feedback.id,
+            'stats': stats,
+            'recommendation_score': article.get_recommendation_score(user)
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'JSON inválido'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': 'Erro interno do servidor'}, status=500)
+
+
+def get_client_ip(request):
+    """
+    Obtém o IP real do cliente considerando proxies
+    """
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+def update_session_preferences(session, article, feedback_type):
+    """
+    Atualiza preferências do usuário na sessão para algoritmo de recomendação
+    """
+    if 'user_preferences' not in session:
+        session['user_preferences'] = {
+            'liked_categories': {},
+            'disliked_categories': {},
+            'total_interactions': 0
+        }
+    
+    prefs = session['user_preferences']
+    category = article.category
+    
+    if feedback_type == 'like':
+        prefs['liked_categories'][category] = prefs['liked_categories'].get(category, 0) + 1
+    else:
+        prefs['disliked_categories'][category] = prefs['disliked_categories'].get(category, 0) + 1
+    
+    prefs['total_interactions'] += 1
+    session['user_preferences'] = prefs
+    session.modified = True

@@ -29,10 +29,31 @@
     <meta name="referrer" content="always">
 
     <title>{{ article.title }} - Jornal do Commercio</title>
-
-    <!-- CSS do template JC -->
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    
+    <!-- CSS Principal -->
     <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/jc.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'core/css/images/jc-logo.png' %}">
+    
+    <!-- Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/fonts/font-face.css">
+    
+    <!-- CSS do JC Original -->
+    <link rel="stylesheet" href="https://jc.uol.com.br/css/jc.min.css">
+    
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://imagens.ne10.uol.com.br">
+    <link rel="preconnect" href="https://cdn.privacytools.com.br">
+    <link rel="dns-prefetch" href="//stc.uol.com">
+    
+    <!-- Barra UOL Fonts -->
+    <link type="font/woff2" rel="preload" as="font" href="https://stc.uol.com/c/webfont/projeto-grafico/v2/icones-setas/uol-icones-setas.woff?2017" crossorigin="">
+    <link type="font/woff2" rel="preload" as="font" href="https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-regular.woff2?v5" crossorigin="">
+    
+    <meta name="theme-color" content="#da291c">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -60,6 +81,9 @@
         "articleSection": "{{ article.category }}"
     }
     </script>
+
+    <!-- CSS da Barra UOL -->
+    <style type="text/css" rel="preload" id="css-barrauol">@font-face{src:url(https://stc.uol.com/c/webfont/projeto-grafico/v2/icones-setas/uol-icones-setas.woff?2017) format("woff"),url(https://stc.uol.com/c/webfont/projeto-grafico/v2/icones-setas/uol-icones-setas.ttf?2017#iefix) format("embedded-opentype"), url(https://stc.uol.com/c/webfont/projeto-grafico/v2/icones-setas/uol-icones-setas.svg?2017#uol-icones-e-setas) format("svg");font-family:UOLIcons;font-weight:400;font-display:swap;font-style:normal;}@font-face{src:url(https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-regular.woff2?v5) format("woff2"), local("?"), url(https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-regular.ttf?#iefix) format("embedded-opentype"), url(https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-regular.svg?v5#uol-text-regular) format("svg");font-family:UOLText;font-weight:400;font-display:swap;font-style:normal;}#barrauol{background-color:#262626;color:#FFF;font:14px UOLText,sans-serif,Helvetica,Arial;margin:0;padding:0;position:relative;text-align:center;width:100%;z-index:9;}#barrauol .containerUOL{display:flex;flex-direction:row;flex-wrap:nowrap;margin:0 auto;height:44px;max-height:44px;width:1170px;}#barrauol .menu-products{flex-grow:2;}#barrauol .logotipo{margin:auto 30px auto 8px;}#barrauol .fs-15{font-size:15px;}#barrauol a{text-decoration:none;}#barrauol a,#barrauol a:focus,#barrauol a:hover,#barrauol a:visited{color:#FFF;}#barrauol a,#barrauol nav li{transition:all .1s linear;}#barrauol ul,#barrauol li{list-style:none;margin:0;padding:0;}#barrauol nav{background:#262626;height:44px;position:relative;width:auto;}#barrauol nav a{display:flex;font:13px UOLText, sans-serif, Helvetica, Arial;height:44px;line-height:44px;padding:0 8px;vertical-align:middle;letter-spacing:normal;text-transform:uppercase;}#barrauol nav i{display:block;font-style:normal;margin:auto 4px auto 0;}#barrauol nav a:before{display:none;}#barrauol nav li{float:left;height:44px;background:transparent;border:0;}#barrauol nav li.first a{padding-left:15px;}#barrauol nav li.last a{padding-right:15px;}#barrauol nav li:hover{background-color:#404040;}#barrauol .uolicons{font-family:UOLIcons;color:#fff;}#barrauol i.icon-Busca_Outline:before{content:"\e905";font-size:24px;}#barrauol i.icon-Email_Outline:before{content:"\e906";font-size:24px;}#barrauol i.icon-Batepapo_Outline:before{content:"\e904";font-size:24px;}#barrauol i.icon-email{font-size:24px;width:25px;}#barrauol i:before{font-family:UOLIcons;margin:-3px 5px 0 0;opacity:1;}#barrauol i.icon-email:before{content:"\e626";font-size:26px;width:24px;}#barrauol i.icon-batepapo{font-size:26px;margin-top:1px;width:27px;}#barrauol i.icon-batepapo:before{content:"\e654";font-size:26px;width:30px;}#barrauol i.icon-search{font-size:20px;margin-top:-4px;width:25px;}#barrauol i.icon-search:before{content:"\e619";font-size:22px;width:20px;}#barrauol .logouol{display:block;}#barrauol .logouol:hover{opacity:.9;}#barrauol .logouol span{padding-left:30px;}#barrauol .logouol img{border:none;width:68px;}@media (max-width:1024px){#barrauol nav a{font-family:UOLText;font-size:13px;}#barrauol .containerUOL{width:940px;}}@media (min-width:894px) and (max-width:1023px){#barrauol .containerUOL .menu-products .uol-play{display:none;}}@media (min-width:769px) and (max-width:893px){#barrauol .containerUOL .menu-products .uol-play,#barrauol .containerUOL .menu-products .pagseguro{display:none;}}@media (max-width:768px){#barrauol nav{display:none;}#barrauol .containerUOL{justify-content:center;align-items:center;height:44px;width:100%;}#barrauol .logotipo{margin:0;}}#barrauol.barrafolha,#barrauol.barrafolha .containerUOL,#barrauol.barrafolha .containerUOL .logotipo,#barrauol.barrafolha .containerUOL nav{height:36px;max-height:36px;}#barrauol.barrafolha .containerUOL .logotipo,#barrauol.barrafolha .containerUOL .logotipo .logouol{display:flex;}#barrauol.barrafolha .containerUOL .logotipo .logouol{display:inherit;align-items:center;}#barrauol.barrafolha .containerUOL .logotipo .logouol img{height:unset;}#barrauol.barrafolha .logouol,#barrauol.barrafolha a{line-height:36px;-webkit-font-smoothing:initial;}#barrauol.barrafolha .menu-products li.assine_sac,#barrauol.barrafolha .menu-services li.item-busca{display:none;}</style>
 
     <style>
         .artigo-container {
@@ -148,6 +172,233 @@
         
         .resumir-loading {
             display: none;
+        }
+        
+        /* Estilos dos botões de feedback */
+        .feedback-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .feedback-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 20px;
+        }
+        
+        .feedback-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .feedback-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .feedback-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .feedback-btn.like {
+            color: #28a745;
+        }
+        
+        .feedback-btn.like:hover {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border-color: #28a745;
+        }
+        
+        .feedback-btn.like.active {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border-color: #28a745;
+        }
+        
+        .feedback-btn.dislike {
+            color: #dc3545;
+        }
+        
+        .feedback-btn.dislike:hover {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #dc3545;
+            border-color: #dc3545;
+            box-shadow: inset 0 0 0 3px #dc3545;
+        }
+        
+        .feedback-btn.dislike.active {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #dc3545;
+            border-color: #dc3545;
+            box-shadow: inset 0 0 0 3px #dc3545;
+        }
+        
+        .feedback-icon {
+            font-size: 1.3em;
+        }
+        
+        .feedback-count {
+            font-size: 0.9em;
+            margin-left: 5px;
+            opacity: 0.8;
+        }
+        
+        .feedback-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            display: none;
+        }
+        
+        .feedback-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        @media (max-width: 768px) {
+            .feedback-buttons {
+                flex-direction: row;
+                gap: 15px;
+            }
+            
+            .feedback-btn {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+        }
+
+        /* Botões de Feedback Fixos no Lado Esquerdo */
+        .floating-feedback-container {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .floating-feedback-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 50px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            color: #6c757d;
+            font-size: 1.5em;
+        }
+
+        .floating-feedback-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+        }
+
+        .floating-feedback-btn.like {
+            color: #28a745;
+        }
+
+        .floating-feedback-btn.like:hover,
+        .floating-feedback-btn.like.active {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border-color: #28a745;
+        }
+
+        .floating-feedback-btn.dislike {
+            color: #dc3545;
+        }
+
+        .floating-feedback-btn.dislike:hover,
+        .floating-feedback-btn.dislike.active {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #dc3545;
+            border-color: #dc3545;
+            box-shadow: inset 0 0 0 3px #dc3545;
+        }
+
+        .floating-feedback-btn.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .floating-feedback-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 1024px) {
+            .floating-feedback-container {
+                left: 15px;
+            }
+            
+            .floating-feedback-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-feedback-container {
+                left: 10px;
+                top: auto;
+                bottom: 120px;
+                transform: none;
+                flex-direction: row;
+                gap: 10px;
+            }
+            
+            .floating-feedback-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2em;
+            }
         }
         
         /* Área do resumo gerado */
@@ -366,7 +617,7 @@
             right: 30px;
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
-            padding: 15px 20px;
+            padding: 10px 15px;
             border-radius: 15px;
             text-decoration: none;
             font-weight: bold;
@@ -389,9 +640,9 @@
         }
         
         .floating-next-button .button-image {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            border-radius: 6px;
             object-fit: cover;
             border: 2px solid white;
             flex-shrink: 0;
@@ -514,14 +765,14 @@
             .floating-next-button {
                 top: 80px;
                 right: 15px;
-                padding: 12px 15px;
+                padding: 8px 12px;
                 max-width: 220px;
                 font-size: 0.85em;
             }
             
             .floating-next-button .button-image {
-                width: 35px;
-                height: 35px;
+                width: 50px;
+                height: 50px;
             }
             
             .floating-next-button .button-title {
@@ -534,54 +785,267 @@
             }
         }
     </style>
+    
+    <!-- Scripts do Google Ads e UOL -->
+    <script async="" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script>
+        window.googletag=window.googletag||{},window.googletag.cmd=window.googletag.cmd||[];
+        window.pushAds = window.pushAds || [];
+    </script>
 </head>
 
-<body id="jc-new">
-    <!-- Header similar ao template JC -->
-    <header id="header" class="header-jc">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-4 col-md-4">
-                    <a href="#" class="edition">
-                        <img src="{% static 'core/css/images/edicao.png' %}" alt="Edição do dia" onerror="this.style.display='none'">
-                        <h5>Edição do dia</h5>
-                    </a>
-                </div>
-                
-                <div class="col-xs-4 col-md-4">
-                    <a href="{% url 'home' %}" class="logo">
-                        <figure>
-                            <img src="{% static 'core/css/images/jc-logo.png' %}" alt="Página inicial do Jornal do Commercio">
-                        </figure>
-                    </a>    
-                </div>
-                
-                <div class="col-xs-4 col-md-4">
-                    <div class="options">
-                        <a href="#" class="toggle-menu">
-                            <img src="{% static 'core/css/images/menu.svg' %}" alt="menu" onerror="this.style.display='none'">
+<body id="jc" class="with-player"><div id="barrauol" class="barrauol"><div class="containerUOL"> <div class="logotipo"> <a class="logouol" href="https://www.uol.com.br/" onclick="javascript:audCountClick('home')"><img src="https://conteudo.imguol.com.br/c/_layout/v3/logoUOL2021/logo_completo_white.svg" width="68" height="24" alt="UOL - O melhor conteúdo" title="UOL - O melhor conteúdo"></a> </div> <nav class="menu-products"> <ul> <li><a class="ingresso-com" href="https://www.ingresso.com/?utm_source=uol-parceiros&amp;utm_medium=barrauol&amp;utm_campaign=linkfixo_barrauol&amp;utm_content=barrauol-link-ingressocom&amp;utm_term=barrauol-ingressocom" onclick="javascript:audCountClick('ingresso')">INGRESSO.COM</a></li> <li><a class="uol-host" href="https://uolhost.uol.com.br/?utm_source=midia-interna&amp;utm_medium=barra_uol&amp;utm_campaign=link_fixo_host&amp;utm_content=parceiro" onclick="javascript:audCountClick('host')">UOL HOST</a></li> <li><a class="pagbank" href="https://pagbank.onelink.me/Dzpm?pid=midia-interna&amp;c=26052023_uol_linkfixo&amp;af_channel=uol&amp;af_adset=parceiros&amp;af_dp=psmyaccount%3A%2F%2Fhome&amp;utm_source=appsflyer-midia-interna&amp;utm_medium=uol&amp;utm_campaign=26052023_uol_linkfixo&amp;utm_content=parceiros&amp;af_web_dp=https%3A%2F%2Fpagseguro.com.br&amp;af_force_deeplink=true" onclick="javascript:audCountClick('pagbank')">PAGBANK</a></li> <li><a class="cursos" href="https://www.portaleducacao.com.br/cursos?utm_source=uol&amp;utm_medium=header-menu&amp;utm_campaign=cursos" onclick="javascript:audCountClick('cursos')">CURSOS</a></li> <li><a class="uol-play" href="https://play.uol.com.br/?utm_source=jc.uol.com.br&amp;utm_medium=barrauol&amp;utm_campaign=linkfixo_barrauol&amp;utm_term=barrauol-uolplay&amp;utm_content=barrauol" onclick="javascript:audCountClick('uolplay')">UOL PLAY</a></li> <li><a class="uol-ads" href="https://ads.uol.com.br/?utm_source=midia-interna&amp;utm_medium=barra_uol&amp;utm_campaign=link_fixo_ads_uol&amp;utm_content=parceiro" onclick="javascript:audCountClick('pagseguro')">UOL ADS</a></li> </ul> </nav> <nav class="menu-services"> <ul> <li class="item-busca"><a href="https://busca.uol.com.br/" onclick="javascript:audCountClick('busca')"><i class="uolicons icon-Busca_Outline"></i>BUSCA</a></li> <li class="item-batepapo"><a href="https://batepapo.uol.com.br/" onclick="javascript:audCountClick('batepapo')"><i class="uolicons icon-Batepapo_Outline"></i>BATE-PAPO</a></li> <li><a href="https://email.uol.com.br/" onclick="javascript:audCountClick('email')"><i class="uolicons icon-Email_Outline"></i>EMAIL</a></li> </ul> </nav> </div> </div>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8GNLB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <!--------------------------------------------------------------
+        # Header
+        -------------------------------------------------------------->
+        <div id="header-top-container">
+    <div id="wrapper-header-searchbar">
+        <header id="header">
+            <div class="container">
+                <div class="header-grid">
+                    <div class="header-left">
+                        <div class="user-menu">
+                            {% if user.is_authenticated %}
+                                <div class="user-info">
+                                    <a href="#" class="user-icon">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                    <span class="username">{{ user.username }}</span>
+                                    <a href="{% url 'logout' %}" class="logout-link">Sair</a>
+                                </div>
+                            {% else %}
+                                <div class="user-actions">
+                                    <a href="#" class="user-icon">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                    <div class="user-dropdown">
+                                        <a href="{% url 'login' %}" class="login-link">Login</a>
+                                        <a href="{% url 'cadastro' %}" class="register-link">Cadastro</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <a href="https://impresso.jc.uol.com.br/index.php?id=/banca.php&amp;utm_source=site_jc&amp;utm_medium=imagem_capa&amp;utm_campaign=chama_flip" class="edition">
+                            <img width="106" height="91" src="{% static 'core/css/images/jc-logo.png' %}" alt="Leia aqui a edição de hoje" style="max-width: 106px; max-height: 91px; object-fit: contain;">
+                            <h5>Edição do dia</h5>
                         </a>
-                        <a href="#" class="toggle-search">
-                            <img src="{% static 'core/css/images/busca.svg' %}" alt="busca" onerror="this.style.display='none'">
+                    </div>
+                    <div class="header-center">
+                        <a href="/" class="logo">
+                            <figure>
+                                <img width="160" height="80" src="{% static 'core/css/images/jc-logo.png' %}" alt="JC" title="JC - Jornal do Commercio">
+                                <figcaption>Jornal do Commercio</figcaption>
+                            </figure>
                         </a>
+                    </div>
+                    <div class="header-right">
+                        <div class="options">
+                            <a href="/publicidade-legal" class="btn btn-primary btn-publicidade-legal">
+                                <i class="fas fa-ad"></i>
+                                <span>Publicidade legal</span>
+                            </a>
+                            <a href="#" class="btn-icon toggle-menu-sidebar-menu-jc">
+                                <i class="fas fa-bars"></i>
+                            </a>
+                            <a href="#" class="btn-icon toggle-search">
+                                <i class="fas fa-search"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
+    
+        <div class="searchbar">
+        <form action="/search" class="search-form">
+            <input type="text" name="q" placeholder="O que você procura?" value="" required class="search-input">
+            <button type="submit" class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+        <button class="close-search">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    </div>
+</div>
 
-    <!-- Navegação das categorias -->
-    <nav style="background: #34495e; padding: 15px 0;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <ul style="display: flex; justify-content: center; flex-wrap: wrap; list-style: none; margin: 0; padding: 0;">
-                <li style="margin: 0 15px;"><a href="{% url 'esportes' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Esportes</a></li>
-                <li style="margin: 0 15px;"><a href="{% url 'cultura' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Cultura</a></li>
-                <li style="margin: 0 15px;"><a href="{% url 'economia' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Economia</a></li>
-                <li style="margin: 0 15px;"><a href="{% url 'ciencia' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">Ciência</a></li>
-                <li style="margin: 0 15px;"><a href="{% url 'jc360' %}" style="color: white; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 5px; transition: background 0.3s;">JC360</a></li>
+<div id="sidebar-menu-jc" class="sidebar-menu">
+    <div class="sidebar-header">
+        <button class="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="search-sidebar">
+        <form action="/search" class="search-form">
+            <input type="text" name="q" placeholder="Pesquisar no site..." value="" required class="search-input">
+            <button type="submit" class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+    <div class="side-scroll scroll-JC">
+        <div class="lives">
+            <button>AO VIVO</button>
+            <ul>
+                <li><a href="https://jc.uol.com.br/radio-jornal/ao-vivo">Rádio Jornal (RECIFE)</a></li>
+                <li><a href="https://interior.ne10.uol.com.br/radio-jornal/caruaru">Rádio Jornal (INTERIOR)</a></li>
+                <li><a href="https://tvjornal.com.br/ao-vivo">TV Jornal (RECIFE)</a></li>
+                <li><a href="https://interior.ne10.uol.com.br/tv-jornal/ao-vivo">TV Jornal (INTERIOR)</a></li>
             </ul>
         </div>
-    </nav>
+                <nav>
+            <ul>
+                                                                                        <li>
+                                <a href="https://digital.jc.uol.com.br/">JORNAL DIGITAL</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/ultimas">Últimas</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/colunas">Colunas</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/pernambuco">Pernambuco</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/colunas/seguranca">Segurança</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/colunas/saude-e-bem-estar">Saúde e Bem-Estar</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/colunas/enem-e-educacao">Enem e Educação</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/colunas/mobilidade">Mobilidade</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/politica">Política</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/economia">Economia</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/cultura">Cultura</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://jc.uol.com.br/mundo/">Mundo</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://tvjornal.com.br/">TV Jornal</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://radiojornal.com.br/">Rádio Jornal</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://interior.ne10.uol.com.br/">Interior</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://jc.uol.com.br/blog-do-torcedor/">Blog do Torcedor</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://jc.uol.com.br/social1/">Social1</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://receitadaboa.com.br/">Receita da Boa</a>
+                            </li>
+                                                                                                <li>
+                                <a href="/opiniao">Opinião</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://jc.uol.com.br/recall-de-marcas">Recall de Marcas</a>
+                            </li>
+                                                                                                <li>
+                                <a href="https://ads.sjcc.com.br/">Anuncie aqui</a>
+                            </li>
+                                                                        </ul>
+        </nav>
+        <div class="social-wrap">
+            <p>Siga JC</p>
+            <ul class="social">
+    <li>
+        <a href="https://www.facebook.com/jornaldocommercioPE/" target="_blank">
+            <i class="fab fa-facebook" style="font-size: 24px; color: #1877f2;"></i>
+            <span style="margin-left: 8px;">Facebook</span>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" href="https://www.instagram.com/jc_pe">
+            <i class="fab fa-instagram" style="font-size: 24px; color: #E4405F;"></i>
+            <span style="margin-left: 8px;">Instagram</span>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" href="https://www.linkedin.com/company/grupo-jc/">
+            <i class="fab fa-linkedin" style="font-size: 24px; color: #0A66C2;"></i>
+            <span style="margin-left: 8px;">LinkedIn</span>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" href="https://www.youtube.com/@JCPlayOficial">
+            <i class="fab fa-youtube" style="font-size: 24px; color: #FF0000;"></i>
+            <span style="margin-left: 8px;">YouTube</span>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" href="https://www.tiktok.com/@jc_pe">
+            <i class="fab fa-tiktok" style="font-size: 24px; color: #000000;"></i>
+            <span style="margin-left: 8px;">TikTok</span>
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+</div>
+        
+        
+        <!--------------------------------------------------------------
+        # banner-1x1-area
+        -------------------------------------------------------------->
+        <div id="banner-1x1-area" style="height: 22px;" data-google-query-id="CM-Lsp7VzJADFQBU3QIdZ0c3Qw"><div id="google_ads_iframe_/8804/parceiros/ne_10/jornal_do_commercio_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/8804/parceiros/ne_10/jornal_do_commercio_0" name="google_ads_iframe_/8804/parceiros/ne_10/jornal_do_commercio_0" title="3rd party ad content" width="1" height="1" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" aria-label="Advertisement" tabindex="0" allow="private-state-token-redemption;attribution-reporting" data-load-complete="true" data-google-container-id="3" style="border: 0px; vertical-align: bottom;" data-gtm-yt-inspected-2552766_148="true" data-gtm-yt-inspected-25="true" data-gtm-yt-inspected-30="true"></iframe></div></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        window.pushAds.push({
+            id: "banner-1x1-area"
+        });
+    });
+</script>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-list">
+                    <li><a href="/" class="nav-link active">Home</a></li>
+                    <li><a href="/colunas/seguranca" class="nav-link">Segurança</a></li>
+                    <li><a href="/pernambuco" class="nav-link">Pernambuco</a></li>
+                    <li><a href="/economia" class="nav-link">Economia</a></li>
+                    <li><a href="/politica" class="nav-link">Política</a></li>
+                    <li><a href="/cultura" class="nav-link">Cultura</a></li>
+                    <li><a href="/mundo" class="nav-link">Mundo</a></li>
+                    <li><a href="/colunas/enem-e-educacao" class="nav-link">Educação</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Botões de Feedback Fixos -->
+        <div class="floating-feedback-container">
+            <button class="floating-feedback-btn like{% if user_feedback.feedback_type == 'like' %} active{% endif %}" 
+                    onclick="submitFeedback({{ article.id }}, 'like')"
+                    {% if user_feedback %}disabled{% endif %}
+                    title="Gostei desta notícia">
+                <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button class="floating-feedback-btn dislike{% if user_feedback.feedback_type == 'dislike' %} active{% endif %}" 
+                    onclick="submitFeedback({{ article.id }}, 'dislike')"
+                    {% if user_feedback %}disabled{% endif %}
+                    title="Não gostei desta notícia">
+                <i class="fas fa-thumbs-down"></i>
+            </button>
+        </div>
 
     <!-- Main Content -->
     <main>
@@ -599,25 +1063,24 @@
 
                 <!-- Article Header -->
                 <div class="artigo-header">
-                    <div class="artigo-category">{{ article.get_category_icon }} {{ article.category }}</div>
+                    <div class="artigo-category">{{ article.category }}</div>
                     <h1 class="artigo-title">
-                        {{ article.get_trending_emoji }} {{ article.title }}
+                        {{ article.title }}
                     </h1>
                     
                     <!-- Botão de Resumir Notícia -->
                     <div class="resumir-container">
                         <button id="resumir-btn" class="resumir-button">
-                            <span class="resumir-icon">📋</span>
                             <span class="resumir-text">Resumir Notícia</span>
-                            <span class="resumir-loading" style="display: none;">⏳ Gerando resumo...</span>
+                            <span class="resumir-loading" style="display: none;">Gerando resumo...</span>
                         </button>
                     </div>
                     
                     <p class="artigo-subtitle">{{ article.description }}</p>
                     <div class="artigo-meta">
-                        <span>📅 {{ article.created_at|date:"d/m/Y" }}</span>
-                        <span>⏱️ {{ article.created_at|date:"H:i" }}</span>
-                        <span>📂 {{ article.category }}</span>
+                        <span>{{ article.created_at|date:"d/m/Y" }}</span>
+                        <span>{{ article.created_at|date:"H:i" }}</span>
+                        <span>{{ article.category }}</span>
                     </div>
                 </div>
 
@@ -630,7 +1093,6 @@
                 <!-- Área do Resumo (inicialmente oculta) -->
                 <div id="resumo-area" class="resumo-area">
                     <div class="resumo-titulo">
-                        <span>📋</span>
                         <span>Resumo da Notícia</span>
                     </div>
                     <div id="resumo-conteudo" class="resumo-conteudo">
@@ -648,20 +1110,23 @@
                         <p>O Jornal do Commercio continua comprometido em trazer conteúdo de qualidade e informações precisas para manter você sempre bem informado sobre os assuntos mais importantes da categoria {{ article.category }}.</p>
                     </div>
 
-                    <!-- Navegação Interna do Artigo -->
-                    {% if next_article %}
-                    <div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 20px; border-radius: 10px; margin: 30px 0; text-align: center;">
-                        <h4 style="margin: 0 0 15px 0; font-size: 1.1em;">Leia também</h4>
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                            <div style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 3px solid white; flex-shrink: 0;">
-                                <img src="{{ next_article.get_image_url }}" alt="{{ next_article.get_image_alt_text }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}';">
-                            </div>
-                            <a href="{% url 'artigo' pk=next_article.id %}" style="background: white; color: #3498db; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-                                {{ next_article.get_category_icon }} {{ next_article.title|truncatewords:6 }}
-                            </a>
+                    <!-- Botões de Feedback -->
+                    <div class="feedback-container">
+                        <div class="feedback-title">
+                            Gostou desta notícia?
                         </div>
+                        <div class="feedback-buttons">
+                            <button class="feedback-btn like{% if user_feedback.feedback_type == 'like' %} active{% endif %}" onclick="submitFeedback({{ article.id }}, 'like')"{% if user_feedback %} disabled{% endif %}>
+                                <i class="fas fa-thumbs-up feedback-icon"></i>
+                                <span>Gostei</span>
+                            </button>
+                            <button class="feedback-btn dislike{% if user_feedback.feedback_type == 'dislike' %} active{% endif %}" onclick="submitFeedback({{ article.id }}, 'dislike')"{% if user_feedback %} disabled{% endif %}>
+                                <i class="fas fa-thumbs-down feedback-icon"></i>
+                                <span>Não gostei</span>
+                            </button>
+                        </div>
+                        <div class="feedback-message" id="feedback-message"></div>
                     </div>
-                    {% endif %}
                 </div>
 
                 <!-- Navegação entre Artigos -->
@@ -673,16 +1138,13 @@
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                         {% if next_article %}
                             <a href="{% url 'artigo' pk=next_article.id %}" class="nav-button" title="{{ next_article.title }}">
-                                <span class="icon">{{ next_article.get_category_icon }}</span>
                                 <span>Próxima</span>
                             </a>
                         {% endif %}
                         <a href="{% url 'tema' slug=article.get_normalized_slug %}" class="nav-button">
-                            <span class="icon">{{ article.get_category_icon }}</span>
                             <span>Ver Todas</span>
                         </a>
                         <a href="{% url 'home' %}" class="nav-button">
-                            <span class="icon">🏠</span>
                             <span>Início</span>
                         </a>
                     </div>
@@ -692,9 +1154,9 @@
                 <div class="share-section">
                     <h3>Compartilhe esta notícia</h3>
                     <div class="share-buttons">
-                        <a href="https://api.whatsapp.com/send?text={{ article.title|urlencode }} - {% url 'artigo' pk=article.id %}" class="share-button share-whatsapp" target="_blank">📱 WhatsApp</a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={% url 'artigo' pk=article.id %}" class="share-button share-facebook" target="_blank">📘 Facebook</a>
-                        <a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={% url 'artigo' pk=article.id %}" class="share-button share-twitter" target="_blank">🐦 Twitter</a>
+                        <a href="https://api.whatsapp.com/send?text={{ article.title|urlencode }} - {% url 'artigo' pk=article.id %}" class="share-button share-whatsapp" target="_blank">WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={% url 'artigo' pk=article.id %}" class="share-button share-facebook" target="_blank">Facebook</a>
+                        <a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={% url 'artigo' pk=article.id %}" class="share-button share-twitter" target="_blank">Twitter</a>
                     </div>
                 </div>
 
@@ -704,7 +1166,7 @@
                         <h3 class="next-article-title">Continue lendo - Próximo artigo</h3>
                         <a href="{% url 'artigo' pk=next_article.id %}" class="next-article-card">
                             <img src="{{ next_article.get_image_url }}" alt="{{ next_article.get_image_alt_text }}" class="next-article-image" onerror="this.src='{% static 'core/css/images/jc-logo.png' %}';">
-                            <div class="next-article-label">🚀 Próximo artigo em {{ next_article.get_category_icon }} {{ next_article.category }}</div>
+                            <div class="next-article-label">Próximo artigo em {{ next_article.category }}</div>
                             <div class="next-article-name">{{ next_article.title }}</div>
                             <div style="margin-top: 15px; background: #3498db; color: white; padding: 10px 20px; border-radius: 25px; display: inline-block; font-size: 0.9em; font-weight: bold;">
                                 Continuar Lendo →
@@ -717,10 +1179,10 @@
                         <div style="text-align: center; padding: 30px;">
                             <p style="color: #7f8c8d; margin-bottom: 20px;">Você chegou ao fim desta categoria! Que tal explorar outros temas?</p>
                             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-                                <a href="{% url 'esportes' %}" style="background: #e74c3c; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">🏈 Esportes</a>
-                                <a href="{% url 'cultura' %}" style="background: #9b59b6; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">🎭 Cultura</a>
-                                <a href="{% url 'economia' %}" style="background: #f39c12; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">💰 Economia</a>
-                                <a href="{% url 'ciencia' %}" style="background: #1abc9c; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">🔬 Ciência</a>
+                                <a href="{% url 'esportes' %}" style="background: #e74c3c; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">Esportes</a>
+                                <a href="{% url 'cultura' %}" style="background: #9b59b6; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">Cultura</a>
+                                <a href="{% url 'economia' %}" style="background: #f39c12; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">Economia</a>
+                                <a href="{% url 'ciencia' %}" style="background: #1abc9c; color: white; padding: 12px 20px; text-decoration: none; border-radius: 25px; font-weight: bold;">Ciência</a>
                             </div>
                         </div>
                     </div>
@@ -841,7 +1303,7 @@
             ];
             
             let resumoHtml = '<div style="background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">';
-            resumoHtml += '<h4 style="color: #e74c3c; margin-bottom: 15px; font-size: 16px;">📋 Principais pontos:</h4>';
+            resumoHtml += '<h4 style="color: #e74c3c; margin-bottom: 15px; font-size: 16px;">Principais pontos:</h4>';
             resumoHtml += '<ul class="resumo-pontos">';
             
             pontosChave.forEach(ponto => {
@@ -971,6 +1433,184 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Sistema de Feedback para Algoritmo de Recomendação
+        let userFeedback = {
+            articleId: {{ article.id }},
+            hasVoted: {% if user_feedback %}true{% else %}false{% endif %},
+            voteType: {% if user_feedback %}'{{ user_feedback.feedback_type }}'{% else %}null{% endif %}
+        };
+
+        // Função para submeter feedback
+        function submitFeedback(articleId, feedbackType) {
+            // Botões
+            const likeBtn = document.querySelector('.feedback-btn.like');
+            const dislikeBtn = document.querySelector('.feedback-btn.dislike');
+            const floatingLikeBtn = document.querySelector('.floating-feedback-btn.like');
+            const floatingDislikeBtn = document.querySelector('.floating-feedback-btn.dislike');
+            
+            // Verificar se é toggle off (clicou no mesmo botão que já estava ativo)
+            const isToggleOff = (feedbackType === userFeedback.voteType && userFeedback.hasVoted);
+            
+            // Se é toggle off, remover estados ativos
+            if (isToggleOff) {
+                likeBtn.classList.remove('active');
+                dislikeBtn.classList.remove('active');
+                floatingLikeBtn.classList.remove('active');
+                floatingDislikeBtn.classList.remove('active');
+                
+                // Reabilitar botões
+                likeBtn.disabled = false;
+                dislikeBtn.disabled = false;
+                floatingLikeBtn.disabled = false;
+                floatingDislikeBtn.disabled = false;
+                floatingLikeBtn.classList.remove('disabled');
+                floatingDislikeBtn.classList.remove('disabled');
+                
+                // Limpar estado do feedback
+                userFeedback.hasVoted = false;
+                userFeedback.voteType = null;
+            } else {
+                // Remover todos os estados ativos
+                likeBtn.classList.remove('active');
+                dislikeBtn.classList.remove('active');
+                floatingLikeBtn.classList.remove('active');
+                floatingDislikeBtn.classList.remove('active');
+                
+                // Adicionar estado ativo ao botão clicado
+                if (feedbackType === 'like') {
+                    likeBtn.classList.add('active');
+                    floatingLikeBtn.classList.add('active');
+                } else {
+                    dislikeBtn.classList.add('active');
+                    floatingDislikeBtn.classList.add('active');
+                }
+                
+                // Marcar como votado
+                userFeedback.hasVoted = true;
+                userFeedback.voteType = feedbackType;
+            }
+
+            // Enviar dados para o backend
+            sendFeedbackToBackend(articleId, feedbackType, isToggleOff);
+        }
+
+        // Função para enviar feedback para o backend
+        function sendFeedbackToBackend(articleId, feedbackType, isToggleOff = false) {
+            // Obter CSRF token
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || 
+                              document.querySelector('meta[name=csrf-token]')?.getAttribute('content');
+
+            // Dados para envio
+            const feedbackData = {
+                article_id: articleId,
+                feedback_type: feedbackType,
+                timestamp: new Date().toISOString(),
+                user_agent: navigator.userAgent,
+                page_url: window.location.href
+            };
+
+            // Enviar para o backend
+            fetch('/api/article-feedback/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken || '',
+                },
+                body: JSON.stringify(feedbackData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Feedback processado com sucesso:', data);
+                
+                // Atualizar contadores com dados reais do backend
+                if (data.stats) {
+                    updateFeedbackCountsFromBackend(data.stats);
+                }
+                
+                // Mostrar mensagem apropriada
+                let message;
+                if (data.removed) {
+                    message = 'Avaliação removida.';
+                } else if (data.updated) {
+                    message = feedbackType === 'like' ? 
+                        'Alterado para "Gostei". Obrigado!' : 
+                        'Alterado para "Não gostei". Vamos trabalhar para melhorar!';
+                } else {
+                    message = feedbackType === 'like' ? 
+                        'Obrigado! Sua avaliação nos ajuda a melhorar nossas recomendações.' : 
+                        'Obrigado pelo feedback! Vamos trabalhar para melhorar nosso conteúdo.';
+                }
+                
+                showFeedbackMessage(message, 'success');
+                
+                // Atualizar dados do algoritmo de recomendação
+                if (!data.removed) {
+                    updateRecommendationAlgorithm(feedbackData);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao enviar feedback:', error);
+                showFeedbackMessage('Erro ao processar feedback. Tente novamente.', 'error');
+                
+                // Reverter mudanças em caso de erro
+                location.reload();
+            });
+        }
+
+        // Função para atualizar algoritmo de recomendação
+        function updateRecommendationAlgorithm(feedbackData) {
+            // Armazenar feedback localmente para melhorar recomendações futuras
+            const userPreferences = JSON.parse(localStorage.getItem('userPreferences') || '{}');
+            
+            if (!userPreferences.articleFeedback) {
+                userPreferences.articleFeedback = [];
+            }
+            
+            userPreferences.articleFeedback.push({
+                articleId: feedbackData.article_id,
+                feedbackType: feedbackData.feedback_type,
+                category: '{{ article.category }}',
+                timestamp: feedbackData.timestamp
+            });
+            
+            // Manter apenas os últimos 50 feedbacks
+            if (userPreferences.articleFeedback.length > 50) {
+                userPreferences.articleFeedback = userPreferences.articleFeedback.slice(-50);
+            }
+            
+            localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
+            
+            console.log('Preferências do usuário atualizadas para recomendação:', userPreferences);
+        }
+
+        // Função para mostrar mensagens de feedback
+        function showFeedbackMessage(message, type) {
+            const messageDiv = document.getElementById('feedback-message');
+            messageDiv.textContent = message;
+            messageDiv.className = `feedback-message ${type}`;
+            messageDiv.style.display = 'block';
+            
+            // Esconder mensagem após 4 segundos
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 4000);
+        }
+
+        // Função para atualizar contadores com dados do backend
+        function updateFeedbackCountsFromBackend(stats) {
+            // Contadores removidos - mantendo apenas para compatibilidade com backend
+            console.log('Feedback stats:', stats);
+        }
+        
+        // Função para atualizar contadores visuais (fallback)
+        function updateFeedbackCounts(feedbackType) {
+            // Contadores removidos - mantendo apenas para compatibilidade
+            console.log('Feedback type:', feedbackType);
+        }
+
+        // Tornar função disponível globalmente
+        window.submitFeedback = submitFeedback;
     </script>
 
 </body>

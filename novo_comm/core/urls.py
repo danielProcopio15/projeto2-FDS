@@ -25,4 +25,7 @@ urlpatterns = [
     # Página de pré-lançamento
     path('pre-lancamento/', views.pre_lancamento, name='pre_lancamento'),
     
+    # API endpoint para feedback de artigos
+    path('api/article-feedback/', views.article_feedback, name='article_feedback'),
+    
 ]

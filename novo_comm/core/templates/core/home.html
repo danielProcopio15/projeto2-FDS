@@ -217,14 +217,14 @@
                             {% endif %}
                         </div>
                         <a href="https://impresso.jc.uol.com.br/index.php?id=/banca.php&amp;utm_source=site_jc&amp;utm_medium=imagem_capa&amp;utm_campaign=chama_flip" class="edition">
-                            <img width="106" height="91" src="/img/edicao.png" alt="Leia aqui a edição de hoje">
+                            <img width="106" height="91" src="{% static 'core/css/images/jc-logo.png' %}" alt="Leia aqui a edição de hoje" style="max-width: 106px; max-height: 91px; object-fit: contain;">
                             <h5>Edição do dia</h5>
                         </a>
                     </div>
                     <div class="header-center">
                         <a href="/" class="logo">
                             <figure>
-                                <img width="160" height="80" src="/img/logo.svg" alt="JC" title="JC">
+                                <img width="160" height="80" src="{% static 'core/css/images/jc-logo.png' %}" alt="JC" title="JC - Jornal do Commercio">
                                 <figcaption>Jornal do Commercio</figcaption>
                             </figure>
                         </a>
@@ -357,10 +357,8 @@
             <ul class="social">
     <li>
         <a href="https://www.facebook.com/jornaldocommercioPE/" target="_blank">
-            <figure>
-                <img loading="lazy" width="30" height="30" src="/img/icon-facebook.svg" alt="icone-facebook">
-                <figcaption>Facebook</figcaption>  
-            </figure>
+            <i class="fab fa-facebook" style="font-size: 24px; color: #1877f2;"></i>
+            <span style="margin-left: 8px;">Facebook</span>
         </a>
     </li>
     <li>
@@ -950,7 +948,7 @@
                                                     </script>
                                                 </div>
                                                 <figure class="mt-3">
-                                                    <img loading="lazy" width="305" height="85" src="/img/pet-banner.png" alt="Meu Pet" title="Meu Pet" style="width: 100%; height: auto; display: block;">
+                                                    <!-- <img loading="lazy" width="305" height="85" src="/img/pet-banner.png" alt="Meu Pet" title="Meu Pet" style="width: 100%; height: auto; display: block;"> -->
                                                 </figure>
                                             </div>
                                             <div class="col-xs-12 col-md-12 mt-4">
@@ -1065,7 +1063,7 @@
     </div>
             
             <div class="d-flex justify-content-center my-5">
-    <a class="logo-recall" target="_blank" href="https://produtos.ne10.uol.com.br/recalldemarcas2025/"><img src="/img/selo_revista_recall.png" alt="Selo da Revista Recall" title="Veja detalhes do prêmio Recall recebido em 2025" loading="lazy" width="622" height="120" style="max-width:100%; height:auto;"></a>
+    <!-- <a class="logo-recall" target="_blank" href="https://produtos.ne10.uol.com.br/recalldemarcas2025/"><img src="/img/selo_revista_recall.png" alt="Selo da Revista Recall" title="Veja detalhes do prêmio Recall recebido em 2025" loading="lazy" width="622" height="120" style="max-width:100%; height:auto;"></a> -->
 </div>
 <style>
     .logo-recall {
@@ -1207,25 +1205,25 @@
     <div class="container">
         <div id="widgets">
                             <div class="tide">
-                    <h5><img loading="lazy" width="33" height="18" src="/img/mare/icon-tide.svg" title="maré" alt="maré"> Tábua de Marés | Recife</h5>
+                    <h5><i class="fas fa-water" style="font-size: 16px; margin-right: 8px;"></i> Tábua de Marés | Recife</h5>
                     <div class="times">
-                                                                                <span class="up"><img loading="lazy" width="12" height="11" src="/img/widgets/mare/icon-up.svg" title="up" alt="up"> 02:56</span>
-                                                                                <span class="down"><img loading="lazy" width="12" height="11" src="/img/widgets/mare/icon-down.svg" title="down" alt="down"> 09:11</span>
-                                                                                <span class="up"><img loading="lazy" width="12" height="11" src="/img/widgets/mare/icon-up.svg" title="up" alt="up"> 15:11</span>
-                                                                                <span class="down"><img loading="lazy" width="12" height="11" src="/img/widgets/mare/icon-down.svg" title="down" alt="down"> 21:24</span>
+                                                                                <span class="up"><i class="fas fa-arrow-up" style="font-size: 10px; margin-right: 4px;"></i> 02:56</span>
+                                                                                <span class="down"><i class="fas fa-arrow-down" style="font-size: 10px; margin-right: 4px;"></i> 09:11</span>
+                                                                                <span class="up"><i class="fas fa-arrow-up" style="font-size: 10px; margin-right: 4px;"></i> 15:11</span>
+                                                                                <span class="down"><i class="fas fa-arrow-down" style="font-size: 10px; margin-right: 4px;"></i> 21:24</span>
                                             </div>
                 </div>
                         <div class="weather">
-                                    <img loading="lazy" width="32" height="12" src="/img/widgets/icon-nublado.svg" title="tempo" alt="tempo">
+                                    <i class="fas fa-cloud" style="font-size: 18px; margin-right: 4px;"></i>
                                 <h5>Recife</h5>
                 <span class="max">28°C</span>
                 <span class="min">24°C</span>
             </div>
             <div class="money">
-                <h5><img loading="lazy" width="30" height="21" src="/img/icon-money.svg" title="cotação" alt="cotação"> Cotação de hoje</h5>
+                <h5><i class="fas fa-dollar-sign" style="font-size: 18px; margin-right: 8px;"></i> Cotação de hoje</h5>
                                 <div class="price">
-                    <strong>Dólar <span class="up"><img loading="lazy" width="12" height="11" src="/img/widgets/money/icon-up.svg" title="dolar" alt="dolar"> 5,3749</span></strong>
-                    <strong>Euro <span class="up"><img loading="lazy" width="12" height="11" src="/img/widgets/money/icon-up.svg" title="euro" alt="euro"> 6,2189</span></strong>
+                    <strong>Dólar <span class="up"><i class="fas fa-arrow-up" style="font-size: 10px; margin-right: 4px; color: green;"></i> 5,3749</span></strong>
+                    <strong>Euro <span class="up"><i class="fas fa-arrow-up" style="font-size: 10px; margin-right: 4px; color: green;"></i> 6,2189</span></strong>
                 </div>
             </div>
             <div class="megasena">
@@ -1903,7 +1901,7 @@
                 </div>
             </div>   
             <div class="col-xs-12 col-md-12 col-lg-4">
-                <a href="https://jc.uol.com.br/ultimas"> <h3 class="title-col"><img loading="lazy" width="23" height="23" src="/img/icon-news.svg" alt=""> NOTÍCIAS</h3></a>   
+                <a href="https://jc.uol.com.br/ultimas"> <h3 class="title-col"><i class="fas fa-newspaper" style="font-size: 20px; margin-right: 8px;"></i> NOTÍCIAS</h3></a>   
                                                                             <div class="box mb-4">
                             <div class="row">
                                 <div class="col-xs-3 col-md-3">
@@ -1982,7 +1980,7 @@
                         </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </div>
             <div class="col-xs-12 col-md-12 col-lg-4">
-                <a href="https://jc.uol.com.br/blog-do-torcedor"><h3 class="title-col"><img loading="lazy" width="28" height="26" src="/img/icon-torcedor.png" alt=""> BLOG DO TORCEDOR</h3></a>   
+                <a href="https://jc.uol.com.br/blog-do-torcedor"><h3 class="title-col"><i class="fas fa-futbol" style="font-size: 20px; margin-right: 8px;"></i> BLOG DO TORCEDOR</h3></a>   
                  
                                                             <div class="box mb-4">
                             <div class="row">

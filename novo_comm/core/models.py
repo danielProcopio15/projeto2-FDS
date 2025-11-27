@@ -28,6 +28,69 @@ class ThemeAccess(models.Model):
 		return self.count
 
 
+class ArticleFeedback(models.Model):
+	"""Track user feedback (like/dislike) for articles.
+	
+	This is used for the recommendation algorithm to understand user preferences.
+	"""
+	FEEDBACK_CHOICES = [
+		('like', 'Like'),
+		('dislike', 'Dislike'),
+	]
+	
+	article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='feedbacks')
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)  # Allow anonymous feedback
+	session_id = models.CharField(max_length=100, null=True, blank=True)  # For anonymous users
+	feedback_type = models.CharField(max_length=10, choices=FEEDBACK_CHOICES)
+	ip_address = models.GenericIPAddressField(null=True, blank=True)
+	user_agent = models.TextField(blank=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		unique_together = [
+			("article", "user"),  # One feedback per user per article
+			("article", "session_id"),  # One feedback per session per article (for anonymous)
+		]
+		indexes = [
+			models.Index(fields=["article", "feedback_type"]),
+			models.Index(fields=["user", "feedback_type"]),
+			models.Index(fields=["created_at"]),
+		]
+
+	def __str__(self):
+		user_info = self.user.username if self.user else f"Session: {self.session_id}"
+		return f"{user_info} — {self.feedback_type} — {self.article.title[:50]}"
+
+	@classmethod
+	def get_article_stats(cls, article):
+		"""Get like/dislike counts for an article."""
+		likes = cls.objects.filter(article=article, feedback_type='like').count()
+		dislikes = cls.objects.filter(article=article, feedback_type='dislike').count()
+		return {'likes': likes, 'dislikes': dislikes, 'total': likes + dislikes}
+
+	@classmethod
+	def get_user_preferences(cls, user):
+		"""Get user's feedback patterns for recommendation algorithm."""
+		if not user or not user.is_authenticated:
+			return {}
+		
+		feedbacks = cls.objects.filter(user=user).select_related('article')
+		preferences = {
+			'liked_categories': {},
+			'disliked_categories': {},
+			'total_interactions': feedbacks.count()
+		}
+		
+		for feedback in feedbacks:
+			category = feedback.article.category
+			if feedback.feedback_type == 'like':
+				preferences['liked_categories'][category] = preferences['liked_categories'].get(category, 0) + 1
+			else:
+				preferences['disliked_categories'][category] = preferences['disliked_categories'].get(category, 0) + 1
+				
+		return preferences
+
+
 class Article(models.Model):
 	"""Simple Article model used by views and templates.
 
@@ -116,6 +179,44 @@ class Article(models.Model):
 		"""
 		from .image_selector import ImageSelector
 		return ImageSelector.generate_alt_text(self.title, self.category)
+	
+	def get_feedback_stats(self):
+		"""
+		Retorna estatísticas de feedback (likes/dislikes) do artigo
+		"""
+		return ArticleFeedback.get_article_stats(self)
+	
+	def likes_count(self):
+		"""
+		Retorna o número de likes do artigo
+		"""
+		return self.feedbacks.filter(feedback_type='like').count()
+	
+	def dislikes_count(self):
+		"""
+		Retorna o número de dislikes do artigo
+		"""
+		return self.feedbacks.filter(feedback_type='dislike').count()
+	
+	def get_recommendation_score(self, user=None):
+		"""
+		Calcula score de recomendação baseado em feedback e preferências do usuário
+		"""
+		stats = self.get_feedback_stats()
+		base_score = stats['likes'] - (stats['dislikes'] * 0.5)  # Dislikes pesam menos
+		
+		if user and user.is_authenticated:
+			user_prefs = ArticleFeedback.get_user_preferences(user)
+			category_likes = user_prefs.get('liked_categories', {}).get(self.category, 0)
+			category_dislikes = user_prefs.get('disliked_categories', {}).get(self.category, 0)
+			
+			# Boost score if user likes this category
+			if category_likes > category_dislikes:
+				base_score += category_likes * 2
+			elif category_dislikes > category_likes:
+				base_score -= category_dislikes * 1
+		
+		return max(0, base_score)  # Não permitir scores negativos
 	
 	def save(self, *args, **kwargs):
 		"""
