@@ -301,8 +301,6 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.2s ease;
-  border: 2px solid #000;
-  border-radius: 8px;
 }
 
 .news-card:hover .news-image img {
@@ -698,28 +696,24 @@ body {
 figure.wide img,
 figure.small img,
 figure img {
-  border: 2px solid #000;
-  border-radius: 8px;
-  transition: border-color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 figure.wide img:hover,
 figure.small img:hover,
 figure img:hover {
-  border-color: var(--primary-color);
+  opacity: 0.9;
 }
 
 /* Estilos específicos para diferentes tamanhos de imagens */
 .content-wrapper figure img {
-  border: 2px solid #000;
-  border-radius: 8px;
+  transition: opacity 0.2s ease;
 }
 
 .content-wrapper figure:hover img {
-  border-color: #da291c;
+  opacity: 0.9;
 }
 
 .next-preview .next-thumb img {
-  border: 2px solid #000;
-  border-radius: 8px;
+  transition: opacity 0.2s ease;
 }
