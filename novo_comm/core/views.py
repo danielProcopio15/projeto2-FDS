@@ -46,9 +46,15 @@ def get_personalized_navbar(user, session):
         from .recommendation import get_session_access_data
         session_data = get_session_access_data(session)
         if session_data:
-            # Ordena por frequência de acesso
-            sorted_themes = sorted(session_data.items(), key=lambda x: x[1], reverse=True)[:4]
-            user_preferences = [theme for theme, _ in sorted_themes]
+            # Ordena por frequência de acesso - verificar se x[1] é dict ou int
+            try:
+                sorted_themes = sorted(session_data.items(), 
+                                     key=lambda x: x[1]['count'] if isinstance(x[1], dict) else x[1], 
+                                     reverse=True)[:4]
+                user_preferences = [theme for theme, _ in sorted_themes]
+            except (KeyError, TypeError):
+                # Fallback se a estrutura for diferente
+                user_preferences = list(session_data.keys())[:4]
     
     # Adicionar temas preferidos do usuário à navbar
     added_themes = set(['Home'])  # Para evitar duplicatas
