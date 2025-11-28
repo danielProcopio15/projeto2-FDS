@@ -413,14 +413,21 @@
         <nav class="main-nav">
             <div class="container">
                 <ul class="nav-list">
-                    <li><a href="/" class="nav-link active">Home</a></li>
-                    <li><a href="/colunas/seguranca" class="nav-link">Segurança</a></li>
-                    <li><a href="/pernambuco" class="nav-link">Pernambuco</a></li>
-                    <li><a href="/economia" class="nav-link">Economia</a></li>
-                    <li><a href="/politica" class="nav-link">Política</a></li>
-                    <li><a href="/cultura" class="nav-link">Cultura</a></li>
-                    <li><a href="/mundo" class="nav-link">Mundo</a></li>
-                    <li><a href="/colunas/enem-e-educacao" class="nav-link">Educação</a></li>
+                    {% for item in navbar_items %}
+                        <li>
+                            <a href="{{ item.url }}" 
+                               class="nav-link {% if item.is_home %}active{% endif %}">
+                                {{ item.name }}
+                            </a>
+                        </li>
+                    {% empty %}
+                        <!-- Fallback caso não haja navbar_items -->
+                        <li><a href="/" class="nav-link active">Home</a></li>
+                        <li><a href="/tema/economia" class="nav-link">Economia</a></li>
+                        <li><a href="/tema/esportes" class="nav-link">Esportes</a></li>
+                        <li><a href="/tema/cultura" class="nav-link">Cultura</a></li>
+                        <li><a href="/politica" class="nav-link">Política</a></li>
+                    {% endfor %}
                 </ul>
             </div>
         </nav>

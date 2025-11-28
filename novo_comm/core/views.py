@@ -10,7 +10,73 @@ from .models import ThemeAccess, Article, ArticleFeedback
 from django.urls import reverse
 from urllib.parse import urlparse
 
+def get_personalized_navbar(user, session):
+    """
+    Gera a navbar personalizada com temas mais acessados pelo usuário
+    + outros temas diversos para completar
+    """
+    # Temas padrão disponíveis
+    all_themes = [
+        {'name': 'Home', 'url': '/', 'is_home': True},
+        {'name': 'Economia', 'url': '/tema/economia', 'is_home': False},
+        {'name': 'Esportes', 'url': '/tema/esportes', 'is_home': False},
+        {'name': 'Cultura', 'url': '/tema/cultura', 'is_home': False},
+        {'name': 'Política', 'url': '/politica', 'is_home': False},
+        {'name': 'Ciência', 'url': '/tema/ciencia', 'is_home': False},
+        {'name': 'Segurança', 'url': '/colunas/seguranca', 'is_home': False},
+        {'name': 'Pernambuco', 'url': '/pernambuco', 'is_home': False},
+        {'name': 'Mundo', 'url': '/mundo', 'is_home': False},
+        {'name': 'Educação', 'url': '/colunas/enem-e-educacao', 'is_home': False},
+        {'name': 'Gerais', 'url': '/tema/gerais', 'is_home': False}
+    ]
+    
+    # Sempre manter Home em primeiro
+    navbar_items = [all_themes[0]]  # Home
+    
+    # Obtém os temas mais acessados pelo usuário
+    user_preferences = []
+    
+    if user and user.is_authenticated:
+        # Usuário logado - usar dados do banco
+        from django.db.models import Sum, Q
+        user_themes = ThemeAccess.objects.filter(user=user).order_by('-count', '-updated_at')[:4]
+        user_preferences = [access.category for access in user_themes]
+    else:
+        # Usuário não logado - usar dados da sessão
+        from .recommendation import get_session_access_data
+        session_data = get_session_access_data(session)
+        if session_data:
+            # Ordena por frequência de acesso
+            sorted_themes = sorted(session_data.items(), key=lambda x: x[1], reverse=True)[:4]
+            user_preferences = [theme for theme, _ in sorted_themes]
+    
+    # Adicionar temas preferidos do usuário à navbar
+    added_themes = set(['Home'])  # Para evitar duplicatas
+    
+    for pref_theme in user_preferences:
+        for theme in all_themes:
+            if (theme['name'].lower() == pref_theme.lower() or 
+                pref_theme.lower() in theme['name'].lower()) and \
+               theme['name'] not in added_themes:
+                navbar_items.append(theme)
+                added_themes.add(theme['name'])
+                break
+    
+    # Completar com outros temas diversos para atingir 7-8 itens
+    target_items = 8
+    for theme in all_themes:
+        if len(navbar_items) >= target_items:
+            break
+        if theme['name'] not in added_themes:
+            navbar_items.append(theme)
+            added_themes.add(theme['name'])
+    
+    return navbar_items[:target_items]  # Máximo 8 itens
+
 def home(request):
+    # Gerar navbar personalizada com temas mais acessados
+    navbar_items = get_personalized_navbar(request.user, request.session)
+    
     # Busca todas as categorias disponíveis dinamicamente
     categories = list(Article.objects.values_list('category', flat=True).distinct())
     
@@ -143,6 +209,7 @@ def home(request):
 
     return render(request, 'core/home.html', {
         'articles': articles,
+        'navbar_items': navbar_items,
         'debug_info': f'Total articles: {len(articles)}'
     })
 
@@ -284,6 +351,9 @@ def tema(request, slug):
     """Render a theme/category page and increment per-user access count."""
     from unidecode import unidecode
     from django.utils.text import slugify
+    
+    # Gerar navbar personalizada com temas mais acessados
+    navbar_items = get_personalized_navbar(request.user, request.session)
 
     # Map of normalized slugs to their display names
     slug_map = {
@@ -333,6 +403,7 @@ def tema(request, slug):
     context = {
         'category': category,
         'articles': enriched,
+        'navbar_items': navbar_items,
     }
 
     # Rastreia acesso à página de categoria para sistema de recomendação
@@ -349,6 +420,9 @@ def tema(request, slug):
 def artigo(request, pk):
     """Render an article detail page with next article preview."""
     from .recommendation import track_article_view
+    
+    # Gerar navbar personalizada com temas mais acessados
+    navbar_items = get_personalized_navbar(request.user, request.session)
     
     art = get_object_or_404(Article, pk=pk)
     next_article = art.get_next_article()
@@ -384,7 +458,8 @@ def artigo(request, pk):
         'feedback_stats': feedback_stats,
         'user_feedback': user_feedback,
         'likes_count': feedback_stats['likes'],
-        'dislikes_count': feedback_stats['dislikes']
+        'dislikes_count': feedback_stats['dislikes'],
+        'navbar_items': navbar_items,
     })
 
 def login(request):
