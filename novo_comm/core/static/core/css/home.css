@@ -301,6 +301,8 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.2s ease;
+  border: 2px solid #000;
+  border-radius: 8px;
 }
 
 .news-card:hover .news-image img {
@@ -378,7 +380,7 @@ body {
 
 .small-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
   grid-column: 1 / -1;
 }
@@ -571,6 +573,10 @@ body {
   .news-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
+  
+  .small-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -591,6 +597,10 @@ body {
   .news-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+  
+  .small-grid {
+    grid-template-columns: 1fr;
   }
   
   .footer-content {
@@ -683,3 +693,33 @@ body {
 
 .btn { background:#ff0000; color:#fff; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
 .btn:hover { filter:brightness(0.95); }
+
+/* Estilos para bordas das imagens das notícias */
+figure.wide img,
+figure.small img,
+figure img {
+  border: 2px solid #000;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+figure.wide img:hover,
+figure.small img:hover,
+figure img:hover {
+  border-color: var(--primary-color);
+}
+
+/* Estilos específicos para diferentes tamanhos de imagens */
+.content-wrapper figure img {
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.content-wrapper figure:hover img {
+  border-color: #da291c;
+}
+
+.next-preview .next-thumb img {
+  border: 2px solid #000;
+  border-radius: 8px;
+}

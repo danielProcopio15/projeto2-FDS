@@ -24,71 +24,204 @@ def home(request):
         for cat in categories
     }
 
+    # Detectar se é primeiro acesso (sem histórico de navegação)
+    def is_first_time_user():
+        if request.user.is_authenticated:
+            # Usuário logado: verificar se tem histórico de ThemeAccess
+            from .models import ThemeAccess
+            return not ThemeAccess.objects.filter(user=request.user).exists()
+        else:
+            # Usuário não logado: verificar se tem dados na sessão
+            from .recommendation import get_session_access_data
+            session_data = get_session_access_data(request.session)
+            return not session_data or len(session_data) == 0
+
     # Sistema de recomendação avançado para todas as posições
     from .recommendation import get_user_recommendation, get_recommended_articles
     articles = []
 
-    if request.user.is_authenticated:
-        # Usuário logado - usar dados do banco
-        recommended_category = get_user_recommendation(request.user, is_authenticated=True)
-        recommended_articles = get_recommended_articles(request.user, is_authenticated=True, limit=4)
-    else:
-        # Usuário não logado - usar dados da sessão
-        recommended_category = get_user_recommendation(request.session, is_authenticated=False)
-        recommended_articles = get_recommended_articles(request.session, is_authenticated=False, limit=4)
-    
-    # 1ª posição: Artigo "Para Você" (maior recomendação)
-    destaque = Article.objects.filter(category=recommended_category).order_by('-created_at').first()
-    if destaque and recommended_category in articles_by_category:
-        articles.append(destaque)
-        articles_by_category[recommended_category] = [
-            a for a in articles_by_category[recommended_category]
-            if a.id != destaque.id
-        ]
-    else:
-        # Fallback para primeira categoria disponível se não encontrar artigo da categoria recomendada
-        fallback_category = categories[0] if categories else 'Economia'
-        latest_fallback = Article.objects.filter(category=fallback_category).order_by('-created_at').first()
-        if latest_fallback:
-            articles.append(latest_fallback)
-            if fallback_category in articles_by_category:
-                articles_by_category[fallback_category] = [
-                    a for a in articles_by_category[fallback_category]
-                    if a.id != latest_fallback.id
-                ]
-
-    # 2ª-4ª posições: Sistema de recomendação decrescente
-    used_article_ids = {articles[0].id} if articles else set()
-    
-    for recommended_article in recommended_articles:
-        if len(articles) >= 4:
-            break
+    if is_first_time_user():
+        # PRIMEIRO ACESSO: Mostrar variedade de categorias
+        print("PRIMEIRO ACESSO - mostrando variedade de categorias")
         
-        # Evita duplicatas
-        if recommended_article.id not in used_article_ids:
-            articles.append(recommended_article)
-            used_article_ids.add(recommended_article.id)
-            
-            # Remove o artigo da lista da categoria para evitar duplicação
-            if recommended_article.category in articles_by_category:
-                articles_by_category[recommended_article.category] = [
-                    a for a in articles_by_category[recommended_article.category]
-                    if a.id != recommended_article.id
-                ]
-
-    # Fallback: preenche com artigos recentes se não tiver recomendações suficientes
-    if len(articles) < 4:
-        for category in categories:
-            if len(articles) >= 4:
+        # Priorizar categorias principais para primeira impressão
+        priority_categories = ['Economia', 'Esportes', 'Cultura', 'Ciência', 'Gerais', 'JC360']
+        available_priority = [cat for cat in priority_categories if cat in categories]
+        
+        # Se não tiver categorias prioritárias, usar as disponíveis
+        if not available_priority:
+            available_priority = categories[:5]
+        
+        used_article_ids = set()
+        
+        # Pegar 1 artigo de cada categoria prioritária (máximo 5)
+        for category in available_priority:
+            if len(articles) >= 5:
                 break
-            category_articles = articles_by_category[category]
+                
+            category_articles = articles_by_category.get(category, [])
             for article in category_articles:
                 if article.id not in used_article_ids:
                     articles.append(article)
                     used_article_ids.add(article.id)
                     break
+        
+        # Fallback se ainda não tiver 5 artigos
+        if len(articles) < 5:
+            for category in categories:
+                if len(articles) >= 5:
+                    break
+                category_articles = articles_by_category[category]
+                for article in category_articles:
+                    if article.id not in used_article_ids:
+                        articles.append(article)
+                        used_article_ids.add(article.id)
+                        break
+    else:
+        # USUÁRIO COM HISTÓRICO: Usar algoritmo de recomendação personalizada
+        print("USUARIO COM HISTORICO - usando recomendacoes personalizadas")
+        
+        if request.user.is_authenticated:
+            # Usuário logado - usar dados do banco
+            recommended_category = get_user_recommendation(request.user, is_authenticated=True)
+            recommended_articles = get_recommended_articles(request.user, is_authenticated=True, limit=5)
+        else:
+            # Usuário não logado - usar dados da sessão
+            recommended_category = get_user_recommendation(request.session, is_authenticated=False)
+            recommended_articles = get_recommended_articles(request.session, is_authenticated=False, limit=5)
+        
+        # 1ª posição: Artigo "Para Você" (maior recomendação)
+        destaque = Article.objects.filter(category=recommended_category).order_by('-created_at').first()
+        if destaque and recommended_category in articles_by_category:
+            articles.append(destaque)
+            articles_by_category[recommended_category] = [
+                a for a in articles_by_category[recommended_category]
+                if a.id != destaque.id
+            ]
+        else:
+            # Fallback para primeira categoria disponível se não encontrar artigo da categoria recomendada
+            fallback_category = categories[0] if categories else 'Economia'
+            latest_fallback = Article.objects.filter(category=fallback_category).order_by('-created_at').first()
+            if latest_fallback:
+                articles.append(latest_fallback)
+                if fallback_category in articles_by_category:
+                    articles_by_category[fallback_category] = [
+                        a for a in articles_by_category[fallback_category]
+                        if a.id != latest_fallback.id
+                    ]
 
-    return render(request, 'core/home.html', {'articles': articles})
+        # 2ª-4ª posições: Sistema de recomendação decrescente
+        used_article_ids = {articles[0].id} if articles else set()
+        
+        for recommended_article in recommended_articles:
+            if len(articles) >= 5:
+                break
+            
+            # Evita duplicatas
+            if recommended_article.id not in used_article_ids:
+                articles.append(recommended_article)
+                used_article_ids.add(recommended_article.id)
+                
+                # Remove o artigo da lista da categoria para evitar duplicação
+                if recommended_article.category in articles_by_category:
+                    articles_by_category[recommended_article.category] = [
+                        a for a in articles_by_category[recommended_article.category]
+                        if a.id != recommended_article.id
+                    ]
+
+        # Fallback: preenche com artigos recentes se não tiver recomendações suficientes
+        if len(articles) < 5:
+            for category in categories:
+                if len(articles) >= 5:
+                    break
+                category_articles = articles_by_category[category]
+                for article in category_articles:
+                    if article.id not in used_article_ids:
+                        articles.append(article)
+                        used_article_ids.add(article.id)
+                        break
+
+    return render(request, 'core/home.html', {
+        'articles': articles,
+        'debug_info': f'Total articles: {len(articles)}'
+    })
+
+def debug_articles(request):
+    """View de debug para verificar os artigos"""
+    # Reutilizar a lógica da home
+    from django.shortcuts import redirect
+    from django.urls import reverse
+    
+    # Busca todas as categorias disponíveis dinamicamente
+    categories = list(Article.objects.values_list('category', flat=True).distinct())
+    
+    # Se não houver categorias, usa uma lista padrão
+    if not categories:
+        categories = ['Esportes', 'Cultura', 'Economia', 'Ciência', 'Gerais']
+    
+    # Get articles for each category
+    articles_by_category = {
+        cat: list(Article.objects.filter(category=cat).order_by('-created_at'))
+        for cat in categories
+    }
+
+    # Detectar se é primeiro acesso (sem histórico de navegação)
+    def is_first_time_user():
+        if request.user.is_authenticated:
+            # Usuário logado: verificar se tem histórico de ThemeAccess
+            from .models import ThemeAccess
+            return not ThemeAccess.objects.filter(user=request.user).exists()
+        else:
+            # Usuário não logado: verificar se tem dados na sessão
+            from .recommendation import get_session_access_data
+            session_data = get_session_access_data(request.session)
+            return not session_data or len(session_data) == 0
+
+    # Sistema de recomendação avançado para todas as posições
+    from .recommendation import get_user_recommendation, get_recommended_articles
+    articles = []
+
+    if is_first_time_user():
+        print("DEBUG - PRIMEIRO ACESSO")
+        
+        # Priorizar categorias principais para primeira impressão
+        priority_categories = ['Economia', 'Esportes', 'Cultura', 'Ciência', 'Gerais', 'JC360']
+        available_priority = [cat for cat in priority_categories if cat in categories]
+        
+        # Se não tiver categorias prioritárias, usar as disponíveis
+        if not available_priority:
+            available_priority = categories[:5]
+        
+        used_article_ids = set()
+        
+        # Pegar 1 artigo de cada categoria prioritária (máximo 5)
+        for category in available_priority:
+            if len(articles) >= 5:
+                break
+                
+            category_articles = articles_by_category.get(category, [])
+            for article in category_articles:
+                if article.id not in used_article_ids:
+                    articles.append(article)
+                    used_article_ids.add(article.id)
+                    break
+        
+        # Fallback se ainda não tiver 5 artigos
+        if len(articles) < 5:
+            for category in categories:
+                if len(articles) >= 5:
+                    break
+                category_articles = articles_by_category[category]
+                for article in category_articles:
+                    if article.id not in used_article_ids:
+                        articles.append(article)
+                        used_article_ids.add(article.id)
+                        break
+    
+    return render(request, 'core/debug_articles.html', {
+        'articles': articles,
+        'debug_info': f'Total articles: {len(articles)}, Categories: {categories}'
+    })
 
 def cadastro(request):
     context = {}
@@ -472,3 +605,10 @@ def update_session_preferences(session, article, feedback_type):
     prefs['total_interactions'] += 1
     session['user_preferences'] = prefs
     session.modified = True
+
+
+def test_images(request):
+    """
+    Página de teste para verificar se as imagens estão carregando
+    """
+    return render(request, 'core/test_images.html')

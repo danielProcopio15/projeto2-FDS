@@ -446,7 +446,12 @@
                                     <!-- Tag "Para Você" aparece sempre (logado ou não) -->
                                     <span class="news-category para-voce" style="display: inline-block; margin-right: 50px;">Para Você</span>
                                     <span class="news-category" style="display: inline-block;">{{ articles.0.category }}</span>
-                                    <img width="852" height="479" src="{{ articles.0.get_image_url }}" alt="{{ articles.0.get_image_alt_text }}">
+                                    <img width="852" height="479" 
+                                         src="{{ articles.0.get_image_url }}" 
+                                         alt="{{ articles.0.get_image_alt_text }}"
+                                         loading="lazy"
+                                         onerror="this.src='{% static 'core/css/images/jc-logo.png' %}'; console.log('Erro ao carregar imagem:', this.src);"
+                                         onload="console.log('Imagem carregada:', this.src);">
                                 </figure>
                             </a>
                         </div>
@@ -466,7 +471,7 @@
             </div>
                         
                         <!-- GRID DE NOTÍCIAS SECUNDÁRIAS -->
-                        {% for article in articles|slice:'1:4' %}
+                        {% for article in articles|slice:'1:5' %}
                         <div class="col-xs-6 col-md-6 col-lg-3 mt-4">
                             <div class="box">
                                 <div class="row">
@@ -474,7 +479,11 @@
                                         <a href="{% url 'artigo' article.id %}">
                                             <figure class="small">
                                                 <span class="news-category">{{ article.category }}</span>
-                                                <img width="305" height="171" src="{{ article.get_secondary_image_url }}" alt="{{ article.get_image_alt_text }}">
+                                                <img width="305" height="171" 
+                                                     src="{{ article.get_secondary_image_url }}" 
+                                                     alt="{{ article.get_image_alt_text }}"
+                                                     loading="lazy"
+                                                     onerror="this.src='{% static 'core/css/images/jc-logo.png' %}'; console.log('Erro ao carregar imagem secundária:', this.src);">
                                             </figure>
                                         </a>
                                     </div>

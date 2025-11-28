@@ -28,4 +28,8 @@ urlpatterns = [
     # API endpoint para feedback de artigos
     path('api/article-feedback/', views.article_feedback, name='article_feedback'),
     
+    # Página de teste de imagens
+    path('test-images/', views.test_images, name='test_images'),
+    path('debug-articles/', views.debug_articles, name='debug_articles'),
+    
 ]

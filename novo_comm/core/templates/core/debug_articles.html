@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug - Teste de Artigos</title>
+</head>
+<body>
+    <h1>Debug - Artigos na Homepage</h1>
+    
+    <h2>Informações dos Artigos:</h2>
+    <p><strong>Total de artigos:</strong> {{ articles|length }}</p>
+    
+    {% if articles %}
+        <h3>Lista de Artigos:</h3>
+        <ol>
+        {% for article in articles %}
+            <li>{{ article.title }} ({{ article.category }})</li>
+        {% endfor %}
+        </ol>
+        
+        <h3>Grid Template (articles|slice:'1:5'):</h3>
+        <p><strong>Artigo Principal (índice 0):</strong></p>
+        {% if articles.0 %}
+            <ul><li>{{ articles.0.title }} ({{ articles.0.category }})</li></ul>
+        {% else %}
+            <p>Nenhum artigo principal encontrado</p>
+        {% endif %}
+        
+        <p><strong>Artigos Secundários (índices 1-4):</strong></p>
+        {% for article in articles|slice:'1:5' %}
+            <ul><li>{{ forloop.counter }}. {{ article.title }} ({{ article.category }})</li></ul>
+        {% empty %}
+            <p>Nenhum artigo secundário encontrado</p>
+        {% endfor %}
+    {% else %}
+        <p><strong>ERRO:</strong> Nenhum artigo foi passado para o template!</p>
+    {% endif %}
+    
+    <hr>
+    <p><strong>Debug Info:</strong> {{ debug_info }}</p>
+    <p><a href="/">← Voltar para Homepage</a></p>
+</body>
+</html>
